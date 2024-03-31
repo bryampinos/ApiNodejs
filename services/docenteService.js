@@ -2,6 +2,7 @@ const docenteRepository = require('../repository/docenteRepository');
 
 const docenteCreate = async (docente) => {
     try {
+        
         return await docenteRepository.createDocente(docente)
     } catch (error) {
         console.error('Error al registrar el docente:', error);

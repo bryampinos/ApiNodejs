@@ -8,7 +8,12 @@ const findUserByEmail = async (email) => {
   return await User.findOne({ where: { email } });
 };
 
+const findUserByCedula = async (cedula) => {
+  return await User.findOne({ where: { cedula } });
+};
+
 module.exports = {
   createUser,
-  findUserByEmail
+  findUserByEmail,
+  findUserByCedula
 };
