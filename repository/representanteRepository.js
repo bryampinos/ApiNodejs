@@ -4,4 +4,9 @@ const createRepresentante = async (representante) =>{
     return await Representante.create(representante);
 
 }
-module.exports = {createRepresentante};
+const findRepresentanteById = async (user_iduser)=>{
+    return await Representante.findOne({ where: { user_iduser } });
+}
+module.exports = {createRepresentante,
+    findRepresentanteById
+};

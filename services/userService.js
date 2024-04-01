@@ -4,6 +4,9 @@ const userRepository = require('../repository/userRepository');
 const docenteService = require('./docenteService');
 const representanteService = require('./representanteService')
 const inspectorService = require('./inspectorService')
+const docenteRepository = require('../repository/docenteRepository')
+const inspectorRepository = require('../repository/inspectorRepository')
+const representanteRepository = require('../repository/representanteRepository')
 const register = async (user) => {
     try {
         // Verificar si los campos requeridos están presentes en el objeto user
@@ -59,14 +62,31 @@ const register = async (user) => {
         throw error; 
     }
 };
-
+//Aqui estoy realizando la logica del login 
 const login = async (email, password) => {
   const user = await userRepository.findUserByEmail(email);
+
   if (user && await bcrypt.compare(password, user.password)) {
-    const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
-    return { user, token };
+    if (user.rol === "docente") {
+      const rol = await docenteRepository.findDocenteById(user.iduser);
+
+      const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '2h' });
+      return { user, token,rol };
+    }else if (user.rol === "inspector"){
+      const rol = await inspectorRepository.findInspectorByid(user.iduser);
+      const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '2h' });
+      return { user, token,rol };
+
+    }else if (user.rol === "representante"){
+      const rol = await representanteRepository.findRepresentanteById(user.iduser);
+      const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '2h' });
+      return { user, token,rol };
+      
+    }else{
+      throw new Error('El usuario o contreña es incorrecto');
+    }
   }
-   throw new Error('El correo electrónico ya está en uso');
+   
 };
 
 module.exports = {

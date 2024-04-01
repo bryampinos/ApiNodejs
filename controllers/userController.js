@@ -5,7 +5,7 @@ const register = async (req, res) => {
 
     
     const user = await userService.register(req.body);
-  res.json("usuario registrado exitosamente");
+  res.json("usuario registrado");
   } catch (error) {
     res.status(401).json({ message: error.message });
   }
@@ -14,8 +14,8 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { user, token } = await userService.login(req.body.email, req.body.password);
-    res.json({ user, token});
+    const { user, token, rol } = await userService.login(req.body.email, req.body.password);
+    res.json({ user, token, rol});
  
   } catch (error) {
     res.status(401).json({ message: error.message });
@@ -24,5 +24,5 @@ const login = async (req, res) => {
 
 module.exports = {
   register,
-  login
+  login,
 };
