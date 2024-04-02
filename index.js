@@ -1,10 +1,14 @@
 const express = require('express');
 const userRoutes = require('./routes/userRoutes');
-
+const representanteRoutes = require('./routes/representanteRoutes')
+const cursoRoutes = require('./routes/cursoRoutes')
 const app = express();
 app.use(express.json());
-app.use('/users', userRoutes);
-app.use('/inicio', userRoutes);
+app.use('/inicio', representanteRoutes);
+app.use('/representante', representanteRoutes);
+app.use('/curso', cursoRoutes);
+app.use('/user', userRoutes);
+
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
