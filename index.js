@@ -1,13 +1,16 @@
 const express = require('express');
 const userRoutes = require('./routes/userRoutes');
 const representanteRoutes = require('./routes/representanteRoutes')
+const estudianteRoutes=require('./routes/estudianteRoutes')
 const cursoRoutes = require('./routes/cursoRoutes')
 const app = express();
 app.use(express.json());
-app.use('/inicio', representanteRoutes);
 app.use('/representante', representanteRoutes);
 app.use('/curso', cursoRoutes);
 app.use('/user', userRoutes);
+
+app.use('/estudiante', estudianteRoutes);
+
 
 
 app.use((err, req, res, next) => {
