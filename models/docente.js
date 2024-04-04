@@ -1,5 +1,5 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('mysql://root:admin@localhost:3306/aplicacion');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
 const Docente = sequelize.define('docente', {
     iddocente: {

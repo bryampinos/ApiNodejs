@@ -10,7 +10,7 @@ const representanteRepository = require('../repository/representanteRepository')
 const register = async (user) => {
     try {
         // Verificar si los campos requeridos están presentes en el objeto user
-        if (!user.password || !user.email || !user.apellido || !user.nombre || !user.password || !user.cedula || !user.rol) {
+        if ( !user.email || !user.apellido || !user.nombre || !user.password || !user.cedula || !user.rol) {
             throw new Error('Faltan datos obligatorios del usuario');
         }
          // Verificar si el correo electrónico ya existe en la base de datos
