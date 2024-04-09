@@ -6,7 +6,9 @@ const createInspector = async (inspector) =>{
 
 }
 const findInspectorByid = async (user_iduser) => {
-    return await Inspector.findOne({ where: { user_iduser } });
+    const inspector =  await Inspector.findOne({ where: { user_iduser } });
+    return inspector.idIsnpector
+   
   };
 
 module.exports={createInspector,

@@ -5,7 +5,9 @@ const createRepresentante = async (representante) =>{
 
 }
 const findRepresentanteById = async (user_iduser)=>{
-    return await Representante.findOne({ where: { user_iduser } });
+     
+    const representante = await Representante.findOne({ where: { user_iduser } });
+return representante.idrepresentantes
 }
 
 const verificarRepresentante = async (representantes_idrepresentantes) => {

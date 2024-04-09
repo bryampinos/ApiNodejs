@@ -12,10 +12,8 @@ const Docente = sequelize.define('docente', {
         model: 'user',
         key: 'iduser'
       }
-    },
-    asignatura: {
-        type: DataTypes.STRING
-      }
+    }
+    
    
   }
   , {

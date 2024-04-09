@@ -5,7 +5,7 @@ const register = async (req, res) => {
 
     
     const user = await userService.register(req.body);
-  res.json("usuario registrado");
+  res.json({message: "usuario registrado"});
   } catch (error) {
     res.status(401).json({ message: error.message });
   }
@@ -14,8 +14,9 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { user, token, rol } = await userService.login(req.body.email, req.body.password);
-    res.json({ user, token, rol});
+    const { token } = await userService.login(req.body.email, req.body.password);
+    res.json({ message: 'Inicio de sesión exitoso',token});
+   
  
   } catch (error) {
     res.status(401).json({ message: error.message });

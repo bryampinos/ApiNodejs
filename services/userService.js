@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+require ('dotenv').config();
 const jwt = require('jsonwebtoken');
 const userRepository = require('../repository/userRepository');
 const docenteService = require('./docenteService');
@@ -36,8 +37,7 @@ const register = async (user) => {
         if (user.rol === 'docente') {
           const docente = {
               iddocente: "LIC"+user.cedula,
-              user_iduser: user.iduser,
-              asignatura: user.asignatura
+              user_iduser: user.iduser
           }
            await docenteService.docenteCreate(docente);
       }
@@ -64,28 +64,34 @@ const register = async (user) => {
 };
 //Aqui estoy realizando la logica del login 
 const login = async (email, password) => {
-  const user = await userRepository.findUserByEmail(email);
+  try {
+    const user = await userRepository.findUserByEmailLogin(email);
 
   if (user && await bcrypt.compare(password, user.password)) {
     if (user.rol === "docente") {
-      const rol = await docenteRepository.findDocenteById(user.iduser);
+      const idRol = await docenteRepository.findDocenteById(user.iduser);
 
-      const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '2h' });
-      return { user, token,rol };
+      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '2h' });
+      return { user, token,idRol };
     }else if (user.rol === "inspector"){
-      const rol = await inspectorRepository.findInspectorByid(user.iduser);
-      const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '2h' });
-      return { user, token,rol };
+      const idRol = await inspectorRepository.findInspectorByid(user.iduser);
+      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
+      return { user, token,idRol };
 
     }else if (user.rol === "representante"){
-      const rol = await representanteRepository.findRepresentanteById(user.iduser);
-      const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '2h' });
-      return { user, token,rol };
+      const idRol = await representanteRepository.findRepresentanteById(user.iduser);
+      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '2h' });
+      return { user, token,idRol };
       
-    }else{
+    }
+  }else{
       throw new Error('El usuario o contreña es incorrecto');
     }
+  } catch (error) {
+    console.error('usuario no registrado', error);
+    throw error;
   }
+  
    
 };
 

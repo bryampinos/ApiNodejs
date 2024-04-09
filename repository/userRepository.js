@@ -5,8 +5,17 @@ const createUser = async (user) => {
 };
 
 const findUserByEmail = async (email) => {
-  return await User.findOne({ where: { email } });
+  const user = await User.findOne({ where: { email } });
+return user;
 };
+const findUserByEmailLogin = async (email) => {
+  const user = await User.findOne({ where: { email } });
+  if (!user) {
+    throw new Error('Usuario no encontrado');
+  }
+  return user;
+};
+
 
 const findUserByCedula = async (cedula) => {
   return await User.findOne({ where: { cedula } });
@@ -15,5 +24,6 @@ const findUserByCedula = async (cedula) => {
 module.exports = {
   createUser,
   findUserByEmail,
-  findUserByCedula
+  findUserByCedula,
+  findUserByEmailLogin
 };
