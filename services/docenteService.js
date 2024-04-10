@@ -1,5 +1,5 @@
 const docenteRepository = require('../repository/docenteRepository');
-
+const jwt = require('jsonwebtoken');
 const docenteCreate = async (docente) => {
     try {
         
@@ -11,6 +11,22 @@ const docenteCreate = async (docente) => {
 
 }   
 
+const asignacionDocente = async (asignacion)=>{
+try {
+    const token = asignacion.token
+    const secret = process.env.SECRET;
+    const decoded = jwt.decode(token, secret);
+    asignacion.docente_iddocente= decoded.idRol
+    return await docenteRepository.asignarAsignatura(asignacion)
+} catch (error) {
+    console.error('Error al asignar la asignatura :', error);
+    throw error; 
+}
+
+
+}
+
 module.exports={
-    docenteCreate
+    docenteCreate,
+    asignacionDocente
 }
