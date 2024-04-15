@@ -2,8 +2,6 @@ const userService = require('../services/userService');
 
 const register = async (req, res) => {
   try {
-
-    
     const user = await userService.register(req.body);
   res.json({message: "usuario registrado"});
   } catch (error) {
@@ -23,7 +21,17 @@ const login = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+      const users = await userService.getAllUsers();
+      res.json(users);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   register,
   login,
+  getUsers
 };

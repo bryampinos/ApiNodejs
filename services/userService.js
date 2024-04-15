@@ -94,8 +94,16 @@ const login = async (email, password) => {
   
    
 };
-
+const getAllUsers = async () => {
+  try {
+      const users = await userRepository.fetchAll();
+      return users;
+  } catch (error) {
+      throw new Error('Error al obtener los usuarios: ' + error.message);
+  }
+};
 module.exports = {
   register,
-  login
+  login,
+  getAllUsers
 };

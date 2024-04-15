@@ -21,9 +21,19 @@ const findUserByCedula = async (cedula) => {
   return await User.findOne({ where: { cedula } });
 };
 
+const fetchAll = async () => {
+  try {
+      const users = await User.findAll();
+      return users;
+  } catch (error) {
+      throw new Error('Error al obtener los usuarios de la base de datos: ' + error.message);
+  }
+};
+
 module.exports = {
   createUser,
   findUserByEmail,
   findUserByCedula,
-  findUserByEmailLogin
+  findUserByEmailLogin,
+  fetchAll
 };

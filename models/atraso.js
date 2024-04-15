@@ -24,6 +24,9 @@ const atraso = sequelize.define('atraso', {
       model: 'estudiante',
       key: 'idEstudiantes'
     }
+  },
+  descripcion:{
+    type:DataTypes.STRING
   }
 }, {
   tableName: 'atraso',
