@@ -102,8 +102,15 @@ const getAllUsers = async () => {
       throw new Error('Error al obtener los usuarios: ' + error.message);
   }
 };
+
+const getUserById = async (id) => {
+  return userRepository.findById(id);
+};
+
+
 module.exports = {
   register,
   login,
-  getAllUsers
+  getAllUsers,
+  getUserById
 };

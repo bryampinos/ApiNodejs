@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.post('/register',asignaturaController.crearAsignatura );
 
+//metodos get
+router.get('/all',asignaturaController.getAsignaturas)
 module.exports = router;

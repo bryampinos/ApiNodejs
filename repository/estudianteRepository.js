@@ -9,4 +9,23 @@ const estudianteCreate = async (estudiante) => {
 
 }
 
-module.exports={estudianteCreate}
+const fetchAll =async ()=>{
+    try {
+        const estudiantes = await Estudiante.findAll();
+        return estudiantes;
+    } catch (error) {
+        throw new Error('Error al obtener los usuarios de la base de datos: ' + error.message);
+    }
+}
+
+const findById = async(id)=>{
+    try {
+        const estudiante = await Estudiante.findOne({ 
+            where: { curso_idCurso: id } 
+        });
+        return estudiante;
+    } catch (error) {
+        throw new Error('Error al obtener el usuario de la base de datos: ' + error.message);
+    }
+}
+module.exports={estudianteCreate,fetchAll,findById}

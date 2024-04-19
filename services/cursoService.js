@@ -14,4 +14,12 @@ const createCurso = async(curso) =>{
 
 
 }
-module.exports={createCurso}
+const getAllCursos = async()=>{
+try {
+    const cursos = await cursoRepository.fetchAll();
+      return cursos;
+} catch (error) {
+    throw new Error('Error al obtener los cursos: ' + error.message);
+}
+}
+module.exports={createCurso, getAllCursos}

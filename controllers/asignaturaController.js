@@ -9,6 +9,13 @@ const crearAsignatura = async (req, res) => {
         res.status(401).json({ message: error.message });
     }
 }
+const getAsignaturas = async (req, res) => {
+    try {
+        const cursos = await asignaturaService.getAllAsignaturas();
+        res.json(cursos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+  };
 
-
-module.exports={crearAsignatura};
+module.exports={crearAsignatura,getAsignaturas};

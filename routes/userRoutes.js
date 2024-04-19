@@ -6,7 +6,8 @@ const router = express.Router();
 router.post('/register', userController.register);
 router.post('/login', userController.login);
 //METODOS GET
-router.get('/users', userController.getUsers);
+router.get('/all', userController.getUsers);
+router.get('/:id', userController.getUser);
 
 
 module.exports = router;

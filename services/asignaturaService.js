@@ -12,4 +12,12 @@ const asignaturaCreate = async (asignatura) => {
     }
 }
 
-module.exports = {asignaturaCreate};
+const getAllAsignaturas = async() =>{
+    try {
+        const asignaturas = await asignaturaRepository.fetchAll();
+        return asignaturas;
+    } catch (error) {
+        throw new Error('Error al obtener las asignaturas: ' + error.message);
+    }
+}
+module.exports = {asignaturaCreate,getAllAsignaturas};

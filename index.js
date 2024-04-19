@@ -6,6 +6,7 @@ const cursoRoutes = require('./routes/cursoRoutes')
 const atrasoRoutes = require('./routes/atrasoRoutes')
 const asignaturaRoutes = require('./routes/asignaturaRoutes')
 const docenteRoutes = require('./routes/docenteRoutes')
+const esquelaRoutes = require('./routes/esquelaRoutes')
 const app = express();
 process.env.TZ = 'America/Guayaquil';
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use('/estudiante', estudianteRoutes);
 app.use('/atraso', atrasoRoutes )
 app.use('/asignatura' , asignaturaRoutes)
 app.use('/docente' , docenteRoutes)
+app.use('/esquela', esquelaRoutes )
 
 
 

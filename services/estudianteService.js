@@ -20,10 +20,24 @@ if (verficiarRepresentante) {
 }
         return  await estudianteRepository.estudianteCreate(estudiante);
     } catch (error) {
-        console.error('Error al registrar el curso:', error);
+        console.error('Error al registrar el estudiante:', error);
         throw error; 
     }
 
 
 }
-module.exports={register}
+
+const getAllEstudiantes = async ()=>{
+    try {
+        const estudiantes = await estudianteRepository.fetchAll();
+        return estudiantes;
+    } catch (error) {
+        throw new Error('Error al obtener los usuarios: ' + error.message);
+    }
+
+}
+
+const getEstudianteById = async (id) => {
+    return estudianteRepository.findById(id);
+  };
+module.exports={register,getAllEstudiantes,getEstudianteById}

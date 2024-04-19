@@ -29,11 +29,20 @@ const fetchAll = async () => {
       throw new Error('Error al obtener los usuarios de la base de datos: ' + error.message);
   }
 };
+const findById = async (id) => {
+  try {
+      const user = await User.findByPk(id);
+      return user;
+  } catch (error) {
+      throw new Error('Error al obtener el usuario de la base de datos: ' + error.message);
+  }
+};
 
 module.exports = {
   createUser,
   findUserByEmail,
   findUserByCedula,
   findUserByEmailLogin,
-  fetchAll
+  fetchAll,
+  findById
 };
