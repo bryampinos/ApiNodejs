@@ -20,7 +20,7 @@ const fetchAll =async ()=>{
 
 const findById = async(id)=>{
     try {
-        const estudiante = await Estudiante.findOne({ 
+        const estudiante = await Estudiante.findAll({ 
             where: { curso_idCurso: id } 
         });
         return estudiante;
