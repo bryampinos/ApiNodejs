@@ -40,4 +40,7 @@ const getAllEstudiantes = async ()=>{
 const getEstudianteById = async (id) => {
     return estudianteRepository.findById(id);
   };
-module.exports={register,getAllEstudiantes,getEstudianteById}
+  const getEstudianteByIdRepresentante = async (id) => {
+    return estudianteRepository.findByIdRepresentante(id);
+  };
+module.exports={register,getAllEstudiantes,getEstudianteById,getEstudianteByIdRepresentante}

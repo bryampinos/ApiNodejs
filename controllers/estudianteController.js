@@ -17,7 +17,7 @@ const getEstudiantes = async (req, res) => {
   };
 
 
-  const getEstudiante = async(req, res, next)=>{
+  const getEstudianteByCurso = async(req, res, next)=>{
     const estudianteId = req.params.id;
     estudianteService.getEstudianteById(estudianteId)
         .then(user => {
@@ -33,4 +33,19 @@ const getEstudiantes = async (req, res) => {
         });
   }
 
-module.exports={crearEstudiante,getEstudiantes,getEstudiante}
+  const getEstudianteByIdRepresentante = async(req, res, next)=>{
+    const estudianteId = req.params.idpadre;
+    estudianteService.getEstudianteByIdRepresentante(estudianteId)
+        .then(user => {
+            if (!user) {
+                res.status(404).json({ message: 'Usuario no encontrado' });
+            } else {
+                res.status(200).json(user);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+  }
+module.exports={crearEstudiante,getEstudiantes,getEstudianteByCurso,getEstudianteByIdRepresentante}
