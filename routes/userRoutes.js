@@ -10,6 +10,9 @@ router.post('/login', userController.login);
 router.get('/all', userController.getUsers);
 router.get('/:id', userController.getUser);
 
+//METODO DELETE
+router.delete('/delete/:id', userController.deleteUser)
+
 
 module.exports = router;
 

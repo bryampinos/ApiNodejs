@@ -107,10 +107,14 @@ const getUserById = async (id) => {
   return userRepository.findById(id);
 };
 
+const deleteUser = async(id)=>{
+  return await userRepository.deleteUser(id);
+}
 
 module.exports = {
   register,
   login,
   getAllUsers,
-  getUserById
+  getUserById,
+  deleteUser
 };
