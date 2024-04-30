@@ -8,6 +8,8 @@ const asignaturaRoutes = require('./routes/asignaturaRoutes')
 const docenteRoutes = require('./routes/docenteRoutes')
 const esquelaRoutes = require('./routes/esquelaRoutes')
 const app = express();
+const cors = require('cors');
+app.use(cors());
 process.env.TZ = 'America/Guayaquil';
 app.use(express.json());
 app.use('/representante', representanteRoutes);
