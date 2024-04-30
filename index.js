@@ -9,6 +9,7 @@ const docenteRoutes = require("./routes/docenteRoutes");
 const esquelaRoutes = require("./routes/esquelaRoutes");
 const cors = require("cors");
 const app = express();
+app.use(cors());
 process.env.TZ = 'America/Guayaquil';
 app.use(express.json());
 app.use("/representante", representanteRoutes);
