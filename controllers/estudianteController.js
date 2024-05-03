@@ -48,4 +48,6 @@ const getEstudiantes = async (req, res) => {
             res.status(500).json({ error: err });
         });
   }
-module.exports={crearEstudiante,getEstudiantes,getEstudianteByCurso,getEstudianteByIdRepresentante}
+
+module.exports={crearEstudiante,getEstudiantes,getEstudianteByCurso,
+    getEstudianteByIdRepresentante}
