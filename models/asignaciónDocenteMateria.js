@@ -17,7 +17,15 @@ const asigDocenteMateria = sequelize.define('asigDocenteMateria', {
           model: 'asignatura',
           key: 'idasignatura'
         }
-    }
+    },
+    curso_idCurso:{
+      type: DataTypes.STRING,
+      primaryKey: true,
+      references: {
+        model: 'curso',
+        key: 'idCurso'
+      }
+  }
   }, {
     tableName: 'asignación docente-materia',
     timestamps: false 
