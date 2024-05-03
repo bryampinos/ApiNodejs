@@ -22,6 +22,7 @@ const esquelaRoutes = require('./routes/esquelaRoutes')
 const asignacionDocenteMateria=require('./routes/asignacionDocenteMateriaRoutes')
 >>>>>>> origin/rama_bryam
 const app = express();
+app.use(cors());
 process.env.TZ = 'America/Guayaquil';
 app.use(express.json());
 <<<<<<< HEAD
