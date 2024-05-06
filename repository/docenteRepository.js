@@ -12,7 +12,12 @@ const findDocenteById = async (user_iduser) => {
 };
 
 const asignarAsignatura = async(asignacion) =>{
-return await Asignacion.create(asignacion)
+  try {
+    return await Asignacion.create(asignacion)
+  } catch (error) {
+    throw new Error('Ya se encuentra asignado a esta asignatura');
+  }
+
 
 }
 
