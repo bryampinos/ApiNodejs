@@ -24,7 +24,17 @@ try {
 }
 
 
+
 }
+const getEsquelaByEstudiante = async (id) => {
+    try {
+        return esquelaRepository.findById(id);
+    } catch (error) {
+        console.error('error al buscar la esquela ', error);
+        throw error
+    }
+   
+  };
 
 
-module.exports={esquelaCreate}
+module.exports={esquelaCreate,getEsquelaByEstudiante}

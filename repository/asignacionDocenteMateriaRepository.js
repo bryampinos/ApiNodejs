@@ -11,4 +11,5 @@ const finfByDocente = async(id)=>{
     
 }
 
+
 module.exports={finfByDocente}
