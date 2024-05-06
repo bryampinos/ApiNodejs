@@ -71,7 +71,7 @@ const login = async (email, password) => {
     if (user.rol === "docente") {
       const idRol = await docenteRepository.findDocenteById(user.iduser);
 
-      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '2h' });
+      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
       return { user, token,idRol };
     }else if (user.rol === "inspector"){
       const idRol = await inspectorRepository.findInspectorByid(user.iduser);
@@ -80,7 +80,7 @@ const login = async (email, password) => {
 
     }else if (user.rol === "representante"){
       const idRol = await representanteRepository.findRepresentanteById(user.iduser);
-      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '2h' });
+      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
       return { user, token,idRol };
       
     }
