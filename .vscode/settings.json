@@ -1,4 +1,24 @@
 {
     "errorLens.enabled": true,
-    "errorLens.enableOnDiffView": false
+    "errorLens.enableOnDiffView": false,
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#a05cfb",
+        "activityBar.background": "#a05cfb",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#fcb683",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#a05cfb",
+        "statusBar.background": "#832afa",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#a05cfb",
+        "statusBarItem.remoteBackground": "#832afa",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#832afa",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#832afa99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#832AFA"
 }

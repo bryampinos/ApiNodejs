@@ -10,9 +10,15 @@ const esquelaRoutes = require('./routes/esquelaRoutes')
 const asignacionDocenteMateria=require('./routes/asignacionDocenteMateriaRoutes')
 const app = express();
 const cors = require('cors');
+
+
 app.use(cors());
 process.env.TZ = 'America/Guayaquil';
-app.use(express.json());
+
+
+app.use(express.json({ limit: '50mb' }));
+
+
 app.use('/representante', representanteRoutes);
 app.use('/curso', cursoRoutes);
 app.use('/user', userRoutes);
@@ -30,4 +36,12 @@ app.use((err, req, res, next) => {
     
     res.status(500).send({ error: 'Algo salió mal' });
   });
-app.listen(3000, () => console.log('Zona horaria del servidor:', process.env.TZ));
+
+
+// Configuración del servidor para escuchar en todas las interfaces de red
+const PORT = 3000;  // Puedes cambiar el puerto si es necesario
+const HOST = '0.0.0.0'; // Escucha en todas las interfaces de red
+app.listen(PORT, HOST, () => {
+    console.log(`Server running on http://${HOST}:${PORT}`);
+    console.log('Zona horaria del servidor:', process.env.TZ);
+});
