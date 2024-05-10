@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const esquelaController = require('../controllers/esquelaController')
 
-router.post('/registar', esquelaController.crearEsquela)
+router.post('/registrar', esquelaController.crearEsquela)
 
 
 //METODOS GET
