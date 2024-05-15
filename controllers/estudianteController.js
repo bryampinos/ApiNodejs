@@ -16,6 +16,37 @@ const getEstudiantes = async (req, res) => {
     }
   };
 
+  const getEstudianteById= async(req,  res) =>{
+    const estudianteId = req.params.id;
+    estudianteService.getEstudianteByIdEstudiante(estudianteId)
+        .then(user => {
+            if (!user) {
+                res.status(404).json({ message: 'Usuario no encontrado' });
+            } else {
+                res.status(200).json(user);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+  }
+
+  const generarQR = async (req, res) => {
+    const codigo = req.params.id;
+
+    if (!codigo) {
+        return res.status(400).send('Se requiere proporcionar un código.');
+    }
+
+    try {
+        const qrCodeDataURL = await estudianteService.generarCodigoQR(codigo);
+        res.send({ qrCodeDataURL });
+    } catch (error) {
+        console.error('Error al generar el código QR:', error);
+        res.status(500).send('Error interno al generar el código QR.');
+    }
+};
 
   const getEstudianteByCurso = async(req, res, next)=>{
     const estudianteId = req.params.id;
@@ -50,4 +81,4 @@ const getEstudiantes = async (req, res) => {
   }
 
 module.exports={crearEstudiante,getEstudiantes,getEstudianteByCurso,
-    getEstudianteByIdRepresentante}
+    getEstudianteByIdRepresentante,getEstudianteById,generarQR}

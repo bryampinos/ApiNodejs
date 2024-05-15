@@ -2,6 +2,7 @@
 const estudianteRepository=require('../repository/estudianteRepository')
 const representanteRepository = require('../repository/representanteRepository')
 const jwt = require('jsonwebtoken');
+const QRCode = require('qrcode');
 
 const register = async(estudiante) =>{
     try {
@@ -40,7 +41,19 @@ const getAllEstudiantes = async ()=>{
 const getEstudianteById = async (id) => {
     return estudianteRepository.findById(id);
   };
+  const getEstudianteByIdEstudiante= async (id) => {
+    return estudianteRepository.findEstudianteById(id);
+  };
   const getEstudianteByIdRepresentante = async (id) => {
     return estudianteRepository.findByIdRepresentante(id);
   };
-module.exports={register,getAllEstudiantes,getEstudianteById,getEstudianteByIdRepresentante}
+  const generarCodigoQR = async (codigo) => {
+    try {
+        const qrCodeDataURL = await QRCode.toDataURL(codigo);
+        return qrCodeDataURL;
+    } catch (error) {
+        throw new Error('Error al generar el código QR');
+    }
+};
+module.exports={register,getAllEstudiantes,getEstudianteById,getEstudianteByIdRepresentante,
+    getEstudianteByIdEstudiante,generarCodigoQR}

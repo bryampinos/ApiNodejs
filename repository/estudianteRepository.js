@@ -28,6 +28,14 @@ const findById = async(id)=>{
         throw new Error('Error al obtener el usuario de la base de datos: ' + error.message);
     }
 }
+const findEstudianteById = async(idEstudiantes)=>{
+    try {
+        const estudiante = await Estudiante.findOne({ where: { idEstudiantes } });
+        return estudiante;
+    } catch (error) {
+        throw new Error('Error al obtener el usuario de la base de datos: ' + error.message);
+    }
+}
 const findByIdRepresentante = async(id)=>{
     try {
         const estudiante = await Estudiante.findAll({ 
@@ -38,4 +46,4 @@ const findByIdRepresentante = async(id)=>{
         throw new Error('Error al obtener el usuario de la base de datos: ' + error.message);
     }
 }
-module.exports={estudianteCreate,fetchAll,findById,findByIdRepresentante}
+module.exports={estudianteCreate,fetchAll,findById,findByIdRepresentante,findEstudianteById}

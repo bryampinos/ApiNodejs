@@ -30,7 +30,11 @@ try {
 
 }
 
+const getDocenteById= async (id)=>{
+    return docenteRepository.findRepresenmtanteById(id);
+}
 module.exports={
     docenteCreate,
-    asignacionDocente
+    asignacionDocente,
+    getDocenteById
 }
