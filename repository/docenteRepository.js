@@ -15,7 +15,11 @@ const asignarAsignatura = async(asignacion) =>{
   try {
     return await Asignacion.create(asignacion)
   } catch (error) {
+<<<<<<< HEAD
     throw new Error('Ya se encuentra asignado a esta asignatura'+ error);
+=======
+    throw new Error('Ya se encuentra asignado a esta asignatura',error);
+>>>>>>> 1b6fe0496099e1e8143e96d415bc39e6019be482
   }
 }
 const findRepresenmtanteById = async(iddocente)=>{
