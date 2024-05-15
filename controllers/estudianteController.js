@@ -32,6 +32,21 @@ const getEstudiantes = async (req, res) => {
         });
   }
 
+  const generarQR = async (req, res) => {
+    const codigo = req.params.id;
+
+    if (!codigo) {
+        return res.status(400).send('Se requiere proporcionar un código.');
+    }
+
+    try {
+        const qrCodeDataURL = await estudianteService.generarCodigoQR(codigo);
+        res.send({ qrCodeDataURL });
+    } catch (error) {
+        console.error('Error al generar el código QR:', error);
+        res.status(500).send('Error interno al generar el código QR.');
+    }
+};
 
   const getEstudianteByCurso = async(req, res, next)=>{
     const estudianteId = req.params.id;
@@ -66,4 +81,4 @@ const getEstudiantes = async (req, res) => {
   }
 
 module.exports={crearEstudiante,getEstudiantes,getEstudianteByCurso,
-    getEstudianteByIdRepresentante,getEstudianteById}
+    getEstudianteByIdRepresentante,getEstudianteById,generarQR}

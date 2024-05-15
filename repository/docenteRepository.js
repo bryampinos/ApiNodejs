@@ -17,12 +17,19 @@ const asignarAsignatura = async(asignacion) =>{
   } catch (error) {
     throw new Error('Ya se encuentra asignado a esta asignatura'+ error);
   }
-
-
+}
+const findRepresenmtanteById = async(iddocente)=>{
+try {
+  const docente = await Docente.findOne({ where: { iddocente } });
+        return docente;
+} catch (error) {
+  throw new Error('Erro al buscar el docente en la base de datos '+ error);
+}
 }
 
 module.exports={
 createDocente,
 findDocenteById,
-asignarAsignatura
+asignarAsignatura,
+findRepresenmtanteById
 }

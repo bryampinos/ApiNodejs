@@ -13,4 +13,6 @@ router.get('/:id',estudianteController.getEstudianteById)
 router.get('/curso/:id', estudianteController.getEstudianteByCurso);
 //OBTENER ESTDIANTE POR PADRE DE FAMILIA 
 router.get('/representante/:idpadre', estudianteController.getEstudianteByIdRepresentante);
+//GENERAR EL CODIGO QR
+router.get('/generarqr/:id', estudianteController.generarQR)
 module.exports = router;

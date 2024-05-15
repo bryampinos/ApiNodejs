@@ -22,10 +22,26 @@ try {
 }
 }
 
+const findDocenteById = async (req, res )=>{
+  const docenteId = req.params.id;
+  docenteService.getDocenteById(docenteId)
+      .then(user => {
+          if (!user) {
+              res.status(404).json({ message: 'Usuario no encontrado' });
+          } else {
+              res.status(200).json(user);
+          }
+      })
+      .catch(err => {
+          console.log(err);
+          res.status(500).json({ error: err });
+      });
+
+}
 
 
   module.exports={
-    loginDocente, asignacionMateria
+    loginDocente, asignacionMateria,findDocenteById
   }
 
 
