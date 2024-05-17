@@ -27,8 +27,16 @@ app.use('/docenteMateria', asignacionDocenteMateria )
 
 
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    
-    res.status(500).send({ error: 'Algo salió mal' });
-  });
-app.listen(3000, () => console.log('Zona horaria del servidor:', process.env.TZ));
+  console.error(err.stack);
+  
+  res.status(500).send({ error: 'Algo salió mal' });
+});
+
+
+// Configuración del servidor para escuchar en todas las interfaces de red
+const PORT = 3000;  // Puedes cambiar el puerto si es necesario
+const HOST = '0.0.0.0'; // Escucha en todas las interfaces de red
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
+  console.log('Zona horaria del servidor:', process.env.TZ);
+});
