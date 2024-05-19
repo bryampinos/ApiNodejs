@@ -32,7 +32,18 @@ const esquela = sequelize.define('esquela', {
           model: 'representantes',
           key: 'idrepresentantes'
         }
-    }
+    },
+    cita:{
+        type: DataTypes.STRING   
+    },
+    
+    asignación_docente_materia_idAsignacion:{
+        type: DataTypes.STRING,
+        references: {
+          model: 'asignación_docente_materia_idAsignacion',
+          key: 'idAsignacion'
+        }
+    },
 
 }, {
     tableName: 'esquela',
