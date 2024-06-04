@@ -24,7 +24,16 @@ const register = async (user) => {
          if (existingCedula) {
           throw new Error('La cedula  ya está en uso');
          }
-        // Hashear la contraseña
+         //VALIDAR EL NUMERO DE CEDULA 
+         
+         const validacionCedula = await userRepository.validacion(user.cedula);
+         if (!validacionCedula) {
+          throw new Error('La cédula es inválida');
+      } else {
+          console.log('La cédula es válida');
+      }
+        // Hashear la cont
+        
         const passwordHash = await bcrypt.hash(user.password, 10);
         user.password = passwordHash;
         // Generar iduser concatenando cedula y rol
