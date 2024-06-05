@@ -1,9 +1,9 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
-
+const Docente = require('./docente');
 const esquela = sequelize.define('esquela', {
     idEsquela:{
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
     primaryKey: true
     },
     Fecha :{
@@ -48,6 +48,7 @@ const esquela = sequelize.define('esquela', {
 }, {
     tableName: 'esquela',
     timestamps: false
-  })
+  });
+  esquela.belongsTo(Docente, { foreignKey: 'docente_docente' });
 
   module.exports=esquela;

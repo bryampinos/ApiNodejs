@@ -16,7 +16,8 @@ try {
     //AQUI ESTOY REWGISTRANDO Y DANDO FOTMATO A LA FECHA DE ACUEDO A CUANDO ENTRRA 
     const fechaActual = new Date();
     const fechaFormateada = fechaActual.toLocaleString('es-EC', { timeZone: 'America/Guayaquil' });
-    esquela.Fecha=fechaFormateada
+esquela.Fecha=fechaFormateada
+//esquela.idEsquela = esquela.estudiantes_idEstudiantes+"||"+esquela.asignación_docente_materia_idAsignacion
     return await esquelaRepository.create(esquela);
 } catch (error) {
     console.error('Error al registrar la esquela:', error);
@@ -28,7 +29,9 @@ try {
 }
 const getEsquelaByEstudiante = async (id) => {
     try {
-        return esquelaRepository.findById(id);
+        const esquela = esquelaRepository.findById(id);
+        
+        return (esquela)
     } catch (error) {
         console.error('error al buscar la esquela ', error);
         throw error
@@ -36,5 +39,19 @@ const getEsquelaByEstudiante = async (id) => {
    
   };
 
+  const getEsquelaById = async (id) => {
+    try {
+        const esquela = esquelaRepository.findByIdEsquela(id);
+      
+      
+        return (esquela)
+    } catch (error) {
+        console.error('error al buscar la esquela ', error);
+        throw error
+    }
+   
+  };
 
-module.exports={esquelaCreate,getEsquelaByEstudiante}
+ 
+
+module.exports={esquelaCreate,getEsquelaByEstudiante,getEsquelaById}

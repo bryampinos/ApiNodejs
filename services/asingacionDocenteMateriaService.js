@@ -7,6 +7,14 @@ const getAsignacionPorDocente = async(id)=>{
         throw new Error('Erro en la asignacion del docente  ' + error.message);
     }
    
+   
 }
-
-module.exports={getAsignacionPorDocente}
+const getAsignacionById = async(id)=>{
+    try {
+        return asignacionDocenteMateriaRepository.findById(id);
+    } catch (error) {
+        throw new Error('Erro en la asignacion del docente  ' + error.message);
+    }
+   
+}
+module.exports={getAsignacionPorDocente,getAsignacionById}

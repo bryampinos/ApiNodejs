@@ -11,6 +11,9 @@ const curso = sequelize.define('curso', {
   },
   paralelo: {
     type: DataTypes.STRING
+  },
+  especialidad:{
+    type: DataTypes.STRING
   }
 }, {
     tableName: 'curso',
