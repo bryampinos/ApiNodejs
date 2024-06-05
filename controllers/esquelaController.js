@@ -25,4 +25,20 @@ const getEsquelaByEstudiante = (req, res, next) => {
         });
   };
 
-module.exports={crearEsquela,getEsquelaByEstudiante}
+  const getEsquelaById = (req, res, next) => {
+    const esquelaId = req.params.id;
+    esquelaService.getEsquelaById(esquelaId)
+        .then(user => {
+            if (!user) {
+                res.status(404).json({ message: 'Usuario no encontrado' });
+            } else {
+                res.status(200).json(user);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+  };
+
+module.exports={crearEsquela,getEsquelaByEstudiante,getEsquelaById}

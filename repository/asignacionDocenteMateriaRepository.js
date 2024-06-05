@@ -10,6 +10,17 @@ const finfByDocente = async(id)=>{
         }
     
 }
+const findById = async(id)=>{
+    try {
+        const asignacion = await Asignacion.findOne({ 
+            where: { idAsignacion: id } 
+        });
+        return asignacion;
+    } catch (error) {
+        throw new Error('Error al obtener el usuario de la base de datos: ' + error.message);
+    }
+
+}
 
 
-module.exports={finfByDocente}
+module.exports={finfByDocente,findById}

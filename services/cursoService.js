@@ -4,11 +4,14 @@ const createCurso = async(curso) =>{
     
     try {
         
-        if ( !curso.curso|| !curso.paralelo  ) {
+
+        if ( !curso.curso|| !curso.paralelo || !curso.especialidad  ) {
            
             throw new Error('Faltan datos obligatorios del curso');
         }
+  
         curso.idCurso =curso.curso+curso.paralelo;
+        
         return  await cursoRepository.cursoRegister(curso);
     } catch (error) {
         console.error('Error al registrar el curso:', error);

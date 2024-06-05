@@ -33,7 +33,7 @@ const asigDocenteMateria = sequelize.define('asigDocenteMateria', {
   
 }
   }, {
-    tableName: 'asignación docente-materia',
+    tableName: 'asignación_docente_materia',
     timestamps: false 
   });
 
