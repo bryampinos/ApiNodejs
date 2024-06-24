@@ -1,7 +1,7 @@
 // models/Docente.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
-
+const User = require('./user');
 
 
 const Docente = sequelize.define('docente', {
@@ -12,7 +12,7 @@ const Docente = sequelize.define('docente', {
   user_iduser: {
     type: DataTypes.STRING,
     references: {
-      model: 'user',
+      model: User,
       key: 'iduser'
     }
   }
