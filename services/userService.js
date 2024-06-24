@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 require ('dotenv').config();
 const jwt = require('jsonwebtoken');
 const userRepository = require('../repository/userRepository');
@@ -26,12 +26,12 @@ const register = async (user) => {
          }
          //VALIDAR EL NUMERO DE CEDULA 
          
-         const validacionCedula = await userRepository.validacion(user.cedula);
-         if (!validacionCedula) {
-          throw new Error('La cédula es inválida');
-      } else {
-          console.log('La cédula es válida');
-      }
+        // const validacionCedula = await userRepository.validacion(user.cedula);
+         //if (!validacionCedula) {
+          //throw new Error('La cédula es inválida');
+     // } else {
+       //   console.log('La cédula es válida');
+     // }
         // Hashear la cont
         
         const passwordHash = await bcrypt.hash(user.password, 10);
