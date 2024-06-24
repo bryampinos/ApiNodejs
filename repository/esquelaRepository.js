@@ -1,6 +1,6 @@
 const Esquela =require('../models/esquela')
 const Docente = require('../models/docente')
-const User = require('../models/User')
+const User = require('../models/user')
 const create = async (esquela) =>{
     return await Esquela.create(esquela);
 }
