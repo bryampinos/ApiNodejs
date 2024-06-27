@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const Docente = require('./docente');
+const Asignacion = require('./asignaciónDocenteMateria')
 const esquela = sequelize.define('esquela', {
     idEsquela:{
         type: DataTypes.INTEGER,
@@ -50,5 +51,5 @@ const esquela = sequelize.define('esquela', {
     timestamps: false
   });
   esquela.belongsTo(Docente, { foreignKey: 'docente_docente' });
-
+  esquela.belongsTo(Asignacion, { foreignKey: 'asignación_docente_materia_idAsignacion' });
   module.exports=esquela;
