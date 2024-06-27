@@ -30,7 +30,7 @@ const atraso = sequelize.define('atraso', {
   }
 }, {
   tableName: 'atraso',
-  timestamps: false // Desactivar timestamps automáticos de Sequelize
+  timestamps: false 
 });
 
 
