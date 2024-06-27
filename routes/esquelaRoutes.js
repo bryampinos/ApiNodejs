@@ -9,5 +9,7 @@ router.post('/registrar', esquelaController.crearEsquela)
 router.get('/estudiante/:idEstudiante', esquelaController.getEsquelaByEstudiante)
 //MEOTODO PARA TRAER UNA ESQUELA DETALLADA 
 router.get('/:id', esquelaController.getEsquelaById)
+//METODO PARA TRAER LAS ESQUELAS POR ASIGNACOIN DOCENTE ASIGNAUTRA
+router.get('/docenteAsignacion/:idasignaciondocentemateria', esquelaController.getEsquelaByAsignacion)
 module.exports=router;
 
