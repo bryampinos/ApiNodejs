@@ -40,5 +40,20 @@ const getEsquelaByEstudiante = (req, res, next) => {
             res.status(500).json({ error: err });
         });
   };
+  const getEsquelaByAsignacion = (req, res, next) => {
+    const esquelaId = req.params.idasignaciondocentemateria;
+    esquelaService.getEsquelabyAsignacion(esquelaId)
+        .then(user => {
+            if (!user) {
+                res.status(404).json({ message: 'Usuario no encontrado' });
+            } else {
+                res.status(200).json(user);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+  };
 
-module.exports={crearEsquela,getEsquelaByEstudiante,getEsquelaById}
+module.exports={crearEsquela,getEsquelaByEstudiante,getEsquelaById,getEsquelaByAsignacion}

@@ -53,5 +53,16 @@ const getEsquelaByEstudiante = async (id) => {
   };
 
  
+  const getEsquelabyAsignacion = async (id) => {
+    try {
+        const esquela = esquelaRepository.findByAsignacion(id);
+        return (esquela)
+    } catch (error) {
+        console.error('error al buscar la esquela ', error);
+        throw error
+    }
+   
+  };
 
-module.exports={esquelaCreate,getEsquelaByEstudiante,getEsquelaById}
+
+module.exports={esquelaCreate,getEsquelaByEstudiante,getEsquelaById,getEsquelabyAsignacion}
