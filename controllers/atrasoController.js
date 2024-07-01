@@ -8,5 +8,20 @@ const crearAtraso = async (req, res) => {
     }
 }
 
+const findByInspector = (req, res, next) => {
+    const inspectorId = req.params.id;
+    atrasoService.findByInspector(inspectorId)
+        .then(esquela => {
+            if (!esquela) {
+                res.status(404).json({ message: 'Esquelas no encontradas' });
+            } else {
+                res.status(200).json(esquela);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+  };
 
-module.exports={crearAtraso};
+module.exports={crearAtraso, findByInspector};
