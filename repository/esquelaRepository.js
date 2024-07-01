@@ -1,13 +1,13 @@
 const Esquela =require('../models/esquela')
 const Docente = require('../models/docente')
-<<<<<<< HEAD
+
+
+
 const User = require('../models/user')
-=======
-const User = require('../models/User')
 const Estudiante = require('../models/estudiante')
 const Asignacion = require('../models/asignaciónDocenteMateria')
 const estudiante = require('../models/estudiante')
->>>>>>> 236b3e1e58c53cadb8dcf504b8090ddce1744521
+
 const create = async (esquela) =>{
     return await Esquela.create(esquela);
 }
