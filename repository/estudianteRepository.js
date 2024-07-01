@@ -46,4 +46,12 @@ const findByIdRepresentante = async(id)=>{
         throw new Error('Error al obtener el usuario de la base de datos: ' + error.message);
     }
 }
-module.exports={estudianteCreate,fetchAll,findById,findByIdRepresentante,findEstudianteById}
+const findByCedula = async(id)=>{
+    try {
+        const estudiante = await Estudiante.findOne({ where: {cedula: id } });
+        return estudiante;
+    } catch (error) {
+        throw new Error('la cedula no existe: ' + error.message);
+    }
+}
+module.exports={estudianteCreate,fetchAll,findById,findByIdRepresentante,findEstudianteById,findByCedula}
