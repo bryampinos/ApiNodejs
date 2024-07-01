@@ -80,5 +80,22 @@ const getEstudiantes = async (req, res) => {
         });
   }
 
+
+  const getEstudianteByCedula = async(req, res, next)=>{
+    const estudianteId = req.params.cedula;
+    estudianteService.getEstudianteByCedula(estudianteId)
+        .then(user => {
+            if (!user) {
+                res.status(404).json({ message: 'Estudiante no encontrado' });
+            } else {
+                res.status(200).json(user);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+  }
+
 module.exports={crearEstudiante,getEstudiantes,getEstudianteByCurso,
-    getEstudianteByIdRepresentante,getEstudianteById,generarQR}
+    getEstudianteByIdRepresentante,getEstudianteById,generarQR, getEstudianteByCedula}

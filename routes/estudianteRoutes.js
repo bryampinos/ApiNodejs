@@ -15,4 +15,6 @@ router.get('/curso/:id', estudianteController.getEstudianteByCurso);
 router.get('/representante/:idpadre', estudianteController.getEstudianteByIdRepresentante);
 //GENERAR EL CODIGO QR
 router.get('/generarqr/:id', estudianteController.generarQR)
+// OBTENER ESTUDIANTE POR NUMERO DE  CEDULA
+router.get('/cedula/:cedula', estudianteController.getEstudianteByCedula)
 module.exports = router;
