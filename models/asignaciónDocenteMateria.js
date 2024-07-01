@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
+
 const asigDocenteMateria = sequelize.define('asigDocenteMateria', {
     docente_iddocente:{
         type: DataTypes.STRING,
@@ -36,5 +37,6 @@ const asigDocenteMateria = sequelize.define('asigDocenteMateria', {
     tableName: 'asignación_docente_materia',
     timestamps: false 
   });
+
 
   module.exports = asigDocenteMateria ;

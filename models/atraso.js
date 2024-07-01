@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
+const Estudiante = require('../models/estudiante')
 
 const moment = require('moment-timezone'); // Importa moment-timezone
 const atraso = sequelize.define('atraso', {
@@ -30,8 +31,8 @@ const atraso = sequelize.define('atraso', {
   }
 }, {
   tableName: 'atraso',
-  timestamps: false // Desactivar timestamps automáticos de Sequelize
+  timestamps: false 
 });
 
-
+atraso.belongsTo(Estudiante, { foreignKey: 'estudiantes_idEstudiantes' });
 module.exports = atraso;

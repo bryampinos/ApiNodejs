@@ -19,4 +19,15 @@ atraso.registroFecha= fechaFormateada
 
 }   
 
-module.exports = {atrasoCreate};
+const findByInspector = async (id) => {
+    try {
+        const atraso = atrasoRepository.findbyInspector(id);
+        
+        return (atraso)
+    } catch (error) {
+        console.error('error al buscar los atrasos ', error);
+        throw error
+    }
+   
+  };
+module.exports = {atrasoCreate, findByInspector};

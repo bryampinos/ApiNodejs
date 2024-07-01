@@ -55,5 +55,8 @@ const getEstudianteById = async (id) => {
         throw new Error('Error al generar el código QR');
     }
 };
+const getEstudianteByCedula = async (id) => {
+    return estudianteRepository.findByCedula(id);
+  };
 module.exports={register,getAllEstudiantes,getEstudianteById,getEstudianteByIdRepresentante,
-    getEstudianteByIdEstudiante,generarCodigoQR}
+    getEstudianteByIdEstudiante,generarCodigoQR, getEstudianteByCedula}

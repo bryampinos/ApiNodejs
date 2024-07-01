@@ -14,15 +14,16 @@ app.use(cors());
 process.env.TZ = 'America/Guayaquil';
 
 app.use(express.json({limit: '500mb'}));
+app.use('/user', userRoutes);
 app.use('/representante', representanteRoutes);
 app.use('/curso', cursoRoutes);
-app.use('/user', userRoutes);
 app.use('/estudiante', estudianteRoutes);
 app.use('/atraso', atrasoRoutes )
 app.use('/asignatura' , asignaturaRoutes)
 app.use('/docente' , docenteRoutes)
 app.use('/esquela', esquelaRoutes )
 app.use('/docenteMateria', asignacionDocenteMateria )
+
 
 
 
