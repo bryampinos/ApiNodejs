@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const Estudiante = require('../models/estudiante')
 
-const moment = require('moment-timezone'); // Importa moment-timezone
+
 const atraso = sequelize.define('atraso', {
   idAtraso: {
     type: DataTypes.STRING,
@@ -12,6 +12,9 @@ const atraso = sequelize.define('atraso', {
     type: DataTypes.STRING,
   
   },
+  registroHora: {
+    type: DataTypes.STRING},
+
   isnpector_idIsnpector: {
     type: DataTypes.STRING,
     references: {

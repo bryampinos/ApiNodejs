@@ -15,8 +15,18 @@ try {
     esquela.docente_docente = decoded.idRol;
     //AQUI ESTOY REWGISTRANDO Y DANDO FOTMATO A LA FECHA DE ACUEDO A CUANDO ENTRRA 
     const fechaActual = new Date();
-    const fechaFormateada = fechaActual.toLocaleString('es-EC', { timeZone: 'America/Guayaquil' });
-esquela.Fecha=fechaFormateada
+const anio = fechaActual.getFullYear();
+const mes = fechaActual.getMonth() + 1;
+const dia = fechaActual.getDate();
+const horas = fechaActual.getHours();
+const minutos = fechaActual.getMinutes();
+const segundos = fechaActual.getSeconds();
+const fechaFormateada = `${anio}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')} ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+const [fecha, hora] = fechaFormateada.split(' ');
+esquela.Fecha= fecha
+esquela.hora= hora
+
+
 //esquela.idEsquela = esquela.estudiantes_idEstudiantes+"||"+esquela.asignación_docente_materia_idAsignacion
     return await esquelaRepository.create(esquela);
 } catch (error) {
