@@ -2,6 +2,12 @@ const atrasoService= require('../services/atrasoService')
 const xl = require('excel4node');
 const path = require('path');
 const fs = require('fs');
+const ExcelJS = require('exceljs');
+const fechaActual = new Date();
+const anio = fechaActual.getFullYear();
+const mes = fechaActual.getMonth() + 1;
+const dia = fechaActual.getDate();
+const fechaFormateada = `${anio}/${mes.toString().padStart(2, '0')}/${dia.toString().padStart(2, '0')} `;
 const crearAtraso = async (req, res) => {
     try {
         const atraso = await atrasoService.atrasoCreate(req.body);
@@ -26,17 +32,62 @@ const findByInspector = (req, res, next) => {
             res.status(500).json({ error: err });
         });
   };
-
-  const generateReportFile = (inspectorId, reporte, res) => {
-    let date = new Date();
-    let fechaDia = date.getDate();
-    let fechaMes = (date.getUTCMonth()) + 1; 
-    let fechaAño = date.getUTCFullYear();
+//GENERAR LOS REPORTES POR CURSO
+  const generarReportesByCurso = async (req, res) => {
+    const idCurso = req.params.id;
   
-    let nombreArchivo = `reportes del curso ${inspectorId} ${fechaDia}_${fechaMes}_${fechaAño}.xlsx`;
-    let wb = new xl.Workbook();
-    let ws = wb.addWorksheet(nombreArchivo);
+    const fileName = `Reporte del curso ${idCurso} F:${fechaFormateada}.xlsx`;
+    try {
+      const reporte = await atrasoService.reportes(idCurso);
+      if (!reporte) {
+        res.status(404).json({ message: 'Esquelas no encontradas' });
+      } else {
+        generateReportFile(res, fileName, reporte);
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err });
+    }
+  };
+//GENERAR LOS REPORTES POR ESTUDIANTE
+  const generarReportesByEstudiante = async (req, res) => {
+    const estudianteId = req.params.id;
+    const fileName = `Reporte del Estudiante : ${estudianteId}.xlsx`;
+    try {
+      const reporte = await atrasoService.reportesByEstudiante(estudianteId);
+      if (!reporte) {
+        res.status(404).json({ message: 'Esquelas no encontradas' });
+      } else {
+        generateReportFile(res, fileName, reporte);
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err });
+    }
+  };
+  //GENERAR LOS REPORTES POR  FECHA EN ESPECIFICO
+  const generarReportesByFecha = async (req, res) => {
+    const fechaId = req.params.id;
+    const fileName = `Reporte del dia :  ${fechaId}.xlsx`;
+    try {
+      const reporte = await atrasoService.reportesByFecha(fechaId);
+      if (!reporte) {
+        res.status(404).json({ message: 'Esquelas no encontradas' });
+      } else {
+        generateReportFile(res, fileName, reporte);
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err });
+    }
+  };
+  //GENERAR EL ROPERTE EN GENERAL, EL CREADOR DEL EXCEL 
+  const generateReportFile = async ( res,fileName, reporte, ) => {
   
+    // Crear un nuevo libro de trabajo
+    const wb = new xl.Workbook();
+    const ws = wb.addWorksheet('atrasos');
+  //ESTILOS DEL EXCEL
     let cualColumnaEstilo = wb.createStyle({
       font: {
         name: 'Arial',
@@ -53,7 +104,7 @@ const findByInspector = (req, res, next) => {
         size: 11,
       }
     });
-  
+    // Agregar encabezados
     ws.cell(1, 1).string("N0 DE CEDULA").style(cualColumnaEstilo);
     ws.cell(1, 2).string("FECHA").style(cualColumnaEstilo);
     ws.cell(1, 3).string("HORA").style(cualColumnaEstilo);
@@ -61,7 +112,7 @@ const findByInspector = (req, res, next) => {
     ws.cell(1, 5).string("APELLIDO").style(cualColumnaEstilo);
     ws.cell(1, 6).string("CURSO").style(cualColumnaEstilo);
     ws.cell(1, 7).string("OBSERVACION").style(cualColumnaEstilo);
-  
+  //AGREGARE EL CONTENIDO A LAS CELDAS 
     let cualFila = 2;
     for (let i = 0; i < reporte.length; i++) {
       let reporteActual = reporte[i];
@@ -77,76 +128,13 @@ const findByInspector = (req, res, next) => {
   
       cualFila++;
     }
-  
-    const pathExcel = path.join(__dirname, 'excel', nombreArchivo);
-    wb.write(pathExcel, function(err, stats) {
-      if (err) {
-        console.log(err);
-        res.status(500).json({ error: 'Error al escribir el archivo Excel' });
-      } else {
-        res.download(pathExcel, (err) => {
-          if (err) {
-            console.log(err);
-            res.status(500).json({ error: 'Error al descargar el archivo' });
-          } else {
-            fs.rm(pathExcel, (err) => {
-              if (err) {
-                console.log(err);
-                res.status(500).json({ error: 'Error al borrar el archivo' });
-              } else {
-                console.log("Archivo descargado y borrado del servidor correctamente");
-              }
-            });
-          }
-        });
-      }
-    });
+    // Configurar las cabeceras de respuesta para descargar el archivo Excel
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', 'attachment; filename=users.xlsx');
+    
+    // Enviar el archivo Excel al cliente
+    wb.write(`${fileName}`, res);
   };
   
-  const generarReportes = async (req, res) => {
-    const idCurso = req.params.id;
-    try {
-      const reporte = await atrasoService.reportes(idCurso);
-      if (!reporte) {
-        res.status(404).json({ message: 'Esquelas no encontradas' });
-      } else {
-        generateReportFile(idCurso, reporte, res);
-      }
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ error: err });
-    }
-  };
-  const generarReportesByEstudiante = async (req, res) => {
-    const inspectorId = req.params.id;
-    try {
-      const reporte = await atrasoService.reportesByEstudiante(inspectorId);
-      if (!reporte) {
-        res.status(404).json({ message: 'Esquelas no encontradas' });
-      } else {
-        generateReportFile(inspectorId, reporte, res);
-      }
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ error: err });
-    }
-  };
-  const generarReportesByFecha = async (req, res) => {
-    const inspectorId = req.params.id;
-    try {
-      const reporte = await atrasoService.reportesByFecha(inspectorId);
-      if (!reporte) {
-        res.status(404).json({ message: 'Esquelas no encontradas' });
-      } else {
-        generateReportFile(inspectorId, reporte, res);
-      }
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ error: err });
-    }
-  };
-
-
   
-  
-module.exports={crearAtraso, findByInspector,generarReportes, generarReportesByEstudiante ,generarReportesByFecha};
+module.exports={generateReportFile,crearAtraso, findByInspector,generarReportesByCurso, generarReportesByEstudiante ,generarReportesByFecha};

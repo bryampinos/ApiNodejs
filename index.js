@@ -18,7 +18,7 @@ app.use('/user', userRoutes);
 app.use('/representante', representanteRoutes);
 app.use('/curso', cursoRoutes);
 app.use('/estudiante', estudianteRoutes);
-app.use('/atraso', atrasoRoutes )
+app.use('/atraso', atrasoRoutes)
 app.use('/asignatura' , asignaturaRoutes)
 app.use('/docente' , docenteRoutes)
 app.use('/esquela', esquelaRoutes )
@@ -32,4 +32,5 @@ app.use((err, req, res, next) => {
     
     res.status(500).send({ error: 'Algo salió mal' });
   });
-app.listen(3000, () => console.log('Zona horaria del servidor:', process.env.TZ));
+  var puerto = 3000;
+app.listen(puerto, () => console.log('Zona horaria del servidor:', process.env.TZ,`Servidor corrriendo en el puerto : ${puerto}` ));

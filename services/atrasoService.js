@@ -64,4 +64,8 @@ const findByInspector = async (id) => {
        throw new Error('Error en la generacion de reportes '+error.message)
     }
   }
-module.exports = {atrasoCreate, findByInspector, reportes,reportesByEstudiante,reportesByFecha};
+
+  const getAllUsers = async (id) => {
+  return await atrasoRepository.generateDoc(id);
+};
+module.exports = {atrasoCreate, findByInspector, reportes,reportesByEstudiante,reportesByFecha, getAllUsers};

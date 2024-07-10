@@ -8,7 +8,10 @@ const esquela = sequelize.define('esquela', {
         type: DataTypes.INTEGER,
     primaryKey: true
     },
-    Fecha :{
+    Fecha:{
+        type: DataTypes.STRING   
+    },
+    hora:{
         type: DataTypes.STRING   
     },
     Motivo : {
