@@ -32,6 +32,21 @@ const findByInspector = (req, res, next) => {
             res.status(500).json({ error: err });
         });
   };
+  const atrsoByEstudiante = (req, res, next) => {
+    const estudianteId = req.params.id;
+    atrasoService.atrasoByEstudiante(estudianteId)
+        .then(esquela => {
+            if (!esquela) {
+                res.status(404).json({ message: 'Esquelas no encontradas' });
+            } else {
+                res.status(200).json(esquela);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+  };
 //GENERAR LOS REPORTES POR CURSO
   const generarReportesByCurso = async (req, res) => {
     const idCurso = req.params.id;
@@ -137,4 +152,4 @@ const findByInspector = (req, res, next) => {
   };
   
   
-module.exports={generateReportFile,crearAtraso, findByInspector,generarReportesByCurso, generarReportesByEstudiante ,generarReportesByFecha};
+module.exports={generateReportFile,crearAtraso, findByInspector,atrsoByEstudiante,generarReportesByCurso, generarReportesByEstudiante ,generarReportesByFecha};
