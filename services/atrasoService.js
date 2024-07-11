@@ -39,7 +39,15 @@ const findByInspector = async (id) => {
     }
    
   };
-
+const atrasoByEstudiante = async(id)=>{
+    try {
+        const atraso = atrasoRepository.atrasosByEstudiante(id)
+        return atraso
+    } catch (error) {
+        console.error('Error al registrar el docente:', error);
+        throw error;
+    }
+}
   const reportes = async(id)=>{
     try {
         const reporte = atrasoRepository.generateDoc(id);
@@ -68,4 +76,4 @@ const findByInspector = async (id) => {
   const getAllUsers = async (id) => {
   return await atrasoRepository.generateDoc(id);
 };
-module.exports = {atrasoCreate, findByInspector, reportes,reportesByEstudiante,reportesByFecha, getAllUsers};
+module.exports = {atrasoCreate, findByInspector, atrasoByEstudiante,reportes,reportesByEstudiante,reportesByFecha, getAllUsers};

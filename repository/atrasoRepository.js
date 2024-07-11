@@ -73,5 +73,14 @@ try {
 }
   }
 
+const atrasosByEstudiante = async(id)=>{
+try {
+    const atrasos = Atraso.findAll({where : {estudiantes_idEstudiantes:id}})
+    return atrasos
+} catch (error) {
+    throw new Error('Error en la base de datos: ' + error.message);
+}
+}
+
   
-module.exports={create, findbyInspector, generateDoc, generateDocByEstudiante,generateDocByfecha}
+module.exports={create, findbyInspector,atrasosByEstudiante, generateDoc, generateDocByEstudiante,generateDocByfecha}
