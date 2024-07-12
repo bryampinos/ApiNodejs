@@ -17,5 +17,14 @@ const getAsignaturas = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
   };
+  const deleteAsignatura = async(req, res)=> {
+    try {
+      const idAsignatura = req.params.id;
+      await asignaturaService.deleteAsignatura(idAsignatura);
+      res.status(204).json(); // 204 No Content
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  }
 
-module.exports={crearAsignatura,getAsignaturas};
+module.exports={crearAsignatura,getAsignaturas,deleteAsignatura};
