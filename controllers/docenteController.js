@@ -39,9 +39,40 @@ const findDocenteById = async (req, res )=>{
 
 }
 
-
+const getDocentes = async (req, res) => {
+  try {
+      const docentes = await docenteService.getAllDocentes();
+      res.json(docentes);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+const  updateDocente=async(req, res)=> {
+  try {
+    const iduser = req.params.id;
+    const updateData = req.body;
+    const updatedCurso = await docenteService.updateDocente(iduser, updateData);
+    res.json(updatedCurso);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+}
+const deleteDocente = async(req, res)=> {
+  try {
+    const iduser = req.params.id;
+    await docenteService.deleteDocente(iduser);
+    res.status(204).json(); // 204 No Content
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+}
   module.exports={
-    loginDocente, asignacionMateria,findDocenteById
+    loginDocente, 
+    asignacionMateria,
+    findDocenteById,
+    getDocentes,
+    updateDocente,
+    deleteDocente
   }
 
 
