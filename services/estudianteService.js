@@ -58,5 +58,30 @@ const getEstudianteById = async (id) => {
 const getEstudianteByCedula = async (id) => {
     return estudianteRepository.findByCedula(id);
   };
+
+  const updateEstudiante = async(idEstudiante, updateData)=>{
+    try {
+      const estudiante = await estudianteRepository.estudianteById(idEstudiante);
+      if (!estudiante) {
+        throw new Error('Docente no encontrado');
+      }
+      await estudianteRepository.editarEstudiante(idEstudiante, updateData);
+      return await estudianteRepository.estudianteById(idEstudiante);
+    } catch (error) {
+      throw new Error('Erro en el service');
+    }
+   
+  }
+  const deleteEstudiante=async(idEstudiante)=> {
+    try {
+      const estudiante = await estudianteRepository.estudianteById(idEstudiante);
+      if (!estudiante) {
+        throw new Error('Estudiante no encontrado');
+      }
+      return await estudianteRepository.deleteEstudiante(idEstudiante);
+    } catch (error) {
+      throw new Error('Error en el servicio: ' + error.message);
+    }
+  }
 module.exports={register,getAllEstudiantes,getEstudianteById,getEstudianteByIdRepresentante,
-    getEstudianteByIdEstudiante,generarCodigoQR, getEstudianteByCedula}
+    getEstudianteByIdEstudiante,generarCodigoQR, getEstudianteByCedula, updateEstudiante,deleteEstudiante}

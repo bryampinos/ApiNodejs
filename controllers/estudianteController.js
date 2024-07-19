@@ -96,6 +96,26 @@ const getEstudiantes = async (req, res) => {
             res.status(500).json({ error: err });
         });
   }
+  const  updateEstudiante=async(req, res)=> {
+    try {
+      const idEstudiante = req.params.id;
+      const updateData = req.body;
+      const updateEstudiante = await estudianteService.updateEstudiante(idEstudiante, updateData);
+      res.json(updateEstudiante);
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  }
+  const deleteEstudiante = async(req, res)=> {
+    try {
+      const idEstudiante = req.params.id;
+      await estudianteService.deleteEstudiante(idEstudiante);
+      res.status(204).json(); // 204 No Content
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  }
 
 module.exports={crearEstudiante,getEstudiantes,getEstudianteByCurso,
-    getEstudianteByIdRepresentante,getEstudianteById,generarQR, getEstudianteByCedula}
+    getEstudianteByIdRepresentante,getEstudianteById,generarQR, getEstudianteByCedula,
+    updateEstudiante,deleteEstudiante}

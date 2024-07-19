@@ -51,8 +51,8 @@ const  updateDocente=async(req, res)=> {
   try {
     const iduser = req.params.id;
     const updateData = req.body;
-    const updatedCurso = await docenteService.updateDocente(iduser, updateData);
-    res.json(updatedCurso);
+    const updateDocente = await docenteService.updateDocente(iduser, updateData);
+    res.json(updateDocente);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }

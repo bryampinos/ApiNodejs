@@ -56,9 +56,9 @@ const updateDocente = async(iduser, updateData)=>{
   }
   const deleteDocente=async(iduser)=> {
     try {
-      const curso = await docenteRepository.docenteById(iduser);
-      if (!curso) {
-        throw new Error('Curso no encontrado');
+      const docente = await docenteRepository.docenteById(iduser);
+      if (!docente) {
+        throw new Error('Docente no encontrado');
       }
       return await docenteRepository.deleteDocente(iduser);
     } catch (error) {
