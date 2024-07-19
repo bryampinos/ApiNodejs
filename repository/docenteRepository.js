@@ -52,7 +52,7 @@ const editardocente =async(iduser, updateData)=>{
     });
     return updated;
   } catch (error) {
-    throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
+    throw new Error('Error al obtener los docentes de la base de datos: ' + error.message);
   }
  
 }
@@ -63,11 +63,11 @@ const deleteDocente=async(iduser)=> {
       where: { iduser },
     });
     if (deleted === 0) {
-      throw new Error('Curso no encontrado');
+      throw new Error('docentes no encontrado');
     }
     return deleted;
   } catch (error) {
-    throw new Error('Error al eliminar el curso de la base de datos: ' + error.message);
+    throw new Error('Error al eliminar el docentes de la base de datos: ' + error.message);
   }
 }
 
