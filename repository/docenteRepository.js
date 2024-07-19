@@ -1,7 +1,6 @@
 const Docente = require('../models/docente');
-const docente = require('../models/docente')
 const Asignacion = require('../models/asignaciónDocenteMateria');
-
+const DocenteUser = require('../models/User')
 
 const createDocente = async (docente) =>{
     return await Docente.create(docente);
@@ -27,9 +26,59 @@ try {
 }
 }
 
+//METODOS PARA EL CRUD 
+const fetchAll = async()=>{
+  try {
+    const docentes = await DocenteUser.findAll({ where:{ rol: 'docente'}});
+    return docentes;
+} catch (error) {
+    throw new Error('Error al obtener las asignaturas de la base de datos: ' + error.message);
+}
+}
+const docenteById = async(iduser)=>{
+  try {
+    return await DocenteUser.findByPk(iduser);
+  } catch (error) {
+    throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
+  }
+  
+}
+
+const editardocente =async(iduser, updateData)=>{
+  try {
+
+    const [updated] = await DocenteUser.update(updateData, {
+      where: { iduser },
+    });
+    return updated;
+  } catch (error) {
+    throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
+  }
+ 
+}
+const deleteDocente=async(iduser)=> {
+  try {
+  await Docente.destroy({where: {user_iduser: iduser } })
+    const deleted = await DocenteUser.destroy({
+      where: { iduser },
+    });
+    if (deleted === 0) {
+      throw new Error('Curso no encontrado');
+    }
+    return deleted;
+  } catch (error) {
+    throw new Error('Error al eliminar el curso de la base de datos: ' + error.message);
+  }
+}
+
+
 module.exports={
 createDocente,
 findDocenteById,
 asignarAsignatura,
-findRepresenmtanteById
+findRepresenmtanteById,
+fetchAll,
+docenteById,
+editardocente,
+deleteDocente
 }

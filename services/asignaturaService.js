@@ -20,4 +20,16 @@ const getAllAsignaturas = async() =>{
         throw new Error('Error al obtener las asignaturas: ' + error.message);
     }
 }
-module.exports = {asignaturaCreate,getAllAsignaturas};
+const deleteAsignatura=async(idAsignatura)=> {
+    try {
+      const asignatura = await asignaturaRepository.findAsignaturaById(idAsignatura);
+      if (!asignatura) {
+        throw new Error('Asignatura no encontrada');
+      }
+      return await asignaturaRepository.deleteAsignatura(idAsignatura);
+    } catch (error) {
+      throw new Error('Error en el servicio: ' + error.message);
+    }
+  }
+
+module.exports = {asignaturaCreate,getAllAsignaturas,deleteAsignatura};
