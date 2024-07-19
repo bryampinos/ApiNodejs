@@ -18,7 +18,7 @@ app.use('/user', userRoutes);
 app.use('/representante', representanteRoutes);
 app.use('/curso', cursoRoutes);
 app.use('/estudiante', estudianteRoutes);
-app.use('/atraso', atrasoRoutes )
+app.use('/atraso', atrasoRoutes)
 app.use('/asignatura' , asignaturaRoutes)
 app.use('/docente' , docenteRoutes)
 app.use('/esquela', esquelaRoutes )
@@ -28,16 +28,9 @@ app.use('/docenteMateria', asignacionDocenteMateria )
 
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  
-  res.status(500).send({ error: 'Algo salió mal' });
-});
-
-
-// Configuración del servidor para escuchar en todas las interfaces de red
-const PORT = 3000;  // Puedes cambiar el puerto si es necesario
-const HOST = '0.0.0.0'; // Escucha en todas las interfaces de red
-app.listen(PORT, HOST, () => {
-  console.log(`Server running on http://${HOST}:${PORT}`);
-  console.log('Zona horaria del servidor:', process.env.TZ);
-});
+    console.error(err.stack);
+    
+    res.status(500).send({ error: 'Algo salió mal' });
+  });
+  var puerto = 3000;
+app.listen(puerto, () => console.log('Zona horaria del servidor:', process.env.TZ,`Servidor corrriendo en el puerto : ${puerto}` ));

@@ -17,6 +17,43 @@ const cursoRegister = async (curso) => {
       throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
   }
   }
-  module.exports={cursoRegister,fetchAll}
+
+
+const findCursoById = async(idCurso)=>{
+  try {
+    return await Curso.findByPk(idCurso);
+  } catch (error) {
+    throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
+  }
+  
+}
+
+  const EditarCurso =async(idCurso, updateData)=>{
+    try {
+      console.log("entro al repo")
+      const [updated] = await Curso.update(updateData, {
+        where: { idCurso },
+      });
+      return updated;
+    } catch (error) {
+      throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
+    }
+   
+  }
+
+  const deleteCurso=async(idCurso)=> {
+    try {
+      const deleted = await Curso.destroy({
+        where: { idCurso },
+      });
+      if (deleted === 0) {
+        throw new Error('Curso no encontrado');
+      }
+      return deleted;
+    } catch (error) {
+      throw new Error('Error al eliminar el curso de la base de datos: ' + error.message);
+    }
+  }
+   module.exports={cursoRegister,fetchAll, findCursoById, EditarCurso,deleteCurso}
 
  

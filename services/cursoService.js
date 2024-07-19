@@ -28,4 +28,30 @@ try {
     throw new Error('Error al obtener los cursos: ' + error.message);
 }
 }
-module.exports={createCurso, getAllCursos}
+
+  const updateCurso = async(idCurso, updateData)=>{
+    try {
+      const curso = await cursoRepository.findCursoById(idCurso);
+      if (!curso) {
+        throw new Error('Curso not found');
+      }
+      await cursoRepository.EditarCurso(idCurso, updateData);
+      return await cursoRepository.findCursoById(idCurso);
+    } catch (error) {
+      throw new Error('Erro en el service');
+    }
+   
+  }
+  const deleteCurso=async(idCurso)=> {
+    try {
+      const curso = await cursoRepository.findCursoById(idCurso);
+      if (!curso) {
+        throw new Error('Curso no encontrado');
+      }
+      return await cursoRepository.deleteCurso(idCurso);
+    } catch (error) {
+      throw new Error('Error en el servicio: ' + error.message);
+    }
+  }
+
+module.exports={createCurso, getAllCursos, updateCurso, deleteCurso}

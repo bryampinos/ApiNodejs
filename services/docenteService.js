@@ -33,8 +33,43 @@ try {
 const getDocenteById= async (id)=>{
     return docenteRepository.findRepresenmtanteById(id);
 }
+const getAllDocentes = async() =>{
+    try {
+        const docentes = await docenteRepository.fetchAll();
+        return docentes;
+    } catch (error) {
+        throw new Error('Error al obtener las asignaturas: ' + error.message);
+    }
+}
+const updateDocente = async(iduser, updateData)=>{
+    try {
+      const docente = await docenteRepository.docenteById(iduser);
+      if (!docente) {
+        throw new Error('Docente no encontrado');
+      }
+      await docenteRepository.editardocente(iduser, updateData);
+      return await docenteRepository.docenteById(iduser);
+    } catch (error) {
+      throw new Error('Erro en el service');
+    }
+   
+  }
+  const deleteDocente=async(iduser)=> {
+    try {
+      const docente = await docenteRepository.docenteById(iduser);
+      if (!docente) {
+        throw new Error('Docente no encontrado');
+      }
+      return await docenteRepository.deleteDocente(iduser);
+    } catch (error) {
+      throw new Error('Error en el servicio: ' + error.message);
+    }
+  }
 module.exports={
     docenteCreate,
     asignacionDocente,
-    getDocenteById
+    getDocenteById,
+    getAllDocentes,
+    updateDocente,
+    deleteDocente
 }

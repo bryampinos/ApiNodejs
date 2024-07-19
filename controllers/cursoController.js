@@ -17,5 +17,25 @@ const getCursos = async (req, res) => {
     }
   };
 
-
-module.exports={crearCurso,getCursos}
+  
+   const  updateCurso=async(req, res)=> {
+      try {
+        const idCurso = req.params.id;
+        const updateData = req.body;
+        const updatedCurso = await cursoService.updateCurso(idCurso, updateData);
+        res.json(updatedCurso);
+      } catch (error) {
+        res.status(404).json({ error: error.message });
+      }
+    }
+    const deleteCurso = async(req, res)=> {
+      try {
+        const idCurso = req.params.id;
+        await cursoService.deleteCurso(idCurso);
+        res.status(204).json(); // 204 No Content
+      } catch (error) {
+        res.status(404).json({ error: error.message });
+      }
+    }
+ 
+module.exports={crearCurso,getCursos, updateCurso, deleteCurso}

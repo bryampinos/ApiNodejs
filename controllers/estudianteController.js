@@ -80,5 +80,42 @@ const getEstudiantes = async (req, res) => {
         });
   }
 
+
+  const getEstudianteByCedula = async(req, res, next)=>{
+    const estudianteId = req.params.cedula;
+    estudianteService.getEstudianteByCedula(estudianteId)
+        .then(user => {
+            if (!user) {
+                res.status(404).json({ message: 'Estudiante no encontrado' });
+            } else {
+                res.status(200).json(user);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+  }
+  const  updateEstudiante=async(req, res)=> {
+    try {
+      const idEstudiante = req.params.id;
+      const updateData = req.body;
+      const updateEstudiante = await estudianteService.updateEstudiante(idEstudiante, updateData);
+      res.json(updateEstudiante);
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  }
+  const deleteEstudiante = async(req, res)=> {
+    try {
+      const idEstudiante = req.params.id;
+      await estudianteService.deleteEstudiante(idEstudiante);
+      res.status(204).json(); // 204 No Content
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  }
+
 module.exports={crearEstudiante,getEstudiantes,getEstudianteByCurso,
-    getEstudianteByIdRepresentante,getEstudianteById,generarQR}
+    getEstudianteByIdRepresentante,getEstudianteById,generarQR, getEstudianteByCedula,
+    updateEstudiante,deleteEstudiante}
