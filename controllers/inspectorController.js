@@ -19,5 +19,13 @@ const  updateInspector=async(req, res)=> {
       res.status(404).json({ error: error.message });
     }
   }
-  module.exports={updateInspector,deleteInspector}
+  const getInpectores = async (req, res) => {
+    try {
+        const inspector = await inspectorService.getAllInspector();
+        res.json(inspector);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+  };
+  module.exports={updateInspector,deleteInspector, getInpectores}
 

@@ -1,5 +1,7 @@
 const Representante = require('../models/representante')
-const RepresentanteUser = require('../models/User')
+const RepresentanteUser = require('../models/User');
+const User = require('../models/User');
+const { use } = require('../routes/docenteRoutes');
 const createRepresentante = async (representante) =>{
     return await Representante.create(representante);
 
@@ -17,6 +19,7 @@ const verificarRepresentante = async (representantes_idrepresentantes) => {
         console.error("Error al verificar la existencia del curso:", error);
       }
 }
+
 //METODOS PARA EL CRUD 
 const fetchAll = async()=>{
     try {

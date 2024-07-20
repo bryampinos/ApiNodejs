@@ -46,9 +46,18 @@ const findInspectorByid = async (user_iduser) => {
       throw new Error('Error al eliminar el inspector de la base de datos: ' + error.message);
     }
   }
+  const fetchAll = async()=>{
+    try {
+      const inspector = await InspectorUser.findAll({ where:{ rol: 'inspector'}});
+      return inspector;
+  } catch (error) {
+      throw new Error('Error al obtener las asignaturas de la base de datos: ' + error.message);
+  }
+  }
 module.exports={createInspector,
     findInspectorByid,
     inspectorById,
     editarInspector,
-    deleteInspector
+    deleteInspector,
+    fetchAll
 }

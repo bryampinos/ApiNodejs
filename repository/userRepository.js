@@ -15,7 +15,11 @@ const findUserByEmailLogin = async (email) => {
   }
   return user;
 };
-
+const findAdministradorById = async (user_iduser)=>{
+     
+  const administrador = await User.findOne({ where: { user_iduser } });
+return administrador.user_iduser
+}
 
 const findUserByCedula = async (cedula) => {
   return await User.findOne({ where: { cedula } });
@@ -83,6 +87,7 @@ module.exports = {
   fetchAll,
   deleteUser,
   findById,
-  validacion
+  validacion,
+  findAdministradorById
   
 };

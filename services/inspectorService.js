@@ -35,8 +35,16 @@ const updateInspector = async(iduser, updateData)=>{
       throw new Error('Error en el servicio: ' + error.message);
     }
   }
-
+  const getAllInspector = async() =>{
+    try {
+        const inspector = await inspectorRepository.fetchAll();
+        return inspector;
+    } catch (error) {
+        throw new Error('Error al obtener las asignaturas: ' + error.message);
+    }
+}
 module.exports={inspectorCreate,
     updateInspector,
-    deleteInspector
+    deleteInspector,
+    getAllInspector
 }

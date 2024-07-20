@@ -8,6 +8,7 @@ const inspectorService = require('./inspectorService')
 const docenteRepository = require('../repository/docenteRepository')
 const inspectorRepository = require('../repository/inspectorRepository')
 const representanteRepository = require('../repository/representanteRepository')
+const administradorRepository = require('../repository/administradorRepository')
 const register = async (user) => {
     try {
         // Verificar si los campos requeridos están presentes en el objeto user
@@ -65,6 +66,13 @@ const register = async (user) => {
         }
        await inspectorService.inspectorCreate(inspector)
       }
+      else if (user.rol === 'administrador'){
+        const administrador = {
+          idAdministrador: "ADM"+user.cedula,
+          user_iduser: user.iduser
+        }
+       await administradorRepository.createAdministeador(administrador)
+      }
         return  resultado ;
     } catch (error) {
         console.error('Error al registrar usuario:', error);
@@ -79,7 +87,6 @@ const login = async (email, password) => {
   if (user && await bcrypt.compare(password, user.password)) {
     if (user.rol === "docente") {
       const idRol = await docenteRepository.findDocenteById(user.iduser);
-
       const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
       return { user, token,idRol };
     }else if (user.rol === "inspector"){
@@ -89,6 +96,11 @@ const login = async (email, password) => {
 
     }else if (user.rol === "representante"){
       const idRol = await representanteRepository.findRepresentanteById(user.iduser);
+      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
+      return { user, token,idRol };
+      
+    }else if (user.rol === "administrador"){
+      const idRol = await administradorRepository.finAdnministradorById(user.iduser);
       const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
       return { user, token,idRol };
       

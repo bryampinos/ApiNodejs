@@ -7,6 +7,7 @@ const atrasoRoutes = require('./routes/atrasoRoutes')
 const asignaturaRoutes = require('./routes/asignaturaRoutes')
 const docenteRoutes = require('./routes/docenteRoutes')
 const esquelaRoutes = require('./routes/esquelaRoutes')
+const inspectorRoutes = require('./routes/inspectorRoutes')
 const asignacionDocenteMateria=require('./routes/asignacionDocenteMateriaRoutes')
 const app = express();
 const cors = require('cors');
@@ -23,7 +24,7 @@ app.use('/asignatura' , asignaturaRoutes)
 app.use('/docente' , docenteRoutes)
 app.use('/esquela', esquelaRoutes )
 app.use('/docenteMateria', asignacionDocenteMateria )
-
+app.use('/inspector', inspectorRoutes )
 
 
 
