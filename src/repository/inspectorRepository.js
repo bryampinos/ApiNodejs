@@ -11,6 +11,7 @@ const findInspectorByid = async (user_iduser) => {
    
   };
 
+
   const inspectorById = async(iduser)=>{
     try {
       return await InspectorUser.findByPk(iduser);
@@ -60,4 +61,5 @@ module.exports={createInspector,
     editarInspector,
     deleteInspector,
     fetchAll
+    
 }

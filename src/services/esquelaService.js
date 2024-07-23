@@ -82,14 +82,14 @@ const getEsquelaByEstudiante = async (id) => {
    
   };
 
-  const generateEsquelasPDF = async (res) => {
+  const generateEsquelasPDF = async (res,reporte,fileName) => {
     try {
-        const esquelas = await esquelaRepository.getAll();
+        const esquelas = reporte
         const doc = new PDFDocument();
         const escudo = 'src/img/escudo(1).png';
         // Configurar el encabezado de la respuesta para descarga de PDF
         res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'attachment; filename=Esquelas.pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename='+fileName);
 
        
 
@@ -115,7 +115,7 @@ const getEsquelaByEstudiante = async (id) => {
             doc
                 .fontSize(14)
                 
-                .text(`id ${esquela.idEsquela}`, { align: 'left' })
+                .text(`id ${esquela.idEsquela}     FECHA EMITIDA ${esquela.Fecha}`, { align: 'left' })
                 .text(`La unidad educativa Antonio Avila, convoca al PP.FF o representante legal del o la estudiante  ${esquela.estudiante.NombreEst} ${esquela.estudiante.ApellidoEst} del Curso : ${esquela.estudiante.curso_idCurso} acuda a la insittucion, el dia : ${esquela.cita}; en aplicacion del Art.13 de la LOEI: en vista que su representando ha presentando las siguientes dificultades :${esquela.Motivo}`, { align: 'left' })
                     .text(`ENVIADO POR EL/LA DOCENTE: ${esquela.docente.user.nombre} ${esquela.docente.user.apellido} DE LA ASIGNATURA DE :${esquela.asigDocenteMaterium.asignatura_idasignatura}`, { align: 'left' })
                 
@@ -144,6 +144,50 @@ const getEsquelaByEstudiante = async (id) => {
     }
 };
 
-module.exports={esquelaCreate,getEsquelaByEstudiante,getEsquelaById,getEsquelabyAsignacion,getAll,
-    generateEsquelasPDF
+const reporteByEstudiante = async(res,fileName,estudianteId)=>{
+const reporte = await esquelaRepository.findById(estudianteId)
+if (!reporte) {
+    console.error('no existe el estudiante', error);
+    throw error
+}else{
+  
+    generateEsquelasPDF(res,reporte,fileName)
+}
+}
+const reporteByFecha = async(res,fileName,fecha)=>{
+    const reporte = await esquelaRepository.findByFecha(fecha)
+    if (!reporte) {
+        console.error('no existe registros de esta fecha', error);
+        throw error
+    }else{
+        generateEsquelasPDF(res,reporte,fileName)
+    }
+    }
+
+ const reporteByCurso = async(res,fileName,curso)=>{
+        const reporte = await esquelaRepository.findByCurso(curso)
+        if (!reporte) {
+            console.error('no existe registros de este curso', error);
+            throw error
+        }else{
+            
+            generateEsquelasPDF(res,reporte,fileName)
+        }
+        }
+            
+ const reporteByDocente = async(res,fileName,docente)=>{
+    const reporte = await esquelaRepository.fundByDocente(docente)
+    if (!reporte) {
+        console.error('no existe registros de este docente', error);
+        throw error
+    }else{
+        
+        generateEsquelasPDF(res,reporte,fileName)
+    }
+    }
+module.exports={reporteByCurso,esquelaCreate,getEsquelaByEstudiante,getEsquelaById,getEsquelabyAsignacion,getAll,
+    generateEsquelasPDF,
+    reporteByEstudiante,
+    reporteByFecha,
+    reporteByDocente
 }

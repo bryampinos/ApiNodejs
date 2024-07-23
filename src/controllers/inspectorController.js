@@ -27,5 +27,5 @@ const  updateInspector=async(req, res)=> {
         res.status(500).json({ message: error.message });
     }
   };
-  module.exports={updateInspector,deleteInspector, getInpectores}
+  module.exports={updateInspector,deleteInspector, getInpectores,}
 
