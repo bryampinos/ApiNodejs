@@ -1,13 +1,14 @@
 const express = require('express');
-const userRoutes = require('./routes/userRoutes');
-const representanteRoutes = require('./routes/representanteRoutes')
-const estudianteRoutes=require('./routes/estudianteRoutes')
-const cursoRoutes = require('./routes/cursoRoutes')
-const atrasoRoutes = require('./routes/atrasoRoutes')
-const asignaturaRoutes = require('./routes/asignaturaRoutes')
-const docenteRoutes = require('./routes/docenteRoutes')
-const esquelaRoutes = require('./routes/esquelaRoutes')
-const asignacionDocenteMateria=require('./routes/asignacionDocenteMateriaRoutes')
+const userRoutes = require('./src/routes/userRoutes');
+const representanteRoutes = require('./src/routes/representanteRoutes')
+const estudianteRoutes=require('./src/routes/estudianteRoutes')
+const cursoRoutes = require('./src/routes/cursoRoutes')
+const atrasoRoutes = require('./src/routes/atrasoRoutes')
+const asignaturaRoutes = require('./src/routes/asignaturaRoutes')
+const docenteRoutes = require('./src/routes/docenteRoutes')
+const esquelaRoutes = require('./src/routes/esquelaRoutes')
+const inspectorRoutes = require('./src/routes/inspectorRoutes')
+const asignacionDocenteMateria=require('./src/routes/asignacionDocenteMateriaRoutes')
 const app = express();
 const cors = require('cors');
 app.use(cors());
@@ -22,7 +23,7 @@ app.use('/asignatura' , asignaturaRoutes)
 app.use('/docente' , docenteRoutes)
 app.use('/esquela', esquelaRoutes )
 app.use('/docenteMateria', asignacionDocenteMateria )
-
+app.use('/inspector', inspectorRoutes )
 
 
 app.use((err, req, res, next) => {
