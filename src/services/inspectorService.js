@@ -11,6 +11,8 @@ const inspectorCreate = async(inspector) =>{
 
 
 }
+
+
 const updateInspector = async(iduser, updateData)=>{
     try {
       const inspector = await inspectorRepository.inspectorById(iduser);
@@ -46,5 +48,6 @@ const updateInspector = async(iduser, updateData)=>{
 module.exports={inspectorCreate,
     updateInspector,
     deleteInspector,
-    getAllInspector
+    getAllInspector,
+    
 }

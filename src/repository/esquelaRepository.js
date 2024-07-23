@@ -36,6 +36,7 @@ const getAll =async()=>{
 
 const findById = async (id) => {
     try {
+      console.log(id)
       const esquela = await Esquela.findAll({
         where: { estudiantes_idEstudiantes: id },
         include: [
@@ -70,15 +71,10 @@ const findByIdEsquela = async(id)=>{
             include: [
                 {
                   model: Docente,
-                  include: [
-                    {
-                      model: User,
-                    },
-                  ],
+                  include: [{  model: User,}, ],
                 },
-                {
-                  model: Estudiante,  // Incluye el modelo estudiante
-                }
+                { model: Estudiante },
+                {model: Asignacion },
               ],
         });
         return esquela;
@@ -102,6 +98,9 @@ try {
       },
       {
         model: Estudiante,  // Incluye el modelo estudiante
+      },
+      {
+        model: Asignacion,  // Incluye el modelo Asignacion
       }
     ],
   })
@@ -112,4 +111,83 @@ return esquela
 }
 
 }
-module.exports={create,findById,findByIdEsquela,findByAsignacion,getAll};
+const findByFecha = async(fecha)=>{
+  try {
+    const esquela = await Esquela.findAll({
+      where: { Fecha: fecha } ,
+      include: [
+        {model: Docente,
+        include: [ {   model: User, },
+          ],  },{ model: Estudiante,  },
+        {   model: Asignacion,   }   ], })
+  return esquela
+  
+  } catch (error) {
+    throw new Error('Error al obtener la esquela de la base de datos: ' + error.message);
+  }
+  }
+
+  
+const findByCurso = async(curso)=>{
+  try {
+    const esquela = await Esquela.findAll({
+
+      include: [
+        {
+          model: Docente,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+        {
+          model: Estudiante, 
+          where: { curso_idCurso: curso } // Incluye el modelo estudiante
+        },
+        {
+          model: Asignacion,  // Incluye el modelo Asignacion
+        }
+      ],
+    })
+    
+   
+  return esquela
+  
+  } catch (error) {
+    throw new Error('Error al obtener la esquela de la base de datos: ' + error.message);
+  }
+  
+  }
+  const fundByDocente = async(docente)=>{
+    try {
+      const esquela = await Esquela.findAll({
+        where: { docente_docente: docente },
+        include: [
+          {
+            model: Docente,
+            include: [
+              {
+                model: User,
+              },
+            ],
+          },
+          {
+            model: Estudiante, 
+           // Incluye el modelo estudiante
+          },
+          {
+            model: Asignacion,  // Incluye el modelo Asignacion
+          }
+        ],
+      })
+      
+     
+    return esquela
+    
+    } catch (error) {
+      throw new Error('Error al obtener la esquela de la base de datos: ' + error.message);
+    }
+    
+    }
+module.exports={create,findById,findByIdEsquela,findByAsignacion,getAll,findByFecha,findByCurso,fundByDocente};

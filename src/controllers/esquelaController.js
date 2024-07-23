@@ -67,5 +67,29 @@ const getEsquelaByEstudiante = (req, res, next) => {
   const getEsquelasPDF = async (req, res) => {
     await esquelaService.generateEsquelasPDF(res);
 };
+const getReporteByEstudiante = async(req, res)=>{
+    const estudianteId = req.params.id;
+    const fileName = 'reporte del estudiante'+estudianteId+'.pdf'
+    await esquelaService.reporteByEstudiante(res,fileName,estudianteId)
 
-module.exports={crearEsquela,getAll,getEsquelaByEstudiante,getEsquelaById,getEsquelaByAsignacion,getEsquelasPDF}
+}
+const getReporteByFecha = async(req, res)=>{
+    const fecha = req.params.fecha;
+    const fileName = 'reporte del '+fecha+'.pdf'
+    await esquelaService.reporteByFecha(res,fileName,fecha)
+
+}
+const getReporteByCurso = async(req, res)=>{
+    const curso = req.params.curso;
+    const fileName = 'reporte del curso_ '+curso+'.pdf'
+    await esquelaService.reporteByCurso(res,fileName,curso)
+
+}
+const getReporteByDocente = async(req, res)=>{
+    const docente = req.params.docente;
+    const fileName = 'reporte del docente_'+docente+'.pdf'
+    await esquelaService.reporteByDocente(res,fileName,docente)
+
+}
+
+module.exports={getReporteByDocente,getReporteByCurso,getReporteByFecha,crearEsquela,getAll,getEsquelaByEstudiante,getEsquelaById,getEsquelaByAsignacion,getEsquelasPDF,getReporteByEstudiante}
