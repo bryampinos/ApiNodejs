@@ -66,13 +66,23 @@ const deleteDocente = async(req, res)=> {
     res.status(404).json({ error: error.message });
   }
 }
+
+const allDocentes = async(req, res)=>{
+  try {
+    const docentes = await docenteService.allDocentes()
+    res.json(docentes)
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+}
   module.exports={
     loginDocente, 
     asignacionMateria,
     findDocenteById,
     getDocentes,
     updateDocente,
-    deleteDocente
+    deleteDocente,
+    allDocentes
   }
 
 
