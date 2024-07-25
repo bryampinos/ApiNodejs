@@ -1,7 +1,7 @@
 const Docente = require('../models/docente');
 const Asignacion = require('../models/asignaciónDocenteMateria');
-const DocenteUser = require('../models/User')
-
+const DocenteUser = require('../models/user')
+const User = require('../models/user')
 const createDocente = async (docente) =>{
     return await Docente.create(docente);
 }
@@ -70,7 +70,19 @@ const deleteDocente=async(iduser)=> {
     throw new Error('Error al eliminar el docentes de la base de datos: ' + error.message);
   }
 }
-
+const docentesAll = async()=>{
+  try {
+     const docentes = await Docente.findAll({include: [
+      {
+        model: User,
+        attributes: ['nombre','apellido']
+      },
+    ],})
+    return docentes
+  } catch (error) {
+    throw new Error('Error al buscar los docentes en la base de datos  ' + error.message);
+  }
+}
 
 module.exports={
 createDocente,
@@ -80,5 +92,6 @@ findRepresenmtanteById,
 fetchAll,
 docenteById,
 editardocente,
-deleteDocente
+deleteDocente,
+docentesAll
 }

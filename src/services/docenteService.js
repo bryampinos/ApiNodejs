@@ -65,11 +65,20 @@ const updateDocente = async(iduser, updateData)=>{
       throw new Error('Error en el servicio: ' + error.message);
     }
   }
+
+const allDocentes = async()=>{
+  try {
+    return await docenteRepository.docentesAll()
+  } catch (error) {
+    throw new Error('Error en el servicio: ' + error.message);
+  }
+}
 module.exports={
     docenteCreate,
     asignacionDocente,
     getDocenteById,
     getAllDocentes,
     updateDocente,
-    deleteDocente
+    deleteDocente,
+    allDocentes
 }

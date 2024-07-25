@@ -1,6 +1,6 @@
 const Inspector = require('../models/inspector')
 const cursomodel = require('../models/curso')
-const InspectorUser=require('../models/User')
+const InspectorUser=require('../models/user')
 const createInspector = async (inspector) =>{
     return await Inspector.create(inspector);
 

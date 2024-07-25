@@ -13,4 +13,6 @@ router.get('/user/all', docenteController.getDocentes)
 router.put('/update/:id', docenteController.updateDocente)
 router.delete('/delete/:id', docenteController.deleteDocente);
 
+//RUTAS PARA CARGAR TODOS LOS DOCENTES CON SUS DATOS
+router.get('/maestro/all',docenteController.allDocentes)
 module.exports=router;

@@ -3,7 +3,7 @@ require ('dotenv').config();
 const jwt = require('jsonwebtoken');
 const userRepository = require('../repository/userRepository');
 const docenteService = require('./docenteService');
-const representanteService = require('../repository/representanteRepository')
+const representanteService = require('../services/representanteService')
 const inspectorService = require('./inspectorService')
 const docenteRepository = require('../repository/docenteRepository')
 const inspectorRepository = require('../repository/inspectorRepository')
