@@ -131,11 +131,15 @@ const getUserById = async (id) => {
 const deleteUser = async(id)=>{
   return await userRepository.deleteUser(id);
 }
-
+const changePassword=async(id, newPassword)=>{
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  return await userRepository.updatePassword(userId, hashedPassword);
+}
 module.exports = {
   register,
   login,
   getAllUsers,
   getUserById,
-  deleteUser
+  deleteUser,
+  changePassword
 };
