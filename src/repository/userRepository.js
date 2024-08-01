@@ -79,8 +79,8 @@ const deleteUser = async (id) => {
   });
 }
 
-const updatePassword = async(id, newPassword)=>{
-const user = await User.findByPk(id);
+const updatePassword = async(userId, newPassword)=>{
+const user = await User.findByPk(userId);
 if (user) {
   user.password = newPassword;
   await user.save();

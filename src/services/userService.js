@@ -131,7 +131,7 @@ const getUserById = async (id) => {
 const deleteUser = async(id)=>{
   return await userRepository.deleteUser(id);
 }
-const changePassword=async(id, newPassword)=>{
+const changePassword=async(userId, newPassword)=>{
   const hashedPassword = await bcrypt.hash(newPassword, 10);
   return await userRepository.updatePassword(userId, hashedPassword);
 }
