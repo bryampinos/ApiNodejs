@@ -185,9 +185,21 @@ const reporteByFecha = async(res,fileName,fecha)=>{
         generateEsquelasPDF(res,reporte,fileName)
     }
     }
+
+    const reporteByAsignacion = async(res,fileName,asignacion)=>{
+        const reporte = await esquelaRepository.findByAsignacion(asignacion)
+        if (!reporte) {
+            console.error('no existe registros de este docente', error);
+            throw error
+        }else{
+            
+            generateEsquelasPDF(res,reporte,fileName)
+        }
+        }
 module.exports={reporteByCurso,esquelaCreate,getEsquelaByEstudiante,getEsquelaById,getEsquelabyAsignacion,getAll,
     generateEsquelasPDF,
     reporteByEstudiante,
     reporteByFecha,
-    reporteByDocente
+    reporteByDocente,
+    reporteByAsignacion
 }

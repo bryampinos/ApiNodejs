@@ -18,5 +18,6 @@ router.get('/reportepdf/fecha/:fecha', esquelaController.getReporteByFecha)
 router.get('/reporte/generate-pdf', esquelaController.getEsquelasPDF);
 router.get('/reportepdf/curso/:curso', esquelaController.getReporteByCurso);
 router.get('/reportepdf/docente/:docente', esquelaController.getReporteByDocente);
+router.get('/reportepdf/AsignacionDocente/:asignacion', esquelaController.getReporteByAsignacion)
 module.exports=router;
 

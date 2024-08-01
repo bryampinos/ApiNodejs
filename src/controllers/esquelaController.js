@@ -91,5 +91,13 @@ const getReporteByDocente = async(req, res)=>{
     await esquelaService.reporteByDocente(res,fileName,docente)
 
 }
+const getReporteByAsignacion = async(req, res)=>{
+    const asignacion = req.params.asignacion;
+    const fileName = 'reporte del'+asignacion+'.pdf'
+    await esquelaService.reporteByAsignacion(res,fileName,asignacion)
 
-module.exports={getReporteByDocente,getReporteByCurso,getReporteByFecha,crearEsquela,getAll,getEsquelaByEstudiante,getEsquelaById,getEsquelaByAsignacion,getEsquelasPDF,getReporteByEstudiante}
+}
+
+module.exports={getReporteByDocente,getReporteByCurso,getReporteByFecha,crearEsquela,getAll,
+    getEsquelaByEstudiante,getEsquelaById,
+    getEsquelaByAsignacion,getEsquelasPDF,getReporteByEstudiante,getReporteByAsignacion}
