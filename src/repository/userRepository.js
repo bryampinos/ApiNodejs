@@ -79,6 +79,17 @@ const deleteUser = async (id) => {
   });
 }
 
+const updatePassword = async(userId, newPassword)=>{
+const user = await User.findByPk(userId);
+if (user) {
+  user.password = newPassword;
+  await user.save();
+  return user;
+
+}
+throw new Error('User not found');
+}
+
 module.exports = {
   createUser,
   findUserByEmail,
@@ -88,6 +99,6 @@ module.exports = {
   deleteUser,
   findById,
   validacion,
-  findAdministradorById
-  
+  findAdministradorById,
+  updatePassword
 };

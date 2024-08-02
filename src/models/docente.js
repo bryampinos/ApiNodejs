@@ -22,5 +22,5 @@ const Docente = sequelize.define('docente', {
 });
 
 Docente.belongsTo(User, { foreignKey: 'user_iduser' });
-
+//dpcemte
 module.exports = Docente;
