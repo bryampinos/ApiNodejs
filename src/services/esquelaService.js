@@ -196,10 +196,27 @@ const reporteByFecha = async(res,fileName,fecha)=>{
             generateEsquelasPDF(res,reporte,fileName)
         }
         }
+
+    const reporteByAsignacionAndEstudiante = async(res,fileName,idAsignacion,idEstudiante)=>{
+try {
+    const reporte = await esquelaRepository.reporteByAsignacionAndEstudiante(idAsignacion,idEstudiante)
+    if (!reporte) {
+        console.error('no existe estudiantes con ese docente');
+      
+    }else{
+        generateEsquelasPDF(res,reporte,fileName)
+    }
+    
+} catch (error) {
+    console.error('no existe el estudiante', error);
+    throw error
+}
+    }    
 module.exports={reporteByCurso,esquelaCreate,getEsquelaByEstudiante,getEsquelaById,getEsquelabyAsignacion,getAll,
     generateEsquelasPDF,
     reporteByEstudiante,
     reporteByFecha,
     reporteByDocente,
-    reporteByAsignacion
+    reporteByAsignacion,
+    reporteByAsignacionAndEstudiante
 }
