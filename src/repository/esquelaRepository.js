@@ -4,6 +4,7 @@ const User = require('../models/user')
 const Estudiante = require('../models/estudiante')
 const Asignacion = require('../models/asignaciónDocenteMateria')
 const estudiante = require('../models/estudiante')
+const { where } = require('sequelize')
 const create = async (esquela) =>{
     return await Esquela.create(esquela);
 }
@@ -172,22 +173,37 @@ const findByCurso = async(curso)=>{
               },
             ],
           },
-          {
-            model: Estudiante, 
-           // Incluye el modelo estudiante
-          },
-          {
-            model: Asignacion,  // Incluye el modelo Asignacion
-          }
-        ],
-      })
+          {model: Estudiante,  },
+          {model: Asignacion,  } ], })
       
-     
     return esquela
     
     } catch (error) {
       throw new Error('Error al obtener la esquela de la base de datos: ' + error.message);
-    }
-    
-    }
-module.exports={create,findById,findByIdEsquela,findByAsignacion,getAll,findByFecha,findByCurso,fundByDocente};
+    } }
+
+const reporteByAsignacionAndEstudiante =async(idAsignacion,idEstudiante)=>{
+try {
+  const reporte = await Esquela.findAll({
+    where: { asignación_docente_materia_idAsignacion: idAsignacion },
+    where: { estudiantes_idEstudiantes: idEstudiante },
+    include: [
+      {
+        model: Docente,
+        include: [
+          {
+            model: User,
+          },
+        ],
+      },
+      {model: Estudiante,  },
+      {model: Asignacion,  } ]
+  })
+  return reporte 
+} catch (error) {
+  throw new Error('Error al obtener las esquela de la base de datos: ' + error.message);
+}
+}
+
+module.exports={create,findById,findByIdEsquela,findByAsignacion,getAll,findByFecha,
+  findByCurso,fundByDocente,reporteByAsignacionAndEstudiante};

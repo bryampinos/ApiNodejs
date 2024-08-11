@@ -97,7 +97,15 @@ const getReporteByAsignacion = async(req, res)=>{
     await esquelaService.reporteByAsignacion(res,fileName,asignacion)
 
 }
-
+const reporteByAsignacionAndEstudiante = async (req, res)=>{
+    try {
+const {idAsignacion, idEstudiante}=req.body
+const fileName = `reporte del estudiante ${idEstudiante}.pdf`
+await esquelaService.reporteByAsignacionAndEstudiante(res,fileName,idAsignacion,idEstudiante)
+    } catch (error) {
+    
+    }
+}
 module.exports={getReporteByDocente,getReporteByCurso,getReporteByFecha,crearEsquela,getAll,
     getEsquelaByEstudiante,getEsquelaById,
-    getEsquelaByAsignacion,getEsquelasPDF,getReporteByEstudiante,getReporteByAsignacion}
+    getEsquelaByAsignacion,getEsquelasPDF,getReporteByEstudiante,getReporteByAsignacion,reporteByAsignacionAndEstudiante}
