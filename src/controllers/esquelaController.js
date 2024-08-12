@@ -99,7 +99,8 @@ const getReporteByAsignacion = async(req, res)=>{
 }
 const reporteByAsignacionAndEstudiante = async (req, res)=>{
     try {
-const {idAsignacion, idEstudiante}=req.body
+const idAsignacion = req.params.idAsignacion
+const idEstudiante = req.params.idEstudiante
 const fileName = `reporte del estudiante ${idEstudiante}.pdf`
 await esquelaService.reporteByAsignacionAndEstudiante(res,fileName,idAsignacion,idEstudiante)
     } catch (error) {
