@@ -212,11 +212,23 @@ try {
     throw error
 }
     }    
+
+    const cambiarVisto = async (id) => {
+      try {
+        await esquelaRepository.updateEsquela(id)
+const esquela = await esquelaRepository.findByIdEsquela(id)
+return esquela 
+      } catch (error) {
+        
+      }
+    };
+    
 module.exports={reporteByCurso,esquelaCreate,getEsquelaByEstudiante,getEsquelaById,getEsquelabyAsignacion,getAll,
     generateEsquelasPDF,
     reporteByEstudiante,
     reporteByFecha,
     reporteByDocente,
     reporteByAsignacion,
-    reporteByAsignacionAndEstudiante
+    reporteByAsignacionAndEstudiante,
+    cambiarVisto
 }

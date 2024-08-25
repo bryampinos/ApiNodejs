@@ -211,6 +211,15 @@ const findByCurso = async(curso)=>{
         throw new Error('Error al obtener las esquela de la base de datos: ' + error.message);
       }
     };
-
+    const updateEsquela = async (idEsquela) => {
+      try {
+          return await Esquela.update(
+            { estado_esquela: "VISTO" },
+            { where: { idEsquela } }
+          )
+      } catch (error) {
+          throw new Error('Error al actualizar la esquela: ' + error.message);
+      }
+  };
 module.exports={create,findById,findByIdEsquela,findByAsignacion,getAll,findByFecha,
-  findByCurso,fundByDocente,reporteByAsignacionAndEstudiante};
+  findByCurso,fundByDocente,reporteByAsignacionAndEstudiante,updateEsquela};
