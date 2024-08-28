@@ -19,6 +19,7 @@ router.get('/reporte/generate-pdf', esquelaController.getEsquelasPDF);
 router.get('/reportepdf/curso/:curso', esquelaController.getReporteByCurso);
 router.get('/reportepdf/docente/:docente', esquelaController.getReporteByDocente);
 router.get('/reportepdf/AsignacionDocente/:asignacion', esquelaController.getReporteByAsignacion)
-router.post('/reportepdf/asignacionEstudiante', esquelaController.reporteByAsignacionAndEstudiante)
+router.get('/reportepdf/asignacionEstudiante/:idAsignacion/:idEstudiante', esquelaController.reporteByAsignacionAndEstudiante)
+router.put('/cambiar-estado/:id', esquelaController.cambiarVistoController)
 module.exports=router;
 

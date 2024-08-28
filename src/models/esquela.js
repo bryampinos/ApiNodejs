@@ -49,6 +49,10 @@ const esquela = sequelize.define('esquela', {
           key: 'idAsignacion'
         }
     },
+    estado_esquela: {
+        type: DataTypes.STRING     
+    
+    },
 
 }, {
     tableName: 'esquela',

@@ -99,13 +99,30 @@ const getReporteByAsignacion = async(req, res)=>{
 }
 const reporteByAsignacionAndEstudiante = async (req, res)=>{
     try {
-const {idAsignacion, idEstudiante}=req.body
+const idAsignacion = req.params.idAsignacion
+const idEstudiante = req.params.idEstudiante
 const fileName = `reporte del estudiante ${idEstudiante}.pdf`
 await esquelaService.reporteByAsignacionAndEstudiante(res,fileName,idAsignacion,idEstudiante)
     } catch (error) {
     
     }
 }
+
+const cambiarVistoController = (req, res, next) => {
+    const esquelaId = req.params.id;
+    esquelaService.cambiarVisto(esquelaId)
+        .then(user => {
+            if (!user) {
+                res.status(404).json({ message: 'esquela no encontrada' });
+            } else {
+                res.status(200).json(user);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+  };
 module.exports={getReporteByDocente,getReporteByCurso,getReporteByFecha,crearEsquela,getAll,
-    getEsquelaByEstudiante,getEsquelaById,
+    getEsquelaByEstudiante,getEsquelaById,cambiarVistoController,
     getEsquelaByAsignacion,getEsquelasPDF,getReporteByEstudiante,getReporteByAsignacion,reporteByAsignacionAndEstudiante}
