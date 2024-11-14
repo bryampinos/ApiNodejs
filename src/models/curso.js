@@ -3,7 +3,7 @@ const sequelize = require('../../config/db');
 
 const curso = sequelize.define('curso', {
     idCurso: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     primaryKey: true
   },
   curso: {
