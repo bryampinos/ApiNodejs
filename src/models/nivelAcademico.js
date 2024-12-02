@@ -1,5 +1,6 @@
 const sequelize = require("../../config/db");
-const jornada = require("./jornada");
+const jornada = require('./jornada')
+const { DataTypes } = require('sequelize');
 
 const nivelAcademico = sequelize.define('nivel_academico', {
     nivel_id: {

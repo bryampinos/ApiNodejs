@@ -8,7 +8,7 @@ const register = async (req, res) => {
     }
     
   };
-  const getAll = async( res)=>{
+  const getAll = async(req, res)=>{
     try {
         const jornadas = await jornadaService.getAllJornadas()
         res.json(jornadas)
