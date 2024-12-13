@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/db');
 const User = sequelize.define('user', {
   iduser: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     primaryKey: true
   },
   nombre: {
@@ -20,8 +20,8 @@ const User = sequelize.define('user', {
   password: {
     type: DataTypes.STRING
   },
-  rol: {
-    type: DataTypes.STRING
+  rol_id: {
+    type: DataTypes.INTEGER
   }
 }, {
     tableName: 'user',

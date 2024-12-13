@@ -5,7 +5,7 @@ const Estudiante = require('../models/estudiante')
 
 const atraso = sequelize.define('atraso', {
   idAtraso: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     primaryKey: true
   },
   registroFecha: {

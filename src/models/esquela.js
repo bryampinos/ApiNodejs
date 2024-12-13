@@ -32,7 +32,7 @@ const esquela = sequelize.define('esquela', {
         }
     },
     estudiantes_idEstudiantes:{
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         references: {
           model: 'estudiante',
           key: 'idEstudiantes'
@@ -43,7 +43,7 @@ const esquela = sequelize.define('esquela', {
     },
     
     asignación_docente_materia_idAsignacion:{
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         references: {
           model: 'asignación_docente_materia_idAsignacion',
           key: 'idAsignacion'

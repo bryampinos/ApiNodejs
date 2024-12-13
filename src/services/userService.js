@@ -12,7 +12,7 @@ const administradorRepository = require('../repository/administradorRepository')
 const register = async (user) => {
     try {
         // Verificar si los campos requeridos están presentes en el objeto user
-        if ( !user.email || !user.apellido || !user.nombre || !user.password || !user.cedula || !user.rol) {
+        if ( !user.email || !user.apellido || !user.nombre || !user.password || !user.cedula || !user.rol_id) {
             throw new Error('Faltan datos obligatorios del usuario');
         }
          // Verificar si el correo electrónico ya existe en la base de datos
@@ -38,41 +38,11 @@ const register = async (user) => {
         const passwordHash = await bcrypt.hash(user.password, 10);
         user.password = passwordHash;
         // Generar iduser concatenando cedula y rol
-        user.iduser = "user"+user.cedula;
         // Crear el usuario en el repositorio
        const resultado = await userRepository.createUser(user);
        //envia los datos dependiendo su rol 
-
-       //DOCENTE
-        if (user.rol === 'docente') {
-          const docente = {
-              iddocente: "LIC"+user.cedula,
-              user_iduser: user.iduser
-          }
-           await docenteService.docenteCreate(docente);
-      }
-      //REPRESENTANTE
-      else if (user.rol === 'representante') {
-      const representante = {
-        idrepresentantes: "REP"+ user.cedula,
-        user_iduser: user.iduser
-      }
-      await representanteService.representanteCreate(representante)
-      }
-      else if (user.rol === 'inspector'){
-        const inspector = {
-          idIsnpector: "INS"+user.cedula,
-          user_iduser: user.iduser
-        }
-       await inspectorService.inspectorCreate(inspector)
-      }
-      else if (user.rol === 'administrador'){
-        const administrador = {
-          idAdministrador: "ADM"+user.cedula,
-          user_iduser: user.iduser
-        }
-       await administradorRepository.createAdministeador(administrador)
-      }
+  
+  
         return  resultado ;
     } catch (error) {
         console.error('Error al registrar usuario:', error);
@@ -85,23 +55,23 @@ const login = async (email, password) => {
     const user = await userRepository.findUserByEmailLogin(email);
 
   if (user && await bcrypt.compare(password, user.password)) {
-    if (user.rol === "docente") {
-      const idRol = await docenteRepository.findDocenteById(user.iduser);
-      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
-      return { user, token,idRol };
-    }else if (user.rol === "inspector"){
-      const idRol = await inspectorRepository.findInspectorByid(user.iduser);
-      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
-      return { user, token,idRol };
+    if (user.rol_id === 1) {//admin
+      //const idRol = await docenteRepository.findDocenteById(user.iduser);
+      const token = jwt.sign({ user: user, idRol:'ADMIN'}, process.env.SECRET, { expiresIn: '1000h' });
+      return { user, token };
+    }else if (user.rol_id === 2){//inspector
+    //  const idRol = await inspectorRepository.findInspectorByid(user.iduser);
+      const token = jwt.sign({ user: user, idRol:'INSPECTOR'}, process.env.SECRET, { expiresIn: '1000h' });
+      return { user, token };
 
-    }else if (user.rol === "representante"){
-      const idRol = await representanteRepository.findRepresentanteById(user.iduser);
-      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
-      return { user, token,idRol };
+    }else if (user.rol_id === 3){//DOCENTE
+      //const idRol = await representanteRepository.findRepresentanteById(user.iduser);
+      const token = jwt.sign({ user: user, idRol:'DOCENTE'}, process.env.SECRET, { expiresIn: '1000h' });
+      return { user, token };
       
-    }else if (user.rol === "administrador"){
-      const idRol = await administradorRepository.finAdnministradorById(user.iduser);
-      const token = jwt.sign({ user: user, idRol:idRol}, process.env.SECRET, { expiresIn: '1000h' });
+    }else if (user.rol_id === 4){//representante
+     // const idRol = await administradorRepository.finAdnministradorById(user.iduser);
+      const token = jwt.sign({ user: user, idRol:'REPRESENTANTE'}, process.env.SECRET, { expiresIn: '1000h' });
       return { user, token,idRol };
       
     }

@@ -4,7 +4,7 @@ const sequelize = require('../../config/db');
 
 const asigDocenteMateria = sequelize.define('asigDocenteMateria', {
     docente_iddocente:{
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
       
         references: {
           model: 'docente',
@@ -12,7 +12,7 @@ const asigDocenteMateria = sequelize.define('asigDocenteMateria', {
         }
     },
     asignatura_idasignatura:{
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         
         references: {
           model: 'asignatura',
@@ -21,7 +21,7 @@ const asigDocenteMateria = sequelize.define('asigDocenteMateria', {
     },
     
     curso_idCurso:{
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
  
       references: {
         model: 'curso',
@@ -29,7 +29,7 @@ const asigDocenteMateria = sequelize.define('asigDocenteMateria', {
       }
   },
   IdAsignacion:{
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     primaryKey: true
   
 }

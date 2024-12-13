@@ -6,11 +6,11 @@ const User = require('../models/user');
 
 const Administrador = sequelize.define('administrador', {
     idAdministrador: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     primaryKey: true
   },
   user_iduser: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     references: {
       model: User,
       key: 'iduser'

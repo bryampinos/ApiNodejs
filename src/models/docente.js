@@ -6,11 +6,11 @@ const User = require('./user');
 
 const Docente = sequelize.define('docente', {
   iddocente: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     primaryKey: true
   },
   user_iduser: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     references: {
       model: User,
       key: 'iduser'

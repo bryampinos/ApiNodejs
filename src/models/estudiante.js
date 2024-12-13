@@ -3,7 +3,7 @@ const sequelize = require('../../config/db');
 
 const estudiante =  sequelize.define('estudiante', {
     idEstudiantes: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         primaryKey: true
       },
       NombreEst: {
@@ -16,7 +16,7 @@ const estudiante =  sequelize.define('estudiante', {
         type: DataTypes.STRING
       },
       representantes_idrepresentantes: {
-          type: DataTypes.STRING,
+          type: DataTypes.INTEGER,
         references: {
           model: 'representantes',
           key: 'idrepresentantes'

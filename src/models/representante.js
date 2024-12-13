@@ -3,11 +3,11 @@ const sequelize = require('../../config/db');
 
 const Representante = sequelize.define('representantes', {
     idrepresentantes: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       primaryKey: true
     },
     user_iduser: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
       references: {
         model: 'user',
         key: 'iduser'
