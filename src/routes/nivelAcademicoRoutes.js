@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const nivelController= require('../controllers/nivelAcademicoController')
 
-router.get('/nivel/all', nivelController.getAll)
+router.get('/all', nivelController.getAll)
+router.get('/:nivel_id', nivelController.getJornadaById)
 //EDITAR LOS DOCENTES
-router.post('/nivel/register', nivelController.register)
+router.post('/register', nivelController.register)
+module.exports = router;

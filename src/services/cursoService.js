@@ -5,12 +5,12 @@ const createCurso = async(curso) =>{
     try {
         
 
-        if ( !curso.curso|| !curso.paralelo || !curso.especialidad  ) {
+        if ( !curso.nivel_curso|| !curso.paralelo_curso || !curso.especialidad_id || !curso.jor_id || !curso.nivel_id  ) {
            
             throw new Error('Faltan datos obligatorios del curso');
         }
   
-        curso.idCurso =curso.curso+curso.paralelo;
+        
         
         return  await cursoRepository.cursoRegister(curso);
     } catch (error) {
@@ -28,6 +28,14 @@ try {
     throw new Error('Error al obtener los cursos: ' + error.message);
 }
 }
+const getCursoById = async(curso_id)=>{
+  try {
+      const cursos = await cursoRepository.findCursoById(curso_id);
+        return cursos;
+  } catch (error) {
+      throw new Error('Error al obtener los cursos: ' + error.message);
+  }
+  }
 
   const updateCurso = async(idCurso, updateData)=>{
     try {
@@ -54,4 +62,4 @@ try {
     }
   }
 
-module.exports={createCurso, getAllCursos, updateCurso, deleteCurso}
+module.exports={createCurso, getAllCursos, updateCurso, deleteCurso,getCursoById}

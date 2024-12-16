@@ -14,7 +14,7 @@ const nivelAcademico = sequelize.define('nivel_academico', {
     nivel_estado: {
         type: DataTypes.BOOLEAN
     },
-    jornada_jor_id: {
+    jor_id: {
         type: DataTypes.INTEGER,
         references: {
             model: jornada,
@@ -29,4 +29,4 @@ const nivelAcademico = sequelize.define('nivel_academico', {
 
 
 nivelAcademico.belongsTo(jornada, { foreignKey: 'jor_id' });
-module.exports = jornada;
+module.exports = nivelAcademico;

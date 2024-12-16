@@ -4,7 +4,7 @@ const asignaturaCreate = async (asignatura) => {
         if (!asignatura.nombre || !asignatura.descripcion  ) {
             throw new Error('Faltan datos obligatorios de la asignatura');
         }
-        asignatura.idasignatura = asignatura.nombre
+        // asignatura.idasignatura = asignatura.nombre
         return  await asignaturaRepository.asignaturaRegister(asignatura);
     } catch (error) {
         console.error('Error al registrar la asignatura:', error);

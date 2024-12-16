@@ -6,19 +6,20 @@ const QRCode = require('qrcode');
 
 const register = async(estudiante) =>{
     try {
-        if (!estudiante.NombreEst || !estudiante.ApellidoEst|| !estudiante.cedula || !estudiante.curso_idCurso  ) {
+        if (!estudiante.NombreEst || !estudiante.ApellidoEst|| !estudiante.cedula || !estudiante.curso_id  ) {
             throw new Error('Faltan datos obligatorios del estudiante');
         }
-estudiante.idEstudiantes="EST"+estudiante.cedula
+//estudiante.idEstudiantes="EST"+estudiante.cedula
 
 const token = estudiante.token
 const secret = process.env.SECRET;
 const decoded = jwt.decode(token, secret);
-estudiante.representantes_idrepresentantes=decoded.idRol;
-const verficiarRepresentante = await representanteRepository.verificarRepresentante(estudiante.representantes_idrepresentantes)
-if (verficiarRepresentante) {
+
+estudiante.idrepresentantes=decoded.user.iduser;
+// const verficiarRepresentante = await representanteRepository.verificarRepresentante(estudiante.representantes_idrepresentantes)
+// if (verficiarRepresentante) {
     
-}
+// }
         return  await estudianteRepository.estudianteCreate(estudiante);
     } catch (error) {
         console.error('Error al registrar el estudiante:', error);
@@ -63,7 +64,7 @@ const getEstudianteByCedula = async (id) => {
     try {
       const estudiante = await estudianteRepository.estudianteById(idEstudiante);
       if (!estudiante) {
-        throw new Error('Docente no encontrado');
+        throw new Error('Estudiante no encontrado');
       }
       await estudianteRepository.editarEstudiante(idEstudiante, updateData);
       return await estudianteRepository.estudianteById(idEstudiante);

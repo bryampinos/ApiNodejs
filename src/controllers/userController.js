@@ -3,7 +3,7 @@ const userService = require('../services/userService');
 const register = async (req, res) => {
   try {
     const user = await userService.register(req.body);
-  res.json({message: "usuario registrado"});
+  res.json(user);
   } catch (error) {
     res.status(401).json({ message: error.message });
   }
@@ -24,6 +24,15 @@ const login = async (req, res) => {
 const getUsers = async (req, res) => {
   try {
       const users = await userService.getAllUsers();
+      res.json(users);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+const getUsersByRoles = async (req, res) => {
+  try {
+    const userId = req.params.rol_id;
+      const users = await userService.getUsersByRol(userId);
       res.json(users);
   } catch (error) {
       res.status(500).json({ message: error.message });
@@ -70,5 +79,6 @@ module.exports = {
   getUsers,
   getUser,
   deleteUser,
-  changePassword
+  changePassword,
+  getUsersByRoles
 };

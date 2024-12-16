@@ -16,6 +16,15 @@ const getCursos = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
   };
+  const getCursosById = async (req, res) => {
+    try {
+        
+        const cursos = await cursoService.getCursoById(req.params.curso_id);
+        res.json(cursos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+  };
 
   
    const  updateCurso=async(req, res)=> {
@@ -38,4 +47,4 @@ const getCursos = async (req, res) => {
       }
     }
  
-module.exports={crearCurso,getCursos, updateCurso, deleteCurso}
+module.exports={crearCurso,getCursos, updateCurso, deleteCurso,getCursosById}

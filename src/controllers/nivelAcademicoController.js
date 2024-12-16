@@ -16,4 +16,12 @@ const register = async (req, res) => {
         res.status(401).json({ message: error.message });
     }
 }
-  module.exports={register,getAll}
+const getJornadaById = async(req, res)=>{
+  try {
+      const niveles = await nivelAcademicoService.getJornadaById(req)
+      res.json(niveles)
+  } catch (error) {
+      res.status(401).json({ message: error.message });
+  }
+}
+  module.exports={register,getAll,getJornadaById}

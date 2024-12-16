@@ -19,4 +19,12 @@ const getAllNiveles = async() =>{
         throw new Error('Error al obtener los niveles: ' + error.message);
     }
 }
-module.exports={nivelCreate,getAllNiveles}
+const getJornadaById = async(req) =>{
+    try {
+       return await nivelAcademicoRepo.getnivelesById(req);
+      
+    } catch (error) {
+        throw new Error('Error al obtener los niveles: ' + error.message);
+    }
+}
+module.exports={nivelCreate,getAllNiveles,getJornadaById}

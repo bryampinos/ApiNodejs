@@ -1,5 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/db');
+const User = require('./user');
+const nivelAcademico = require('./nivelAcademico');
+const curso = require('./curso');
 
 const estudiante =  sequelize.define('estudiante', {
     idEstudiantes: {
@@ -15,18 +18,18 @@ const estudiante =  sequelize.define('estudiante', {
       cedula: {
         type: DataTypes.STRING
       },
-      representantes_idrepresentantes: {
+      idrepresentantes: {
           type: DataTypes.INTEGER,
         references: {
-          model: 'representantes',
-          key: 'idrepresentantes'
+          model: 'user',
+          key: 'user_id'
         }
       },
-      curso_idCurso: {
+      curso_id: {
         type: DataTypes.STRING,
       references: {
         model: 'curso',
-        key: 'idCurso'
+        key: 'curso_id'
       }
     }
 } 
@@ -34,5 +37,7 @@ const estudiante =  sequelize.define('estudiante', {
   tableName: 'estudiante',
   timestamps: false
 });
+estudiante.belongsTo(User, { foreignKey: 'idrepresentantes' });
 
+estudiante.belongsTo(curso, { foreignKey: 'curso_id' });
 module.exports=estudiante;

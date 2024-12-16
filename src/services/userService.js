@@ -40,9 +40,21 @@ const register = async (user) => {
         // Generar iduser concatenando cedula y rol
         // Crear el usuario en el repositorio
        const resultado = await userRepository.createUser(user);
-       //envia los datos dependiendo su rol 
-  
-  
+     const asignacion = await userRepository.findUserByEmailLogin(user.email)
+
+       const usuarioRol={user_iduser:asignacion.iduser}
+        if(user.rol_id==1){
+         await administradorRepository.createAdministeador(usuarioRol)
+        }
+        if(user.rol_id==2){
+         await inspectorRepository.createInspector(usuarioRol)
+        }
+        if(user.rol_id==3){
+          await docenteRepository.createDocente(usuarioRol)
+         }
+         if(user.rol_id==4){
+          await representanteRepository.createRepresentante(usuarioRol)
+         }
         return  resultado ;
     } catch (error) {
         console.error('Error al registrar usuario:', error);
@@ -56,7 +68,7 @@ const login = async (email, password) => {
 
   if (user && await bcrypt.compare(password, user.password)) {
     if (user.rol_id === 1) {//admin
-      //const idRol = await docenteRepository.findDocenteById(user.iduser);
+    //  const idRol = await docenteRepository.findDocenteById(user.iduser);
       const token = jwt.sign({ user: user, idRol:'ADMIN'}, process.env.SECRET, { expiresIn: '1000h' });
       return { user, token };
     }else if (user.rol_id === 2){//inspector
@@ -72,7 +84,7 @@ const login = async (email, password) => {
     }else if (user.rol_id === 4){//representante
      // const idRol = await administradorRepository.finAdnministradorById(user.iduser);
       const token = jwt.sign({ user: user, idRol:'REPRESENTANTE'}, process.env.SECRET, { expiresIn: '1000h' });
-      return { user, token,idRol };
+      return { user, token };
       
     }
   }else{
@@ -88,6 +100,14 @@ const login = async (email, password) => {
 const getAllUsers = async () => {
   try {
       const users = await userRepository.fetchAll();
+      return users;
+  } catch (error) {
+      throw new Error('Error al obtener los usuarios: ' + error.message);
+  }
+};
+const getUsersByRol = async (rol) => {
+  try {
+      const users = await userRepository.getUserByRol(rol);
       return users;
   } catch (error) {
       throw new Error('Error al obtener los usuarios: ' + error.message);
@@ -111,5 +131,6 @@ module.exports = {
   getAllUsers,
   getUserById,
   deleteUser,
-  changePassword
+  changePassword,
+  getUsersByRol
 };

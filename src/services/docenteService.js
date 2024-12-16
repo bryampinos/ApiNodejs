@@ -19,7 +19,7 @@ try {
     const secret = process.env.SECRET;
     const decoded = jwt.decode(token, secret);
     asignacion.docente_iddocente= decoded.idRol
-    asignacion.IdAsignacion = decoded.idRol + "_"+asignacion.asignatura_idasignatura+"_"+asignacion.curso_idCurso;
+    // asignacion.IdAsignacion = decoded.idRol + "_"+asignacion.asignatura_idasignatura+"_"+asignacion.curso_idCurso;
     
     return await docenteRepository.asignarAsignatura(asignacion)
 } catch (error) {

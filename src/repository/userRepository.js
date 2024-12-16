@@ -1,7 +1,9 @@
 const User = require('../models/user');
 
 const createUser = async (user) => {
-  return await User.create(user);
+   const usuario = await  User.create(user);
+   console.log(usuario)
+   return findUserByCedula(usuario.cedula)
 };
 
 const findUserByEmail = async (email) => {
@@ -58,7 +60,20 @@ return checkDigit === lastDigit;
 
 const fetchAll = async () => {
   try {
-      const users = await User.findAll();
+    const users = await User.findAll()
+      return users;
+  } catch (error) {
+      throw new Error('Error al obtener los usuarios de la base de datos: ' + error.message);
+  }
+};
+
+const getUserByRol = async (rol) => {
+  try {
+    const users = await User.findAll({
+      where: {
+        rol_id: rol,  
+      },
+    });
       return users;
   } catch (error) {
       throw new Error('Error al obtener los usuarios de la base de datos: ' + error.message);
@@ -100,5 +115,6 @@ module.exports = {
   findById,
   validacion,
   findAdministradorById,
-  updatePassword
+  updatePassword,
+  getUserByRol
 };

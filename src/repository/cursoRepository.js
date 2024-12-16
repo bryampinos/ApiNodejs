@@ -1,4 +1,7 @@
-const Curso=require('../models/curso')
+const Curso=require('../models/curso');
+const especialidad = require('../models/especialidad');
+const jornada = require('../models/jornada');
+const nivelAcademico = require('../models/nivelAcademico');
 
 const cursoRegister = async (curso) => {
   try {
@@ -8,20 +11,55 @@ const cursoRegister = async (curso) => {
   }
     
   };
-
-  const fetchAll = async ()=>{
+  const fetchAll = async () => {
     try {
-      const cursos = await Curso.findAll();
-      return cursos;
-  } catch (error) {
+      return await Curso.findAll({
+        include: [
+          {
+            model: especialidad,
+            attributes: ['especialidad_nombre'] // Atributos de la tabla especialidad
+          },
+          {
+            model: nivelAcademico,
+            attributes: ['nivel_id', 'nivel_descripcion'], // Atributos de nivel_academico
+            include: [
+              {
+                model: jornada, // Relación anidada con jornada
+                attributes: ['jor_id', 'jor_nombre'] // Atributos de jornada
+              }
+            ]
+          }
+        ],
+        attributes: ['curso_id', 'nivel_curso', 'paralelo_curso'] // Atributos de curso
+      });
+    } catch (error) {
       throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
-  }
-  }
-
+    }
+  };
+  
 
 const findCursoById = async(idCurso)=>{
   try {
-    return await Curso.findByPk(idCurso);
+    return await Curso.findOne({
+      where: { curso_id: idCurso }, // Condición para buscar por ID
+      include: [
+        {
+          model: especialidad,
+          attributes: ['especialidad_nombre'] // Atributos de la tabla especialidad
+        },
+        {
+          model: nivelAcademico,
+          attributes: ['nivel_id', 'nivel_descripcion'], // Atributos de nivel_academico
+          include: [
+            {
+              model: jornada, // Relación anidada con jornada
+              attributes: ['jor_id', 'jor_nombre'] // Atributos de jornada
+            }
+          ]
+        }
+      ],
+      attributes: ['curso_id', 'nivel_curso', 'paralelo_curso'] // Atributos de curso
+    });
   } catch (error) {
     throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
   }

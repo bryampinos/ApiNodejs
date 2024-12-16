@@ -21,7 +21,11 @@ const User = sequelize.define('user', {
     type: DataTypes.STRING
   },
   rol_id: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'rol_usuario',
+      key: 'rol_id'
+    }
   }
 }, {
     tableName: 'user',

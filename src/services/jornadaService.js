@@ -1,8 +1,11 @@
 
 const jornadaRepository = require('../repository/jornadaRepository')
-const jornadaCreate = async(inspector) =>{
+const jornadaCreate = async(jornada) =>{
     try {
-        return await jornadaRepository.createJornada(inspector)
+        if ( !jornada.jor_nombre ) {
+            throw new Error('Faltan datos obligatorios de la jornada');
+        }
+        return await jornadaRepository.createJornada(jornada)
     } catch (error) {
         console.error('Error al registrar el inspector:', error);
         throw error; 
@@ -18,5 +21,12 @@ const getAllJornadas = async() =>{
         throw new Error('Error al obtener los representantes: ' + error.message);
     }
 }
-
-module.exports = {jornadaCreate,getAllJornadas}
+const getJotnadaById = async(req) =>{
+    try {
+       return await jornadaRepository.getJornadaById(req);
+      
+    } catch (error) {
+        throw new Error('Error al obtener los representantes: ' + error.message);
+    }
+}
+module.exports = {jornadaCreate,getAllJornadas,getJotnadaById,getJotnadaById}

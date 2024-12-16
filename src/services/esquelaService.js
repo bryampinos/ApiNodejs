@@ -116,7 +116,7 @@ const getEsquelaByEstudiante = async (id) => {
                 .fontSize(14)
                 
                 .text(`id ${esquela.idEsquela}     FECHA EMITIDA ${esquela.Fecha}`, { align: 'left' })
-                .text(`La unidad educativa Antonio Avila, convoca al PP.FF o representante legal del o la estudiante  ${esquela.estudiante.NombreEst} ${esquela.estudiante.ApellidoEst} del Curso : ${esquela.estudiante.curso_idCurso} acuda a la insittucion, el dia : ${esquela.cita}; en aplicacion del Art.13 de la LOEI: en vista que su representando ha presentando las siguientes dificultades :${esquela.Motivo}`, { align: 'left' })
+                .text(`La unidad educativa Antonio Avila, convoca al PP.FF o representante legal del o la estudiante  ${esquela.estudiante.NombreEst} ${esquela.estudiante.ApellidoEst} del Curso : ${esquela.estudiante.curso_id} acuda a la insittucion, el dia : ${esquela.cita}; en aplicacion del Art.13 de la LOEI: en vista que su representando ha presentando las siguientes dificultades :${esquela.Motivo}`, { align: 'left' })
                     .text(`ENVIADO POR EL/LA DOCENTE: ${esquela.docente.user.nombre} ${esquela.docente.user.apellido} DE LA ASIGNATURA DE :${esquela.asigDocenteMaterium.asignatura_idasignatura}`, { align: 'left' })
                 
 
