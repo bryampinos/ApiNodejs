@@ -5,6 +5,7 @@ const Estudiante = require('../models/estudiante')
 const Asignacion = require('../models/asignaciónDocenteMateria')
 const estudiante = require('../models/estudiante')
 const { where } = require('sequelize')
+const Asignatura= require ('../models/asignatura')
 const create = async (esquela) =>{
     return await Esquela.create(esquela);
 }
@@ -21,7 +22,12 @@ const getAll =async()=>{
           ],
         },
         {
-          model: Asignacion,  // Incluye el modelo Asignacion
+          model: Asignacion,
+          include: [
+            {
+              model:Asignatura,
+            },
+          ], // Incluye el modelo Asignacion
         },
         {
           model: Estudiante,  // Incluye el modelo estudiante
@@ -41,9 +47,7 @@ const findById = async (id) => {
       const esquela = await Esquela.findAll({
         where: { estudiantes_idEstudiantes: id },
         include: [
-  
           {
-           
             model: Docente,
             include: [
               {
@@ -52,7 +56,12 @@ const findById = async (id) => {
             ],
           },
           {
-            model: Asignacion,  // Incluye el modelo Asignacion
+            model: Asignacion,
+            include: [
+              {
+                model:Asignatura,
+              },
+            ], // Incluye el modelo Asignacion
           },
           {
             model: Estudiante,  // Incluye el modelo estudiante
@@ -70,13 +79,26 @@ const findByIdEsquela = async(id)=>{
         const esquela = await Esquela.findOne({ 
             where: { idEsquela: id } ,
             include: [
-                {
-                  model: Docente,
-                  include: [{  model: User,}, ],
-                },
-                { model: Estudiante },
-                {model: Asignacion },
-              ],
+              {
+                model: Docente,
+                include: [
+                  {
+                    model: User,
+                  },
+                ],
+              },
+              {
+                model: Asignacion,
+                include: [
+                  {
+                    model:Asignatura,
+                  },
+                ], // Incluye el modelo Asignacion
+              },
+              {
+                model: Estudiante,  // Incluye el modelo estudiante
+              }
+            ],
         });
         return esquela;
     } catch (error) {
@@ -98,10 +120,15 @@ try {
         ],
       },
       {
-        model: Estudiante,  // Incluye el modelo estudiante
+        model: Asignacion,
+        include: [
+          {
+            model:Asignatura,
+          },
+        ], // Incluye el modelo Asignacion
       },
       {
-        model: Asignacion,  // Incluye el modelo Asignacion
+        model: Estudiante,  // Incluye el modelo estudiante
       }
     ],
   })
