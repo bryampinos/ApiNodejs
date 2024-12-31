@@ -5,7 +5,8 @@ const fs = require('fs');
 
 const esquelaCreate = async(esquela)=>{
 try {
-    if(!esquela.Motivo){
+    
+    if(!esquela.motivo){
         throw new Error('FALTA EL MOTIVO');
     }else if(!esquela.estudiantes_idEstudiantes){
         throw new Error(' NO SE A SELECCIONADO AL ESTUDIANTE');
@@ -14,7 +15,9 @@ try {
     const token = esquela.token
     const secret = process.env.SECRET;
     const decoded = jwt.decode(token, secret);
-    esquela.docente_docente = decoded.idRol;
+    if (decoded.idRol!='DOCENTE'        || decoded.idRol !='INSPECTOR')
+    {    throw new Error(' ESTA ACCION SOLO LA PEUDEN REALZIAR USUARIO ESTABLECIDOS');}
+    esquela.docente_docente = decoded.user.rol_id;
     //AQUI ESTOY REWGISTRANDO Y DANDO FOTMATO A LA FECHA DE ACUEDO A CUANDO ENTRRA 
     const fechaActual = new Date();
 const anio = fechaActual.getFullYear();
@@ -25,7 +28,7 @@ const minutos = fechaActual.getMinutes();
 const segundos = fechaActual.getSeconds();
 const fechaFormateada = `${anio}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')} ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
 const [fecha, hora] = fechaFormateada.split(' ');
-esquela.Fecha= fecha
+esquela.fecha= fecha
 esquela.hora= hora
 
 

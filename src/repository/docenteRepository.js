@@ -17,6 +17,18 @@ const asignarAsignatura = async(asignacion) =>{
     throw new Error('Ya se encuentra asignado a esta asignatura',error);
   }
 }
+const findByuser = async (user_iduser) => {
+  return await Docente.findOne({ where: { user_iduser } });
+};
+const crearDocente = async(docente) =>{
+  try {
+    console.log(docente)
+    return await Docente.create(docente)
+  } catch (error) {
+    console.log(error)
+    throw new Error('ERROR ALREGISTRAR EL DONCENTE',error);
+  }
+}
 const findRepresenmtanteById = async(iddocente)=>{
 try {
   const docente = await Docente.findOne({ where: { iddocente } });
@@ -93,5 +105,7 @@ fetchAll,
 docenteById,
 editardocente,
 deleteDocente,
-docentesAll
+docentesAll,
+crearDocente,
+findByuser
 }

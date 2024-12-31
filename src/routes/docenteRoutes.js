@@ -3,7 +3,7 @@ const router = express.Router();
 const docenteController = require('../controllers/docenteController')
 
 router.post('/asignacionMateria', docenteController.asignacionMateria);
-
+router.post('/registrar',docenteController.registrar)
 //METODOS GET
 //OBTENER INFORMACION DEL DOCENTE
 router.get('/:id',docenteController.findDocenteById)

@@ -50,7 +50,7 @@ const register = async (user) => {
          await inspectorRepository.createInspector(usuarioRol)
         }
         if(user.rol_id==3){
-          await docenteRepository.createDocente(usuarioRol)
+          //await docenteRepository.createDocente(usuarioRol)
          }
          if(user.rol_id==4){
           await representanteRepository.createRepresentante(usuarioRol)

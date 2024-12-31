@@ -1,7 +1,7 @@
 const asignaturaRepository = require('../repository/asignaturaRepository')
 const asignaturaCreate = async (asignatura) => {
     try {
-        if (!asignatura.nombre || !asignatura.descripcion  ) {
+        if (!asignatura.asig_nombre   ) {
             throw new Error('Faltan datos obligatorios de la asignatura');
         }
         // asignatura.idasignatura = asignatura.nombre

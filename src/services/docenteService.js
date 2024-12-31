@@ -18,7 +18,9 @@ try {
     const token = asignacion.token
     const secret = process.env.SECRET;
     const decoded = jwt.decode(token, secret);
+    const docente = docenteRepository.findByuser(decoded.user.iduser)
     asignacion.docente_iddocente= decoded.idRol
+    asignacion.docente_iddocente = docente.iddocente
     // asignacion.IdAsignacion = decoded.idRol + "_"+asignacion.asignatura_idasignatura+"_"+asignacion.curso_idCurso;
     
     return await docenteRepository.asignarAsignatura(asignacion)
@@ -29,7 +31,26 @@ try {
 
 
 }
-
+const registrarDocente = async (docente)=>{
+  try {
+      
+      const token = docente.token
+      const secret = process.env.SECRET;
+      const decoded = jwt.decode(token, secret);
+      if(decoded.idRol!='DOCENTE'){
+        throw new Error('ESTO SOLO LO PUEDE REALIZAR LOS DOCENTES');
+        
+      }
+      docente.user_iduser= decoded.user.iduser
+     
+      return await docenteRepository.crearDocente(docente)
+  } catch (error) {
+      console.error('Error al asignar la asignatura :', error);
+      throw error; 
+  }
+  
+  
+  }
 const getDocenteById= async (id)=>{
     return docenteRepository.findRepresenmtanteById(id);
 }
@@ -80,5 +101,6 @@ module.exports={
     getAllDocentes,
     updateDocente,
     deleteDocente,
-    allDocentes
+    allDocentes,
+    registrarDocente
 }

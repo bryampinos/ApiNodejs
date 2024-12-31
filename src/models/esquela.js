@@ -8,20 +8,20 @@ const esquela = sequelize.define('esquela', {
         type: DataTypes.INTEGER,
     primaryKey: true
     },
-    Fecha:{
+    fecha:{
         type: DataTypes.STRING   
     },
     hora:{
         type: DataTypes.STRING   
     },
-    Motivo : {
+    motivo : {
         type: DataTypes.STRING     
     },
-    Descripcion: {
+    descripcion: {
         type: DataTypes.STRING     
     
     },
-    Evidencia:{
+    evidencia:{
         type: DataTypes.STRING 
     },
     docente_docente:{
