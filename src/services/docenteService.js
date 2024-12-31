@@ -18,14 +18,16 @@ try {
     const token = asignacion.token
     const secret = process.env.SECRET;
     const decoded = jwt.decode(token, secret);
-    const docente = docenteRepository.findByuser(decoded.user.iduser)
-    asignacion.docente_iddocente= decoded.idRol
+    const docente =  await docenteRepository.findByuser(decoded.user.iduser)
+  
+
     asignacion.docente_iddocente = docente.iddocente
+   
     // asignacion.IdAsignacion = decoded.idRol + "_"+asignacion.asignatura_idasignatura+"_"+asignacion.curso_idCurso;
-    
+    console.log(asignacion)
     return await docenteRepository.asignarAsignatura(asignacion)
 } catch (error) {
-    console.error('Error al asignar la asignatura :', error);
+ 
     throw error; 
 }
 

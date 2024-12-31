@@ -20,6 +20,30 @@ const getAllAsignaturas = async() =>{
         throw new Error('Error al obtener las asignaturas: ' + error.message);
     }
 }
+const getAllAsignaturasByJornada = async(jor_id) =>{
+  try {
+      const asignaturas = await asignaturaRepository.fetchAllByJornada(jor_id);
+      return asignaturas;
+  } catch (error) {
+      throw new Error('Error al obtener las asignaturas: ' + error.message);
+  }
+}
+const getAllAsignaturasBySeccion = async(jor_id,nivel_id) =>{
+  try {
+      const asignaturas = await asignaturaRepository.fetchAllBySeccion(jor_id,nivel_id);
+      return asignaturas;
+  } catch (error) {
+      throw new Error('Error al obtener las asignaturas: ' + error.message);
+  }
+}
+const getAllAsignaturasByNivel = async(jor_id) =>{
+  try {
+      const asignaturas = await asignaturaRepository.fetchAllByNivel(jor_id);
+      return asignaturas;
+  } catch (error) {
+      throw new Error('Error al obtener las asignaturas: ' + error.message);
+  }
+}
 const deleteAsignatura=async(idAsignatura)=> {
     try {
       const asignatura = await asignaturaRepository.findAsignaturaById(idAsignatura);
@@ -32,4 +56,5 @@ const deleteAsignatura=async(idAsignatura)=> {
     }
   }
 
-module.exports = {asignaturaCreate,getAllAsignaturas,deleteAsignatura};
+module.exports = {asignaturaCreate,getAllAsignaturas,deleteAsignatura,
+  getAllAsignaturasByJornada,getAllAsignaturasByNivel,getAllAsignaturasBySeccion};

@@ -17,6 +17,30 @@ const getAsignaturas = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
   };
+  const getAsignaturasBySeccion = async (req, res) => {
+    try {
+        const cursos = await asignaturaService.getAllAsignaturasBySeccion(req.query.jor_id,req.query.nivel_id);
+        res.json(cursos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+  };
+  const getAsignaturasByJornada = async (req, res) => {
+    try {
+        const cursos = await asignaturaService.getAllAsignaturasByJornada(req.params.nivel_id);
+        res.json(cursos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+  };
+  const getAsignaturasByNivel = async (req, res) => {
+    try {
+        const cursos = await asignaturaService.getAllAsignaturasByNivel(req.params.nivel_id);
+        res.json(cursos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+  };
   const deleteAsignatura = async(req, res)=> {
     try {
       const idAsignatura = req.params.id;
@@ -27,4 +51,5 @@ const getAsignaturas = async (req, res) => {
     }
   }
 
-module.exports={crearAsignatura,getAsignaturas,deleteAsignatura};
+module.exports={crearAsignatura,getAsignaturas,deleteAsignatura,
+  getAsignaturasByJornada,getAsignaturasByNivel,getAsignaturasBySeccion};
