@@ -79,17 +79,17 @@ const findCursoById = async(idCurso)=>{
    
   }
 
-  const deleteCurso=async(idCurso)=> {
+  const deleteCurso=async(curso_id)=> {
     try {
       const deleted = await Curso.destroy({
-        where: { idCurso },
+        where: { curso_id:curso_id },
       });
       if (deleted === 0) {
         throw new Error('Curso no encontrado');
       }
       return deleted;
     } catch (error) {
-      throw new Error('Error al eliminar el curso de la base de datos: ' + error.message);
+      throw new Error('Error al eliminar el curso de la base de datos: verifique que ningun usuario este asociado a  este curso  ' + error.message);
     }
   }
    module.exports={cursoRegister,fetchAll, findCursoById, EditarCurso,deleteCurso}

@@ -9,6 +9,6 @@ router.get('/curso/:curso_id', cursoController.getCursosById);
 //METODO GET PARA EDITAR EL CURSO
 router.put('/:curso_id', cursoController.updateCurso);
 //METODO PARA EL ELIMINAR UN CURSO
-router.delete('/cursos/:id', cursoController.deleteCurso);
+router.delete('/delete/:id', cursoController.deleteCurso);
 
 module.exports = router;
