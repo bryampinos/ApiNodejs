@@ -18,6 +18,6 @@ router.get('/generarqr/:id', estudianteController.generarQR)
 // OBTENER ESTUDIANTE POR NUMERO DE  CEDULA
 router.get('/cedula/:cedula', estudianteController.getEstudianteByCedula)
 //MEOTODOS DEL CRUD
-router.put('/update/:id', estudianteController.updateEstudiante)
+router.patch('/patch', estudianteController.updateEstudiante)
 router.delete('/delete/:id', estudianteController.deleteEstudiante);
 module.exports = router;

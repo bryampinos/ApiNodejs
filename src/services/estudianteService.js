@@ -60,15 +60,23 @@ const getEstudianteByCedula = async (id) => {
     return estudianteRepository.findByCedula(id);
   };
 
-  const updateEstudiante = async(idEstudiante, updateData)=>{
+  const updateEstudiante = async(student)=>{
     try {
-      const estudiante = await estudianteRepository.estudianteById(idEstudiante);
+      const estudiante = await estudianteRepository.estudianteById(student.idEstudiantes);
       if (!estudiante) {
         throw new Error('Estudiante no encontrado');
       }
-      await estudianteRepository.editarEstudiante(idEstudiante, updateData);
-      return await estudianteRepository.estudianteById(idEstudiante);
+      if(student.NombreEst){
+        student.NombreEst=student.NombreEst.toUpperCase()
+      }
+      if(student.ApellidoEst){
+        student.ApellidoEst=student.ApellidoEst.toUpperCase()
+      }
+     
+      await estudianteRepository.editarEstudiante(student);
+      return await estudianteRepository.estudianteById(student.idEstudiantes);
     } catch (error) {
+      console.log(error)
       throw new Error('Erro en el service');
     }
    

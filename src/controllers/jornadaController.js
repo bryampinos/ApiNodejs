@@ -9,6 +9,26 @@ const register = async (req, res) => {
     }
     
   };
+  const editarJornada = async (req, res) => {
+    try {
+      
+      await jornadaService.editarJornada(req.body);
+    res.json({message: "JORNADA EDITADA"});
+    } catch (error) {
+      res.status(401).json({ message: error.message });
+    }
+    
+  };
+  const eliminarJornada = async (req, res) => {
+    try {
+      
+      await jornadaService.editarJornada(req.body);
+    res.json({message: "JORNADA EDITADA"});
+    } catch (error) {
+      res.status(401).json({ message: error.message });
+    }
+    
+  };
   const getAll = async(req, res)=>{
     try {
         const jornadas = await jornadaService.getAllJornadas()
@@ -26,4 +46,4 @@ const getJornadaById = async(req, res)=>{
   }
 }
 
-  module.exports ={register,getAll,getJornadaById}
+  module.exports ={register,getAll,getJornadaById,editarJornada,eliminarJornada}

@@ -162,17 +162,42 @@ const findByCedula = async(id)=>{
 }
 const estudianteById = async(idEstudiante)=>{
     try {
-      return await Estudiante.findByPk(idEstudiante);
+      return await Estudiante.findByPk(idEstudiante,{include: [
+        {
+          model: User,
+          attributes: ['nombre', 'apellido'] // Atributos de la tabla User
+        },
+        {
+          model: curso, // Relación con curso
+          attributes: ['nivel_curso', 'paralelo_curso'], // Atributos de curso
+          include: [
+            {
+              model: especialidad, // Relación anidada con especialidad
+              attributes: ['especialidad_nombre']
+            },
+            {
+              model: nivelAcademico, // Relación anidada con nivelAcademico
+              attributes: ['nivel_descripcion'],
+              include: [
+                {
+                  model: jornada, // Relación anidada con jornada
+                  attributes: ['jor_nombre']
+                }
+              ]
+            }
+          ]
+        }
+      ]});
     } catch (error) {
-      throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
+      throw new Error('Error al obtener los estudiante de la base de datos: ' + error.message);
     }
     
   }
-  const editarEstudiante =async(idEstudiante, updateData)=>{
+  const editarEstudiante =async(student)=>{
     try {
   
-      const [updated] = await Estudiante.update(updateData, {
-        where: { idEstudiante },
+      const [updated] = await Estudiante.update(student, {
+        where: { idEstudiantes:student.idEstudiantes },
       });
       return updated;
     } catch (error) {
@@ -182,10 +207,10 @@ const estudianteById = async(idEstudiante)=>{
     
   }
 
-  const deleteEstudiante=async(idEstudiante)=> {
+  const deleteEstudiante=async(idEstudiantes)=> {
     try {
       const deleted = await Estudiante.destroy({
-        where: { idEstudiante },
+        where: { idEstudiantes },
       });
       if (deleted === 0) {
         throw new Error('Estudiante no encontrado');

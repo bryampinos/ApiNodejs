@@ -13,6 +13,19 @@ const jornadaCreate = async(jornada) =>{
 
 
 }
+const editarJornada = async(jornada) =>{
+    try {
+        if ( !jornada.jor_id ) {
+            throw new Error('ELIJA ALGUNA JORNADA');
+        }
+        return await jornadaRepository.editarJornada(jornada)
+    } catch (error) {
+        
+        throw error; 
+    }
+
+
+}
 const getAllJornadas = async() =>{
     try {
        return await jornadaRepository.getAllJornadas();
@@ -29,4 +42,4 @@ const getJotnadaById = async(req) =>{
         throw new Error('Error al obtener los representantes: ' + error.message);
     }
 }
-module.exports = {jornadaCreate,getAllJornadas,getJotnadaById,getJotnadaById}
+module.exports = {jornadaCreate,getAllJornadas,getJotnadaById,getJotnadaById,editarJornada}

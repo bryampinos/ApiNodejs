@@ -121,9 +121,14 @@ const getUserById = async (id) => {
 const deleteUser = async(id)=>{
   return await userRepository.deleteUser(id);
 }
-const changePassword=async(userId, newPassword)=>{
-  const hashedPassword = await bcrypt.hash(newPassword, 10);
-  return await userRepository.updatePassword(userId, hashedPassword);
+
+const changePassword=async(user)=>{
+  if (user.password){
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    user.password = hashedPassword
+  }
+ 
+  return await userRepository.updatePassword(user);
 }
 module.exports = {
   register,

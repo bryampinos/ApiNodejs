@@ -14,7 +14,7 @@ router.get('/:id', userController.getUser);
 
 //METODO DELETE
 router.delete('/delete/:id', userController.deleteUser)
-router.put('/users/change-password', userController.changePassword);
+router.patch('/patch', userController.changePassword);
 
 module.exports = router;
 

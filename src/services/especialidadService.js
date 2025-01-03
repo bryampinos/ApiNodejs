@@ -20,6 +20,32 @@ const createEspecialidad = async(especialidad) =>{
 
 
 }
+const patchEspecialidad = async(especialidad) =>{
+    try {
+     
+       if(especialidad.especialidad_nombre){
+        especialidad.especialidad_nombre=especialidad.especialidad_nombre.toUpperCase()
+       }
+       console.log(especialidad)
+        return await especilidadRepository.EditarEspecialdiad(especialidad)
+    } catch (error) {
+        console.error('Error al registrar el inspector:', error);
+        throw error; 
+    }
+
+
+}
+const deleteEspecialidad = async(especialidad) =>{
+    try {
+     
+        return await especilidadRepository.eliminarEspecialdiad(especialidad)
+    } catch (error) {
+        console.error('Error al registrar el inspector:', error);
+        throw error; 
+    }
+
+
+}
 const getEspecialidadById = async(especialidad_id) =>{
     try {
        
@@ -34,5 +60,5 @@ const getEspecialidadById = async(especialidad_id) =>{
 module.exports={
     getEspecilidades,
     createEspecialidad,
-    getEspecialidadById
+    getEspecialidadById,patchEspecialidad,deleteEspecialidad
 }

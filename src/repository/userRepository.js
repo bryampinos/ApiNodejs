@@ -94,15 +94,16 @@ const deleteUser = async (id) => {
   });
 }
 
-const updatePassword = async(userId, newPassword)=>{
-const user = await User.findByPk(userId);
-if (user) {
-  user.password = newPassword;
-  await user.save();
-  return user;
+const updatePassword = async(user)=>{
+  try {
+    await User.update(user, {
+      where: { iduser: user.iduser }, // Filtra por el ID del usuario
+    }); 
+  } catch (error) {
+    throw new Error('Error al actualzar el usuario de la base de datos: ' + error.message); 
+  }
 
-}
-throw new Error('User not found');
+
 }
 
 module.exports = {

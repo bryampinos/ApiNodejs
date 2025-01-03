@@ -20,6 +20,26 @@ const getEspecilidades = async (req, res) => {
     }
     
   };
+  const patchEspecialidad = async (req, res) => {
+    try {
+      
+      await especialidadService.patchEspecialidad(req.body);
+    res.json({message: "especialidad editada"});
+    } catch (error) {
+      res.status(401).json({ message: error.message });
+    }
+    
+  };
+  const deleteEspecialidad = async (req, res) => {
+    try {
+      
+      await especialidadService.deleteEspecialidad(req.params.id);
+    res.json({message: "especialidad eliminada"});
+    } catch (error) {
+      res.status(401).json({ message: error.message });
+    }
+    
+  };
   const getEspecialidadById = async (req, res) => {
     try {
       
@@ -30,4 +50,4 @@ const getEspecilidades = async (req, res) => {
     }
     
   };
-  module.exports={getEspecilidades,register,getEspecialidadById}
+  module.exports={getEspecilidades,register,getEspecialidadById,patchEspecialidad,deleteEspecialidad}

@@ -98,11 +98,12 @@ const getEstudiantes = async (req, res) => {
   }
   const  updateEstudiante=async(req, res)=> {
     try {
-      const idEstudiante = req.params.id;
-      const updateData = req.body;
-      const updateEstudiante = await estudianteService.updateEstudiante(idEstudiante, updateData);
+   
+      const estudiante = req.body;
+      const updateEstudiante = await estudianteService.updateEstudiante(estudiante);
       res.json(updateEstudiante);
     } catch (error) {
+        
       res.status(404).json({ error: error.message });
     }
   }
@@ -110,7 +111,7 @@ const getEstudiantes = async (req, res) => {
     try {
       const idEstudiante = req.params.id;
       await estudianteService.deleteEstudiante(idEstudiante);
-      res.status(204).json(); // 204 No Content
+      res.json('ESTUDIANTE ELIMINADO').json(); // 204 No Content
     } catch (error) {
       res.status(404).json({ error: error.message });
     }

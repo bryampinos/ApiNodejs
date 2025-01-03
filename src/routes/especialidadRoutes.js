@@ -6,6 +6,8 @@ router.get('/all', especialidadController.getEspecilidades)
 router.get('/:especialidad_id', especialidadController.getEspecialidadById)
 //EDITAR LOS DOCENTES
 router.post('/register', especialidadController.register)
+router.patch('/patch', especialidadController.patchEspecialidad)
+router.delete('/delete/:id', especialidadController.deleteEspecialidad)
 //router.put('/update/:id', representanteController.updateRepresentante)
 //router.delete('/delete/:id', representanteController.deleteDocente);
 module.exports = router;

@@ -7,9 +7,25 @@ const nivelCreate = async(nivel) =>{
         console.error('Error al registrar el nivel academico:', error);
         throw error; 
     }
-
-
-
+}
+const editarNivel = async(nivel) =>{
+    try {
+        if(nivel.nivel_descripcion)
+        {nivel.nivel_descripcion= nivel.nivel_descripcion.toUpperCase()}
+        return await nivelAcademicoRepo.editarNivel(nivel)
+    } catch (error) {
+        console.error('Error al registrar el nivel academico:', error);
+        throw error; 
+    }
+}
+const delteNivel = async(nivel) =>{
+    try {
+       
+        return await nivelAcademicoRepo.deleteNivel(nivel)
+    } catch (error) {
+        console.error('Error al registrar el nivel academico:', error);
+        throw error; 
+    }
 }
 const getAllNiveles = async() =>{
     try {
@@ -27,4 +43,4 @@ const getJornadaById = async(req) =>{
         throw new Error('Error al obtener los niveles: ' + error.message);
     }
 }
-module.exports={nivelCreate,getAllNiveles,getJornadaById}
+module.exports={nivelCreate,getAllNiveles,getJornadaById,editarNivel,delteNivel}

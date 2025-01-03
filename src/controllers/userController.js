@@ -66,9 +66,9 @@ const deleteUser =async(req, res)=>{
 
 const changePassword=async(req,res)=>{
   try {
-    const { userId, newPassword } = req.body;
-    const user = await userService.changePassword(userId, newPassword);
-    res.status(200).json({ message: 'Password updated successfully', user });
+   // const { userId, newPassword } = req.body;
+    const user = await userService.changePassword(req.body);
+    res.status(200).json({ message: 'USUARIO ACATUALIZADO' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
