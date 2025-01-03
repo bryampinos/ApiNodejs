@@ -8,5 +8,6 @@ router.get('/docente/:id', asignacionDocenteMateriaController.getAsignacionByDoc
 
 //METODO PARA TRAER TODA LA INFORMACION DE UNA ASIGNACION DE DOCENTE POR ID 
 router.get('/:id', asignacionDocenteMateriaController.getAsignacionDocenteById);
-
+router.patch('/patch', asignacionDocenteMateriaController.editarAsignacion);
+router.delete('/delete/:id', asignacionDocenteMateriaController.deleteAsignacion);
 module.exports=router

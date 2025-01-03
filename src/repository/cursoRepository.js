@@ -38,10 +38,10 @@ const cursoRegister = async (curso) => {
   };
   
 
-const findCursoById = async(idCurso)=>{
+const findCursoById = async(curso_id)=>{
   try {
     return await Curso.findOne({
-      where: { curso_id: idCurso }, // Condición para buscar por ID
+      where: { curso_id: curso_id }, // Condición para buscar por ID
       include: [
         {
           model: especialidad,
@@ -66,11 +66,11 @@ const findCursoById = async(idCurso)=>{
   
 }
 
-  const EditarCurso =async(idCurso, updateData)=>{
+  const EditarCurso =async(curso_id, updateData)=>{
     try {
-      console.log("entro al repo")
+
       const [updated] = await Curso.update(updateData, {
-        where: { idCurso },
+        where: { curso_id },
       });
       return updated;
     } catch (error) {

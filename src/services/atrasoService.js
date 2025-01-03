@@ -6,7 +6,8 @@ const atrasoCreate = async (atraso) => {
 const token = atraso.token
 const secret = process.env.SECRET;
 const decoded = jwt.decode(token, secret);
-atraso.isnpector_idIsnpector=decoded.idRol;
+console.log(decoded)
+atraso.isnpector_idIsnpector=decoded.user.iduser;
 const fechaActual = new Date();
 const anio = fechaActual.getFullYear();
 const mes = fechaActual.getMonth() + 1;
@@ -19,7 +20,6 @@ const [fecha, hora] = fechaFormateada.split(' ');
 atraso.registroFecha= fecha
 atraso.registroHora= hora
 
-console.log(atraso)
 return await atrasoRepository.create(atraso)
     } catch (error) {
         console.error('Error al registrar el docente:', error);

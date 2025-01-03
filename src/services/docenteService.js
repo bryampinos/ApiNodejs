@@ -66,9 +66,9 @@ const getAllDocentes = async() =>{
 }
 const updateDocente = async(iduser, updateData)=>{
     try {
-      const docente = await docenteRepository.docenteById(iduser);
-      if (!docente) {
-        throw new Error('Docente no encontrado');
+      const docente= await docenteRepository.docenteById(iduser);
+      if(docente){
+        throw new Error('Error al obtener las asignaturas: ' + error.message);
       }
       await docenteRepository.editardocente(iduser, updateData);
       return await docenteRepository.docenteById(iduser);

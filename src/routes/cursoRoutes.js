@@ -7,7 +7,7 @@ router.post('/register', cursoController.crearCurso);
 router.get('/all', cursoController.getCursos);
 router.get('/curso/:curso_id', cursoController.getCursosById);
 //METODO GET PARA EDITAR EL CURSO
-router.put('/:curso_id', cursoController.updateCurso);
+router.patch('/patch', cursoController.updateCurso);
 //METODO PARA EL ELIMINAR UN CURSO
 router.delete('/delete/:id', cursoController.deleteCurso);
 

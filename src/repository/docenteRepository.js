@@ -49,9 +49,9 @@ const fetchAll = async()=>{
     throw new Error('Error al obtener las asignaturas de la base de datos: ' + error.message);
 }
 }
-const docenteById = async(iduser)=>{
+const docenteById = async(iddocente)=>{
   try {
-    return await DocenteUser.findByPk(iduser);
+    return await Docente.findByPk(iddocente);
   } catch (error) {
     throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
   }
@@ -61,8 +61,8 @@ const docenteById = async(iduser)=>{
 const editardocente =async(iduser, updateData)=>{
   try {
 
-    const [updated] = await DocenteUser.update(updateData, {
-      where: { iduser },
+    const [updated] = await Docente.update(updateData, {
+      where: { iddocente:iduser },
     });
     return updated;
   } catch (error) {
@@ -72,14 +72,9 @@ const editardocente =async(iduser, updateData)=>{
 }
 const deleteDocente=async(iduser)=> {
   try {
-  await Docente.destroy({where: {user_iduser: iduser } })
-    const deleted = await DocenteUser.destroy({
-      where: { iduser },
-    });
-    if (deleted === 0) {
-      throw new Error('docentes no encontrado');
-    }
-    return deleted;
+  await Docente.destroy({where: {iddocente: iduser } })
+   
+
   } catch (error) {
     throw new Error('Error al eliminar el docentes de la base de datos: ' + error.message);
   }

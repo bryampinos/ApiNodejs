@@ -56,10 +56,9 @@ const getDocentes = async (req, res) => {
 };
 const  updateDocente=async(req, res)=> {
   try {
-    const iduser = req.params.id;
-    const updateData = req.body;
-    const updateDocente = await docenteService.updateDocente(iduser, updateData);
-    res.json(updateDocente);
+   
+    const updateDocente = await docenteService.updateDocente(req.body.iddocente, req.body);
+    res.json('DOCENTE EDITADO');
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
@@ -68,7 +67,7 @@ const deleteDocente = async(req, res)=> {
   try {
     const iduser = req.params.id;
     await docenteService.deleteDocente(iduser);
-    res.status(204).json(); // 204 No Content
+    res.json('DOCENTE ELIMINADO').json(); // 204 No Content
   } catch (error) {
     res.status(404).json({ error: error.message });
   }

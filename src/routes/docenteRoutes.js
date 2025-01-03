@@ -10,7 +10,7 @@ router.get('/:id',docenteController.findDocenteById)
 // OBTENER TODOS LOS DOCENTES 
 router.get('/user/all', docenteController.getDocentes)
 //MEOTODOS DE LA CONFIGURACION
-router.put('/update/:id', docenteController.updateDocente)
+router.patch('/patch', docenteController.updateDocente)
 router.delete('/delete/:id', docenteController.deleteDocente);
 
 //RUTAS PARA CARGAR TODOS LOS DOCENTES CON SUS DATOS

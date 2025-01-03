@@ -32,5 +32,22 @@ const getAsignacionByDocente = async(req, res, next)=>{
     });
   }
 
-
-  module.exports={getAsignacionByDocente,getAsignacionDocenteById}
+const  editarAsignacion=async(req, res)=> {
+  try {
+   
+    const updateDocente =  asignacionDocenteMateriaService.editarAsignacion(req.body)
+    res.json('DOCENTE EDITADO');
+  } catch (error) {
+    throw new Error('error al editar asignacion: ' + error.message);
+  }
+}
+const deleteAsignacion=async(req, res)=> {
+  try {
+   
+    const updateDocente =  asignacionDocenteMateriaService.eliminarAsignacion(req.params.id)
+    res.json('ASINGNACION ELIMINADA');
+  } catch (error) {
+    throw new Error('Error al elimiar asignacion: ' + error.message);
+  }
+}
+  module.exports={getAsignacionByDocente,getAsignacionDocenteById,editarAsignacion,deleteAsignacion}

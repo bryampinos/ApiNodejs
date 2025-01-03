@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/db');
-const Estudiante = require('../models/estudiante')
+const Estudiante = require('../models/estudiante');
+const User = require('./user');
 
 
 const atraso = sequelize.define('atraso', {
@@ -18,8 +19,8 @@ const atraso = sequelize.define('atraso', {
   isnpector_idIsnpector: {
     type: DataTypes.STRING,
     references: {
-      model: 'inspector',
-      key: 'idIsnpector'
+      model: 'user',
+      key: 'iduser'
     }
   },
   estudiantes_idEstudiantes: {
@@ -38,4 +39,6 @@ const atraso = sequelize.define('atraso', {
 });
 
 atraso.belongsTo(Estudiante, { foreignKey: 'estudiantes_idEstudiantes' });
+
+atraso.belongsTo(User, { foreignKey: 'isnpector_idIsnpector' });
 module.exports = atraso;

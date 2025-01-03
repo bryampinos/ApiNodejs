@@ -29,9 +29,8 @@ const getCursos = async (req, res) => {
   
    const  updateCurso=async(req, res)=> {
       try {
-        const idCurso = req.params.id;
-        const updateData = req.body;
-        const updatedCurso = await cursoService.updateCurso(idCurso, updateData);
+    
+        const updatedCurso = await cursoService.updateCurso(req.body.curso_id,  req.body);
         res.json(updatedCurso);
       } catch (error) {
         res.status(404).json({ error: error.message });

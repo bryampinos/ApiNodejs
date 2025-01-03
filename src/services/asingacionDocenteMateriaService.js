@@ -17,4 +17,20 @@ const getAsignacionById = async(id)=>{
     }
    
 }
-module.exports={getAsignacionPorDocente,getAsignacionById}
+const editarAsignacion = async(asignacion)=>{
+    try {
+        return asignacionDocenteMateriaRepository.updateAsignacion(asignacion);
+    } catch (error) {
+        throw new Error('Erro en la asignacion del docente  ' + error.message);
+    }
+   
+}
+const eliminarAsignacion = async(asignacion)=>{
+    try {
+        return asignacionDocenteMateriaRepository.eliminarAsignacion(asignacion);
+    } catch (error) {
+        throw new Error('Erro en la asignacion del docente  ' + error.message);
+    }
+   
+}
+module.exports={getAsignacionPorDocente,getAsignacionById,editarAsignacion,eliminarAsignacion}

@@ -11,7 +11,18 @@ const asignaturaCreate = async (asignatura) => {
         throw error; 
     }
 }
-
+const editarAsignatura = async (asignatura) => {
+  try {
+    if(asignatura.asig_nombre){
+      asignatura.asig_nombre=asignatura.asig_nombre.toUpperCase()
+    }
+      // asignatura.idasignatura = asignatura.nombre
+      return  await asignaturaRepository.editarAsignatura(asignatura);
+  } catch (error) {
+      console.error('Error al registrar la asignatura:', error);
+      throw error; 
+  }
+}
 const getAllAsignaturas = async() =>{
     try {
         const asignaturas = await asignaturaRepository.fetchAll();
@@ -57,4 +68,4 @@ const deleteAsignatura=async(idAsignatura)=> {
   }
 
 module.exports = {asignaturaCreate,getAllAsignaturas,deleteAsignatura,
-  getAllAsignaturasByJornada,getAllAsignaturasByNivel,getAllAsignaturasBySeccion};
+  getAllAsignaturasByJornada,getAllAsignaturasByNivel,getAllAsignaturasBySeccion,editarAsignatura};

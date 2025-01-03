@@ -1,5 +1,6 @@
 const Atraso = require('../models/atraso')
-const Estudiante = require('../models/estudiante')
+const Estudiante = require('../models/estudiante');
+const User = require('../models/user');
 
 const create = async (atraso) =>{
     return await Atraso.create(atraso);
@@ -75,7 +76,11 @@ try {
 
 const atrasosByEstudiante = async(id)=>{
 try {
-    const atrasos = Atraso.findAll({where : {estudiantes_idEstudiantes:id}})
+    const atrasos = Atraso.findAll({  include:[{
+        model:User
+       
+       
+       }],where : {estudiantes_idEstudiantes:id}})
     return atrasos
 } catch (error) {
     throw new Error('Error en la base de datos: ' + error.message);

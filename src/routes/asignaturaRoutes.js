@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.post('/register',asignaturaController.crearAsignatura );
-
+router.patch('/patch',asignaturaController.editarAsignatura );
 //metodos get
 //metodo para traer todas las asignatura existentes 
 router.get('/all',asignaturaController.getAsignaturas)

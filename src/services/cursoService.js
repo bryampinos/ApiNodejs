@@ -39,13 +39,19 @@ const getCursoById = async(curso_id)=>{
 
   const updateCurso = async(idCurso, updateData)=>{
     try {
+      
       const curso = await cursoRepository.findCursoById(idCurso);
+      
       if (!curso) {
         throw new Error('Curso not found');
+      }
+      if (updateData.paralelo_curso) {
+        updateData.paralelo_curso=updateData.paralelo_curso.toUpperCase()
       }
       await cursoRepository.EditarCurso(idCurso, updateData);
       return await cursoRepository.findCursoById(idCurso);
     } catch (error) {
+      console.log(error)
       throw new Error('Erro en el service');
     }
    

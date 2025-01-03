@@ -21,6 +21,34 @@ const findById = async(id)=>{
     }
 
 }
+const updateAsignacion = async(asig)=>{
+    try {
+        const asignacion = await Asignacion.update(asig,{ 
+            where: { idAsignacion: asig.idAsignacion } 
+        });
+        return asignacion;
+    } catch (error) {
+        throw new Error('Error al obtener el usuario de la base de datos: ' + error.message);
+    }
 
+}
+const eliminarAsignacion = async (asig) => {
+    try {
+        const asignacion = await Asignacion.destroy({
+            where: { idAsignacion: asig }
+        });
 
-module.exports={finfByDocente,findById}
+        // Verifica si la asignación fue eliminada
+        if (!asignacion) {
+            // Si no se encontró la asignación para eliminar, retorna un mensaje específico
+            return { success: false, message: 'Asignación no encontrada o ya eliminada' };
+        }
+
+        return { success: true, message: 'Asignación eliminada exitosamente', data: asignacion };
+    } catch (error) {
+        // Devuelve un objeto con detalles del error sin lanzar una excepción
+        return { success: false, message: 'Error al eliminar el usuario de la base de datos', error: error.message };
+    }
+}
+
+module.exports={finfByDocente,findById,updateAsignacion,eliminarAsignacion}

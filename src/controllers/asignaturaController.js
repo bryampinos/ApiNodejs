@@ -9,6 +9,14 @@ const crearAsignatura = async (req, res) => {
         res.status(401).json({ message: error.message });
     }
 }
+const editarAsignatura = async (req, res) => {
+  try {
+      const asignatura = await asignaturaService.editarAsignatura(req.body);
+      res.json("asignatura editada");
+  } catch (error) {
+      res.status(401).json({ message: error.message });
+  }
+}
 const getAsignaturas = async (req, res) => {
     try {
         const cursos = await asignaturaService.getAllAsignaturas();
@@ -45,11 +53,11 @@ const getAsignaturas = async (req, res) => {
     try {
       const idAsignatura = req.params.id;
       await asignaturaService.deleteAsignatura(idAsignatura);
-      res.status(204).json(); // 204 No Content
+      res.json('ASIGNATURA ELIMINADA').json(); // 204 No Content
     } catch (error) {
       res.status(404).json({ error: error.message });
     }
   }
 
 module.exports={crearAsignatura,getAsignaturas,deleteAsignatura,
-  getAsignaturasByJornada,getAsignaturasByNivel,getAsignaturasBySeccion};
+  getAsignaturasByJornada,getAsignaturasByNivel,getAsignaturasBySeccion,editarAsignatura};

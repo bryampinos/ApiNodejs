@@ -5,6 +5,7 @@ const inspecorController = require('../controllers/inspectorController')
 router.get('/user/all', inspecorController.getInpectores)
 //METODO PARA EDITAR LOS INSPECTORES
 router.put('/update/:id', inspecorController.updateInspector)
+router.put('/register', inspecorController.updateInspector)
 //METODO PARA ELIMINAR LOS INSPECTORES
 router.delete('/delete/:id', inspecorController.deleteInspector);
 

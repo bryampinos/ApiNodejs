@@ -6,7 +6,7 @@ const router = express.Router();
 //METODO POST PARA REGISTRAR LAS ESQUELAS 
 router.post('/register',atrasoController.crearAtraso );
 //METODO GET PARA TRAER TODAS LAS ATRASOS POR INSPECTOR
-router.get('/all/:id', atrasoController.findByInspector)
+router.get('/all/:id', atrasoController.findByIanspector)
 //METODO GET PARA TRAER TODAS LOS ATRASOS DE UN ESTUDIANTE 
 router.get('/estudiante/:id', atrasoController.atrsoByEstudiante)
 //metodo para generar los reportes por curso

@@ -17,8 +17,9 @@ const EditarEspecialdiad = async (especialidad) => {
   return await Especialidad.update(especialidad,{
     where: { especialidad_id: especialidad.especialidad_id }, // Filtra por el ID del usuario
   });
-      
+    
   } catch (error) {
+
 throw new Error('Error al obtener las asignaturas de la base de datos: ' + error.message);
   }
 };

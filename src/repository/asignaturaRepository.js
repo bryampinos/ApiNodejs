@@ -5,7 +5,12 @@ const nivelAcademico = require('../models/nivelAcademico');
 const asignaturaRegister= async (asignatura) => {
     return await Asignatura.create(asignatura);
   };
-
+  const editarAsignatura= async (asignatura) => {
+    
+    return await Asignatura.update(asignatura,{
+      where: { asig_id: asignatura.asig_id }, // Filtra por el ID del usuario
+    });
+  };
   const fetchAll = async()=>{
     try {
       const asignaturas = await Asignatura.findAll({
@@ -69,18 +74,18 @@ const asignaturaRegister= async (asignatura) => {
 
   
   }
-  const findAsignaturaById = async(idAsignatura)=>{
+  const findAsignaturaById = async(asig_id)=>{
     try {
-      return await Asignatura.findByPk(idAsignatura);
+      return await Asignatura.findByPk(asig_id);
     } catch (error) {
       throw new Error('Error al obtener los cursos de la base de datos: ' + error.message);
     }
     
   }
-  const deleteAsignatura=async(idAsignatura)=> {
+  const deleteAsignatura=async(asig_id)=> {
     try {
       const deleted = await Asignatura.destroy({
-        where: { idAsignatura },
+        where: { asig_id },
       });
       if (deleted === 0) {
         throw new Error('Asignatura no encontrado');
@@ -91,4 +96,4 @@ const asignaturaRegister= async (asignatura) => {
     }
   }
   module.exports={asignaturaRegister,fetchAll
-    ,findAsignaturaById,deleteAsignatura,fetchAllByJornada,fetchAllByNivel,fetchAllBySeccion};
+    ,findAsignaturaById,deleteAsignatura,fetchAllByJornada,fetchAllByNivel,fetchAllBySeccion,editarAsignatura};
