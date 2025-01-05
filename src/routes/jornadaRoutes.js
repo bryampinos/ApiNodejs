@@ -6,7 +6,7 @@ router.get('/all', jornadaController.getAll)
 router.get('/:jor_id', jornadaController.getJornadaById)
 router.post('/registrar', jornadaController.register)
 router.patch('/patch', jornadaController.editarJornada)
-router.delete('/delete', jornadaController.eliminarJornada)
+router.delete('/delete/:id', jornadaController.eliminarJornada)
 //EDITAR LOS DOCENTES
 // router.put('/update/:id', jornadaController.updateRepresentante)
 

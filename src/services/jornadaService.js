@@ -23,6 +23,15 @@ const editarJornada = async(jornada) =>{
         
         throw error; 
     }
+}
+const eliminarJornada = async(jornada) =>{
+    try {
+    
+        return await jornadaRepository.eliminarJornada(jornada)
+    } catch (error) {
+        
+        throw error; 
+    }
 
 
 }
@@ -42,4 +51,4 @@ const getJotnadaById = async(req) =>{
         throw new Error('Error al obtener los representantes: ' + error.message);
     }
 }
-module.exports = {jornadaCreate,getAllJornadas,getJotnadaById,getJotnadaById,editarJornada}
+module.exports = {jornadaCreate,getAllJornadas,getJotnadaById,getJotnadaById,editarJornada,eliminarJornada}

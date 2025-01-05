@@ -22,8 +22,8 @@ const register = async (req, res) => {
   const eliminarJornada = async (req, res) => {
     try {
       
-      await jornadaService.editarJornada(req.body);
-    res.json({message: "JORNADA EDITADA"});
+      await jornadaService.eliminarJornada(req.params.id);
+    res.json({message: "JORNADA ELIMINADA"});
     } catch (error) {
       res.status(401).json({ message: error.message });
     }
