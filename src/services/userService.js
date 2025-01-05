@@ -147,6 +147,10 @@ const deleteUser = async(id)=>{
 }
 
 const changePassword=async(user)=>{
+  const userData= await userRepository.findById(user.iduser)
+  if(userData.rol_id==1){
+    throw new Error('NO PUEDE EDITAR A LOS ADMINISTRADORES');
+  }
   if (user.password){
     const hashedPassword = await bcrypt.hash(user.password, 10);
     user.password = hashedPassword
