@@ -12,6 +12,7 @@ const asignacionDocenteMateria=require('./src/routes/asignacionDocenteMateriaRou
 const nivelAcademicoRoutes = require ('./src/routes/nivelAcademicoRoutes')
 const jornadaRoutes = require ('./src/routes/jornadaRoutes')
 const especialidadRoutes = require ('./src/routes/especialidadRoutes')
+const rolesRoutes = require ('./src/routes/rolUsuarioRoutes')
 const app = express();
 const cors = require('cors');
 app.use(cors());
@@ -30,6 +31,7 @@ app.use('/inspector', inspectorRoutes )
 app.use('/nivel-academico', nivelAcademicoRoutes )
 app.use('/jornada', jornadaRoutes )
 app.use('/especialidad', especialidadRoutes )
+app.use('/rol',rolesRoutes  )
 app.use((err, req, res, next) => {
     console.error(err.stack);
     

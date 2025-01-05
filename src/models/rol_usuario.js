@@ -19,4 +19,4 @@ const rol_usuario = sequelize.define('rol_usuario', {
     timestamps: false
 });
 
-module.exports = Representante;
+module.exports = rol_usuario;

@@ -98,9 +98,9 @@ const login = async (email, password) => {
   
    
 };
-const getAllUsers = async () => {
+const getAllUsers = async (query) => {
   try {
-      const users = await userRepository.fetchAll();
+      const users = await userRepository.fetchAll(query);
       return users;
   } catch (error) {
       throw new Error('Error al obtener los usuarios: ' + error.message);
