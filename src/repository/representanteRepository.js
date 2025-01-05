@@ -1,3 +1,6 @@
+const Docente = require('../models/docente');
+const jornada = require('../models/jornada');
+const nivelAcademico = require('../models/nivelAcademico');
 const Representante = require('../models/representante')
 const RepresentanteUser = require('../models/user');
 const User = require('../models/user');
@@ -29,7 +32,18 @@ const fetchAll = async()=>{
       throw new Error('Error al obtener los docentes de la base de datos: ' + error.message);
   }
   }
-
+  const buscarJornadasDocente = async(user)=>{
+    try {
+      const docentes = await Docente.findAll({ where:{ user_iduser: user}, include: [ {
+        model: nivelAcademico
+      }, {
+        model: jornada
+      },]});
+      return docentes;
+  } catch (error) {
+      throw new Error('Error al obtener los docentes de la base de datos: ' + error.message);
+  }
+  }
   const representanteById = async(iduser)=>{
     try {
       return await RepresentanteUser.findByPk(iduser);
@@ -72,5 +86,6 @@ module.exports = {createRepresentante,
     fetchAll,
     representanteById,
     editarRepresentante,
-    deleteRepresentante
+    deleteRepresentante,
+    buscarJornadasDocente
 };

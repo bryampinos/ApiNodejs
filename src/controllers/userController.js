@@ -12,8 +12,8 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { token } = await userService.login(req.body.email, req.body.password);
-    res.json({ message: 'Inicio de sesión exitoso',token});
+    const token  = await userService.login(req.body.email, req.body.password);
+    res.json({token});
    
  
   } catch (error) {

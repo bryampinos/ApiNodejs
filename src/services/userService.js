@@ -78,9 +78,10 @@ const login = async (email, password) => {
 
     }else if (user.rol_id === 3){//DOCENTE
       //const idRol = await representanteRepository.findRepresentanteById(user.iduser);
-      const token = jwt.sign({ user: user, idRol:'DOCENTE'}, process.env.SECRET, { expiresIn: '1000h' });
-      return { user, token };
-      
+      // const token = jwt.sign({ user: user, idRol:'DOCENTE'}, process.env.SECRET, { expiresIn: '1000h' });
+      // return { user, token };
+      const token =  await representanteRepository.buscarJornadasDocente(user.iduser)
+      return {token}
     }else if (user.rol_id === 4){//representante
      // const idRol = await administradorRepository.finAdnministradorById(user.iduser);
       const token = jwt.sign({ user: user, idRol:'REPRESENTANTE'}, process.env.SECRET, { expiresIn: '1000h' });

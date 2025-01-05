@@ -2,7 +2,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/db');
 const User = require('./user');
-const Nivel = require ('./nivelAcademico')
+const Nivel = require ('./nivelAcademico');
+const jornada = require('./jornada');
 
 
 const Docente = sequelize.define('docente', {
@@ -23,6 +24,13 @@ const Docente = sequelize.define('docente', {
       model: Nivel,
       key: 'nivel_id'
     }
+  },
+  jornada_jor_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: jornada,
+      key: 'jor_id'
+    }
   }
 }, {
   tableName: 'docente',
@@ -30,6 +38,7 @@ const Docente = sequelize.define('docente', {
 });
 
 Docente.belongsTo(User, { foreignKey: 'user_iduser' });
-Docente.belongsTo(Nivel,{foreignKey: 'jornada_jor_id'})
+Docente.belongsTo(Nivel,{foreignKey: 'nivel_academico_nivel_id'})
+Docente.belongsTo(jornada,{foreignKey: 'jornada_jor_id'})
 //dpcemte
 module.exports = Docente;
