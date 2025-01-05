@@ -50,7 +50,18 @@ const register = async (user) => {
          await inspectorRepository.createInspector(usuarioRol)
         }
         if(user.rol_id==3){
-          //await docenteRepository.createDocente(usuarioRol)
+           if(user.nivel_academico_nivel_id || user.jornada_jor_id){
+            const docente ={
+              user_iduser:asignacion.iduser,
+              nivel_academico_nivel_id:user.nivel_academico_nivel_id,
+              jornada_jor_id:user.jornada_jor_id
+            }
+
+            await docenteRepository.crearDocente(docente)
+
+           }else{
+            throw new Error('INGRESE JORNADA Y NIVEL ACADEMICO DEL DOCENTE: ' + error.message);
+           }
          }
          if(user.rol_id==4){
           await representanteRepository.createRepresentante(usuarioRol)
