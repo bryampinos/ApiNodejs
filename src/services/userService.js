@@ -106,6 +106,18 @@ const getAllUsers = async () => {
       throw new Error('Error al obtener los usuarios: ' + error.message);
   }
 };
+const getDocenteJor = async (docente_id) => {
+  try {
+    const docente = await docenteRepository.docenteById(docente_id);
+
+    const user = await userRepository.findById(docente.user_iduser);
+    const token = jwt.sign({ user: user,docente:docente, idRol:'DOCENTE'}, process.env.SECRET, { expiresIn: '1000h' });
+      
+    return {token:token};
+  } catch (error) {
+      throw new Error('Error al obtener los usuarios: ' + error.message);
+  }
+};
 const getUsersByRol = async (rol) => {
   try {
       const users = await userRepository.getUserByRol(rol);
@@ -138,5 +150,6 @@ module.exports = {
   getUserById,
   deleteUser,
   changePassword,
-  getUsersByRol
+  getUsersByRol,
+  getDocenteJor
 };

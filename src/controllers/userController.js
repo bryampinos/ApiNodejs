@@ -29,6 +29,14 @@ const getUsers = async (req, res) => {
       res.status(500).json({ message: error.message });
   }
 };
+const getjorDocente = async (req, res) => {
+  try {
+      const token = await userService.getDocenteJor(req.params.id);
+      res.json(token);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
 const getUsersByRoles = async (req, res) => {
   try {
     const userId = req.params.rol_id;
@@ -80,5 +88,6 @@ module.exports = {
   getUser,
   deleteUser,
   changePassword,
-  getUsersByRoles
+  getUsersByRoles,
+  getjorDocente
 };

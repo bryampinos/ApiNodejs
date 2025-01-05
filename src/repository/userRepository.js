@@ -66,6 +66,14 @@ const fetchAll = async () => {
       throw new Error('Error al obtener los usuarios de la base de datos: ' + error.message);
   }
 };
+const getDocenteJornada = async () => {
+  try {
+    const users = await User.findAll()
+      return users;
+  } catch (error) {
+      throw new Error('Error al obtener los usuarios de la base de datos: ' + error.message);
+  }
+};
 
 const getUserByRol = async (rol) => {
   try {
@@ -79,9 +87,9 @@ const getUserByRol = async (rol) => {
       throw new Error('Error al obtener los usuarios de la base de datos: ' + error.message);
   }
 };
-const findById = async (id) => {
+const findById = async (iduser) => {
   try {
-      const user = await User.findByPk(id);
+      const user = await User.findByPk(iduser);
       return user;
   } catch (error) {
       throw new Error('Error al obtener el usuario de la base de datos: ' + error.message);
@@ -117,5 +125,6 @@ module.exports = {
   validacion,
   findAdministradorById,
   updatePassword,
-  getUserByRol
+  getUserByRol, 
+  getDocenteJornada
 };
