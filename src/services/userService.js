@@ -53,8 +53,8 @@ const register = async (user) => {
            if(user.nivel_academico_nivel_id || user.jornada_jor_id){
             const docente ={
               user_iduser:asignacion.iduser,
-              nivel_academico_nivel_id:user.nivel_id,
-              jornada_jor_id:user.jor_id
+              nivel_academico_nivel_id:user.nivel_academico_nivel_id,
+              jornada_jor_id:user.jornada_jor_id
             }
 
             await docenteRepository.crearDocente(docente)
