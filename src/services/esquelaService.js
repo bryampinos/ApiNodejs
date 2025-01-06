@@ -17,7 +17,7 @@ try {
     const decoded = jwt.decode(token, secret);
     // if (decoded.idRol!='DOCENTE'   || decoded.idRol !='INSPECTOR')
     // {    throw new Error(' ESTA ACCION SOLO LA PEUDEN REALZIAR USUARIO ESTABLECIDOS');}
-    esquela.docente_docente = decoded.user.rol_id;
+    esquela.docente_docente = decoded.docente.iddocente;
     //AQUI ESTOY REWGISTRANDO Y DANDO FOTMATO A LA FECHA DE ACUEDO A CUANDO ENTRRA 
     const fechaActual = new Date();
 const anio = fechaActual.getFullYear();
