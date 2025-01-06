@@ -10,7 +10,7 @@ const crearCurso = async (req, res) => {
 const getCursos = async (req, res) => {
     try {
         
-        const cursos = await cursoService.getAllCursos();
+        const cursos = await cursoService.getAllCursos(req.query);
         res.json(cursos);
     } catch (error) {
         res.status(500).json({ message: error.message });

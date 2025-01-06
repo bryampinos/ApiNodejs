@@ -20,9 +20,9 @@ const createCurso = async(curso) =>{
 
 
 }
-const getAllCursos = async()=>{
+const getAllCursos = async(query)=>{
 try {
-    const cursos = await cursoRepository.fetchAll();
+    const cursos = await cursoRepository.fetchAll(query);
       return cursos;
 } catch (error) {
     throw new Error('Error al obtener los cursos: ' + error.message);
