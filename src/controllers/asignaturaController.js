@@ -19,7 +19,7 @@ const editarAsignatura = async (req, res) => {
 }
 const getAsignaturas = async (req, res) => {
     try {
-        const cursos = await asignaturaService.getAllAsignaturas();
+        const cursos = await asignaturaService.getAllAsignaturas(req.query);
         res.json(cursos);
     } catch (error) {
         res.status(500).json({ message: error.message });

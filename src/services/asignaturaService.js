@@ -23,9 +23,9 @@ const editarAsignatura = async (asignatura) => {
       throw error; 
   }
 }
-const getAllAsignaturas = async() =>{
+const getAllAsignaturas = async(query) =>{
     try {
-        const asignaturas = await asignaturaRepository.fetchAll();
+        const asignaturas = await asignaturaRepository.fetchAll(query);
         return asignaturas;
     } catch (error) {
         throw new Error('Error al obtener las asignaturas: ' + error.message);

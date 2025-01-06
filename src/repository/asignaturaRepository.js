@@ -11,16 +11,39 @@ const asignaturaRegister= async (asignatura) => {
       where: { asig_id: asignatura.asig_id }, // Filtra por el ID del usuario
     });
   };
-  const fetchAll = async()=>{
+  const fetchAll = async(query)=>{
     try {
-      const asignaturas = await Asignatura.findAll({
+      if(query.nivel_id){
+        return await Asignatura.findAll({ where: { nivel_id: query.nivel_id },
+
+        include:[
+          {model:jornada,attributes: ['jor_nombre']},
+          {model:nivelAcademico , attributes:['nivel_descripcion']}
+        ]
+      });}
+      if(query.jornada_id){
+        return await Asignatura.findAll({ where: { jornada_id: query.jornada_id },
+
+        include:[
+          {model:jornada,attributes: ['jor_nombre']},
+          {model:nivelAcademico , attributes:['nivel_descripcion']}
+        ]
+      });}
+      if(query.jornada_id   ||query.nivel_id ){
+        return await Asignatura.findAll({ where: { jornada_id: query.jornada_id,nivel_id: query.nivel_id },
+
+        include:[
+          {model:jornada,attributes: ['jor_nombre']},
+          {model:nivelAcademico , attributes:['nivel_descripcion']}
+        ]
+      });}
+      return await Asignatura.findAll({
 
         include:[
           {model:jornada,attributes: ['jor_nombre']},
           {model:nivelAcademico , attributes:['nivel_descripcion']}
         ]
       });
-      return asignaturas;
   } catch (error) {
       throw new Error('Error al obtener las asignaturas de la base de datos: ' + error.message);
   }
