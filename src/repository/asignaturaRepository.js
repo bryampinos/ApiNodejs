@@ -3,6 +3,7 @@ const jornada = require('../models/jornada');
 const nivelAcademico = require('../models/nivelAcademico');
 
 const asignaturaRegister= async (asignatura) => {
+  asignatura.asig_nombre=asignatura.asig_nombre.toUpperCase()
     return await Asignatura.create(asignatura);
   };
   const editarAsignatura= async (asignatura) => {

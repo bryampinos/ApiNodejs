@@ -18,10 +18,10 @@ try {
     const token = asignacion.token
     const secret = process.env.SECRET;
     const decoded = jwt.decode(token, secret);
-    const docente =  await docenteRepository.findByuser(decoded.user.iduser)
+    //const docente =  await docenteRepository.findByuser(decoded.docente.docenteById)
   
 
-    asignacion.docente_iddocente = docente.iddocente
+    asignacion.docente_iddocente = decoded.docente.iddocente
    
     // asignacion.IdAsignacion = decoded.idRol + "_"+asignacion.asignatura_idasignatura+"_"+asignacion.curso_idCurso;
     console.log(asignacion)
