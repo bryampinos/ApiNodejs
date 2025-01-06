@@ -1,8 +1,18 @@
-const Asignacion = require('../models/asignaciónDocenteMateria')
+const Asignacion = require('../models/asignaciónDocenteMateria');
+const asignatura = require('../models/asignatura');
+const curso = require('../models/curso');
 const finfByDocente = async(id)=>{
         try {
             const asignacion = await Asignacion.findAll({ 
-                where: { docente_iddocente: id } 
+                where: { docente_iddocente: id } , include: [
+                    {
+                      model: asignatura,
+                      
+                    },
+                    {
+                      model: curso,  // Incluye el modelo Asignacion
+                    },
+                  ],
             });
             return asignacion;
         } catch (error) {
