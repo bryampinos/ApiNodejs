@@ -21,7 +21,7 @@ const esquela = sequelize.define('esquela', {
         type: DataTypes.STRING     
     
     },
-    evidencia:{
+    Evidencia:{
         type: DataTypes.STRING 
     },
     docente_docente:{

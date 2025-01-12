@@ -6,6 +6,7 @@ const Asignacion = require('../models/asignaciónDocenteMateria')
 const estudiante = require('../models/estudiante')
 const { where } = require('sequelize')
 const Asignatura= require ('../models/asignatura')
+const curso = require('../models/curso')
 const create = async (esquela) =>{
     return await Esquela.create(esquela);
 }
@@ -30,7 +31,12 @@ const getAll =async()=>{
           ], // Incluye el modelo Asignacion
         },
         {
-          model: Estudiante,  // Incluye el modelo estudiante
+          model: Estudiante,
+          include: [
+            {
+              model:curso,
+            },
+          ]  // Incluye el modelo estudiante
         }
       ],
     })
@@ -64,7 +70,12 @@ const findById = async (id) => {
             ], // Incluye el modelo Asignacion
           },
           {
-            model: Estudiante,  // Incluye el modelo estudiante
+            model: Estudiante,
+            include: [
+              {
+                model:curso,
+              },
+            ]  // Incluye el modelo estudiante
           }
         ],
       });
@@ -96,7 +107,12 @@ const findByIdEsquela = async(id)=>{
                 ], // Incluye el modelo Asignacion
               },
               {
-                model: Estudiante,  // Incluye el modelo estudiante
+                model: Estudiante,
+                include: [
+                  {
+                    model:curso,
+                  },
+                ]  // Incluye el modelo estudiante
               }
             ],
         });
@@ -128,7 +144,12 @@ try {
         ], // Incluye el modelo Asignacion
       },
       {
-        model: Estudiante,  // Incluye el modelo estudiante
+        model: Estudiante,
+        include: [
+          {
+            model:curso,
+          },
+        ]  // Incluye el modelo estudiante
       }
     ],
   })
@@ -171,7 +192,8 @@ const findByCurso = async(curso)=>{
         },
         {
           model: Estudiante, 
-          where: { curso_idCurso: curso } // Incluye el modelo estudiante
+          where: { curso_idCurso: curso },
+           // Incluye el modelo estudiante
         },
         {
           model: Asignacion,  // Incluye el modelo Asignacion
@@ -200,7 +222,11 @@ const findByCurso = async(curso)=>{
               },
             ],
           },
-          {model: Estudiante,  },
+          {model: Estudiante,  include: [
+            {
+              model:curso,
+            },
+          ] },
           {model: Asignacion,  } ], })
       
     return esquela
@@ -226,7 +252,12 @@ const findByCurso = async(curso)=>{
               ],
             },
             { 
-              model: Estudiante 
+              model: Estudiante ,
+              include: [
+                {
+                  model:curso,
+                },
+              ]
             },
             { 
               model: Asignacion 
