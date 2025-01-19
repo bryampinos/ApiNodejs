@@ -29,6 +29,14 @@ const registrar = async(req , res) =>{
     res.status(401).json({ message: error.message });
   }
   }
+  const asignarNivel = async(req , res) =>{
+    try {
+      const docente = await docenteService.registrarDocente(req.body);
+      res.json({message: "docente creado "});
+    } catch (error) {
+      res.status(401).json({ message: error.message });
+    }
+    }
 const findDocenteById = async (req, res )=>{
   const docenteId = req.params.id;
   docenteService.getDocenteById(docenteId)
@@ -89,7 +97,8 @@ const allDocentes = async(req, res)=>{
     updateDocente,
     deleteDocente,
     allDocentes,
-    registrar
+    registrar,
+    asignarNivel
   }
 
 

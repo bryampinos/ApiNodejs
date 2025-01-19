@@ -24,7 +24,7 @@ const findByuser = async (user_iduser) => {
 };
 const crearDocente = async(docente) =>{
   try {
-    console.log(docente)
+    
     return await Docente.create(docente)
   } catch (error) {
     console.log(error)

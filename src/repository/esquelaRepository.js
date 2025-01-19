@@ -7,6 +7,7 @@ const estudiante = require('../models/estudiante')
 const { where } = require('sequelize')
 const Asignatura= require ('../models/asignatura')
 const curso = require('../models/curso')
+const jornada = require('../models/jornada')
 const create = async (esquela) =>{
     return await Esquela.create(esquela);
 }
@@ -132,6 +133,9 @@ try {
         include: [
           {
             model: User,
+          },
+          {
+            model: jornada,
           },
         ],
       },

@@ -4,6 +4,7 @@ const docenteController = require('../controllers/docenteController')
 
 router.post('/asignacionMateria', docenteController.asignacionMateria);
 router.post('/registrar',docenteController.registrar)
+router.post('/asignar-jornada-nivel',docenteController.asignarNivel)
 //METODOS GET
 //OBTENER INFORMACION DEL DOCENTE
 router.get('/:id',docenteController.findDocenteById)

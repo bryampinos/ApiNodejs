@@ -77,17 +77,20 @@ const login = async (email, password) => {
   try {
     const user = await userRepository.findUserByEmailLogin(email);
 
+
   if (user && await bcrypt.compare(password, user.password)) {
     if (user.rol_id === 1) {//admin
     //  const idRol = await docenteRepository.findDocenteById(user.iduser);
       const token = jwt.sign({ user: user, idRol:'ADMIN'}, process.env.SECRET, { expiresIn: '1000h' });
       return { user, token };
     }else if (user.rol_id === 2){//inspector
+
     //  const idRol = await inspectorRepository.findInspectorByid(user.iduser);
       const token = jwt.sign({ user: user, idRol:'INSPECTOR'}, process.env.SECRET, { expiresIn: '1000h' });
       return { user, token };
 
     }else if (user.rol_id === 3){//DOCENTE
+
       //const idRol = await representanteRepository.findRepresentanteById(user.iduser);
       // const token = jwt.sign({ user: user, idRol:'DOCENTE'}, process.env.SECRET, { expiresIn: '1000h' });
       // return { user, token };

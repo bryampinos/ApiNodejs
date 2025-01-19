@@ -41,7 +41,6 @@ const registrarDocente = async (docente)=>{
       const decoded = jwt.decode(token, secret);
       if(decoded.idRol!='DOCENTE'){
         throw new Error('ESTO SOLO LO PUEDE REALIZAR LOS DOCENTES');
-        
       }
       docente.user_iduser= decoded.user.iduser
      
