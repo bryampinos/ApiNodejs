@@ -75,13 +75,13 @@ const register = async (user) => {
 //Aqui estoy realizando la logica del login 
 const login = async (email, password) => {
   try {
+     console.log(email,password)
     const user = await userRepository.findUserByEmailLogin(email);
-
 
   if (user && await bcrypt.compare(password, user.password)) {
     if (user.rol_id === 1) {//admin
     //  const idRol = await docenteRepository.findDocenteById(user.iduser);
-      const token = jwt.sign({ user: user, idRol:'ADMIN'}, process.env.SECRET, { expiresIn: '1000h' });
+      const token = jwt.sign({ user: user, idRol:'El usuario o contreña es incorrect'}, process.env.SECRET, { expiresIn: '1000h' });
       return { user, token };
     }else if (user.rol_id === 2){//inspector
 

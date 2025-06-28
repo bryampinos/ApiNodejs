@@ -1,91 +1,118 @@
-const Atraso = require('../models/atraso')
-const Estudiante = require('../models/estudiante');
-const User = require('../models/user');
+const Atraso = require("../models/atraso");
+const Estudiante = require("../models/estudiante");
+const User = require("../models/user");
 
-const create = async (atraso) =>{
-    return await Atraso.create(atraso);
-}
+const create = async (atraso) => {
+  console.log(atraso);
+  console.log("DATA JASON ATRASO", JSON.stringify(atraso));
+  return await Atraso.create(atraso);
+};
 
-const findbyInspector = async(id)=>{
-    try {
-        const atraso = await Atraso.findAll({ where: {isnpector_idIsnpector: id } ,
-            include: [{model:Estudiante}]
-
-
-        });
-        return atraso;
-    } catch (error) {
-        throw new Error('Erro en la base ' + error.message);
-    }
-}
-
-const generateDoc = async(id)=>{
-    try {
-        const reporte = await Atraso.findAll({
-            include:[{
-             model:Estudiante,
-             where:{curso_idCurso:id},
-             attributes:['NombreEst','ApellidoEst','curso_idCurso','cedula']
-            }],
-            attributes:['registroFecha','registroHora','estudiantes_idEstudiantes','descripcion']
-           })  
-
-           return reporte;
-    } catch (error) {
-        throw new Error('Erro en la base ' + error.message);
-    }
-    
-  
+const findbyInspector = async (id) => {
+  try {
+    const atraso = await Atraso.findAll({
+      where: { isnpector_idIsnpector: id },
+      include: [{ model: Estudiante }],
+    });
+    return atraso;
+  } catch (error) {
+    throw new Error("Erro en la base " + error.message);
   }
-  
-  const generateDocByEstudiante = async(id)=>{
-    try {
-        const reporte = await Atraso.findAll({
-            include:[{
-             model:Estudiante,
-             where:{cedula:id},
-             attributes:['NombreEst','ApellidoEst','curso_idCurso','cedula']
-            }],
-            attributes:['registroFecha','registroHora','estudiantes_idEstudiantes','descripcion']
-           })  
+};
 
-           return reporte;
-    } catch (error) {
-        throw new Error('Erro en la base ' + error.message);
-    }
-
-  }
-  const generateDocByfecha = async(id) => {
-try {
+const generateDoc = async (id) => {
+  try {
     const reporte = await Atraso.findAll({
-        include:[{
-         model:Estudiante,
-        
-         attributes:['NombreEst','ApellidoEst','curso_idCurso','cedula']
-        }],
-        where:{registroFecha:id},
-        attributes:['registroFecha','registroHora','estudiantes_idEstudiantes','descripcion']
-       })  
+      include: [
+        {
+          model: Estudiante,
+          where: { curso_id: id },
+          attributes: ["NombreEst", "ApellidoEst", "curso_id", "cedula"],
+        },
+      ],
+      attributes: [
+        "registroFecha",
+        "registroHora",
+        "estudiantes_idEstudiantes",
+        "descripcion",
+      ],
+    });
 
-       return reporte;
-   
-} catch (error) {
-    throw new Error('Error en la base de datos: ' + error.message);
-}
+    return reporte;
+  } catch (error) {
+    throw new Error("Erro en la base " + error.message);
   }
+};
 
-const atrasosByEstudiante = async(id)=>{
-try {
-    const atrasos = Atraso.findAll({  include:[{
-        model:User
-       
-       
-       }],where : {estudiantes_idEstudiantes:id}})
-    return atrasos
-} catch (error) {
-    throw new Error('Error en la base de datos: ' + error.message);
-}
-}
+const generateDocByEstudiante = async (id) => {
+  try {
+    const reporte = await Atraso.findAll({
+      include: [
+        {
+          model: Estudiante,
+          where: { cedula: id },
+          attributes: ["NombreEst", "ApellidoEst", "curso_idCurso", "cedula"],
+        },
+      ],
+      attributes: [
+        "registroFecha",
+        "registroHora",
+        "estudiantes_idEstudiantes",
+        "descripcion",
+      ],
+    });
 
-  
-module.exports={create, findbyInspector,atrasosByEstudiante, generateDoc, generateDocByEstudiante,generateDocByfecha}
+    return reporte;
+  } catch (error) {
+    throw new Error("Erro en la base " + error.message);
+  }
+};
+const generateDocByfecha = async (id) => {
+  try {
+    const reporte = await Atraso.findAll({
+      include: [
+        {
+          model: Estudiante,
+
+          attributes: ["NombreEst", "ApellidoEst", "curso_idCurso", "cedula"],
+        },
+      ],
+      where: { registroFecha: id },
+      attributes: [
+        "registroFecha",
+        "registroHora",
+        "estudiantes_idEstudiantes",
+        "descripcion",
+      ],
+    });
+
+    return reporte;
+  } catch (error) {
+    throw new Error("Error en la base de datos: " + error.message);
+  }
+};
+
+const atrasosByEstudiante = async (id) => {
+  try {
+    const atrasos = Atraso.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+      where: { estudiantes_idEstudiantes: id },
+    });
+    return atrasos;
+  } catch (error) {
+    throw new Error("Error en la base de datos: " + error.message);
+  }
+};
+
+module.exports = {
+  create,
+  findbyInspector,
+  atrasosByEstudiante,
+  generateDoc,
+  generateDocByEstudiante,
+  generateDocByfecha,
+};
